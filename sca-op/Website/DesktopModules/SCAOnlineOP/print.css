@@ -1,0 +1,24 @@
+HTML body#Body
+{
+	color:Black;
+	background:white;
+	background-image:none;
+}
+Table.AtenMainArea
+{
+	color:Black;
+	background:white;
+	background-image:none;
+}
+Table.AtenHeader
+{
+	display:none;
+}
+Table.AtenMenu
+{
+	display:none;
+}
+Table.AtenMainArea P
+{
+	display:none;
+}

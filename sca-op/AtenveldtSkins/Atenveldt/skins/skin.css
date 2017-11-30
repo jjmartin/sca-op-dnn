@@ -1,0 +1,555 @@
+/* ================================
+	CSS STYLES FOR DotNetNuke
+   ================================
+*/   
+.pagemaster {
+	width: 100%;
+	height: 100%;	
+		background-color: #000066;
+	BACKGROUND-IMAGE: url(bg_blue.gif);
+	color:White;
+}
+/* PAGE BACKGROUND */
+/* background color for the menubar at the top of the page  */
+.HeadBg {
+	background-color:  #CCCC99;
+}
+
+/* background color for the content part of the pages */
+Body#Body
+{
+	background-color: #000066;
+	BACKGROUND-IMAGE: url(bg_blue.gif);
+	color:White;
+}
+Body
+{
+	background-color: #000066;
+	BACKGROUND-IMAGE: url(bg_gold.gif);
+	color: #444411;
+}
+Body#Body #MainContainer
+{
+	BACKGROUND-IMAGE: url(bg_gold.gif);
+	color: #444411;
+}
+TD{text-align:left;}
+.FooterText
+{
+	color:White;
+}
+/* background/border colors for the selected tab */
+.TabBg {
+	background-color: #FFFFCC;
+}
+.MainContainer
+{
+	text-align:left;
+}
+.LeftPane  
+{
+	width:110px;
+	text-align:left;
+
+		
+}
+
+.ContentPane  
+{
+text-align:left;
+	
+}
+
+.RightPane  
+{
+	width:210px;
+	text-align:left;
+	
+}
+
+/* text style for the selected tab */
+.SelectedTab {
+	font-weight: bold;
+	font-size: 8.5pt;
+	color: #0099CC;
+	font-family: Tahoma, Arial, Helvetica;
+	text-decoration: none;
+}
+
+/* hyperlink style for the selected tab */
+A.SelectedTab:link {
+	text-decoration:    none;
+	color:black;
+}
+
+A.SelectedTab:visited  {
+	text-decoration:    none;
+	color:#111111;
+}
+
+A.SelectedTab:active   {
+	text-decoration:    none;
+	color:#111111;
+}
+
+A.SelectedTab:hover    {
+	text-decoration:    none;
+	color:#999999;
+}
+
+/* text style for the unselected tabs */
+.OtherTabs {
+	font-weight: bold;
+	font-size: 8.5pt;
+	color: black;
+	font-family: Tahoma, Arial, Helvetica;
+	text-decoration: none;
+}
+	
+/* hyperlink style for the unselected tabs */
+A.OtherTabs:link {
+	text-decoration:    none;
+	color:#006699;
+}
+
+A.OtherTabs:visited  {
+	text-decoration:    none;
+	color:#006699;
+}
+
+A.OtherTabs:active   {
+	text-decoration:    none;
+	color:#006699;
+}
+
+A.OtherTabs:hover    {
+	text-decoration:    underline;
+	color:#0099CC;
+}
+/* Officer Module */
+.OfficerPosition{
+	font-family: Tahoma, Arial, Helvetica;
+	font-size:  8pt;
+	font-weight:    bold;
+	color: black;
+}
+
+/* GENERAL */
+/* style for module titles */
+.Head   {
+	font-family: Tahoma, Arial, Helvetica;
+	font-size: 10pt;
+	font-weight:    bold;
+}
+Body#Body .Head
+{
+color:white;
+}
+Body#Body #MainContainer .Head
+{
+color: #444411;
+}
+
+/* style of item titles on edit and admin pages */
+.SubHead    {
+	font-family: Tahoma, Arial, Helvetica;
+	font-size: 8pt;
+	font-weight:    bold;
+	color: #00AAEE;
+}
+A:link   {
+	text-decoration:    none;
+	color:  #0099CC;
+}
+A:visited   {
+	text-decoration:    none;
+	color:  #0099CC;
+}
+
+A:active    {
+	text-decoration:    none;
+	color:  #0099CC;
+}
+
+A:hover {
+	text-decoration:    underline;
+	color:  #ff0000;
+}
+A.Normal:link   {
+	text-decoration:    none;
+	color:  #006699;
+}
+A.Normal:visited   {
+	text-decoration:    none;
+	color:  #006699;
+}
+
+A.Normal:active    {
+	text-decoration:    none;
+	color:  #0099CC;
+}
+
+A.Normal:hover {
+	text-decoration:    underline;
+	color:  #ff0000;
+}
+
+/* module title style used instead of Head for compact rendering by QuickLinks and Signin modules */
+.SubSubHead {
+	font-family: Tahoma, Arial, Helvetica;
+	font-size:  8pt;
+	font-weight:    bold;
+	color: #444411;
+}
+
+/* text style used for most text rendered by modules */
+.Normal
+{
+	font-family: Tahoma, Arial, Helvetica;
+	font-size: 8pt;
+	font-weight: normal;
+}
+
+/* text style used for textboxes in the admin and edit pages, for Nav compatibility */
+.NormalTextBox
+{
+	font-family: Tahoma, Arial, Helvetica;
+	font-size: 8pt;
+	font-weight: normal;
+}
+
+.NormalRed
+{
+	font-family: Tahoma, Arial, Helvetica;
+	font-size: 8pt;
+	font-weight: bold;
+	color: #ff0000
+}
+
+.NormalBold
+{
+	font-family: Tahoma, Arial, Helvetica;
+	font-size: 8pt;
+	font-weight: bold
+}
+
+/* text style for buttons and link buttons used in the portal admin pages */
+.CommandButton     {
+	font-family: Tahoma, Arial, Helvetica;
+	font-size: 8pt;
+	font-weight: normal;
+}
+	
+/* hyperlink style for buttons and link buttons used in the portal admin pages */
+A.CommandButton:link {
+	text-decoration:    underline;
+	color: #0099CC;
+}
+
+A.CommandButton:visited  {
+	text-decoration:    underline;
+	color: #0099CC;
+}
+
+A.CommandButton:active   {
+	text-decoration:    underline;
+	color: #0099CC;
+}
+
+A.CommandButton:hover    {
+	text-decoration:    underline;
+	color: #ff0000;
+}
+	
+/* GENERIC */
+H1  {
+	font-family: Tahoma, Arial, Helvetica;
+	font-size:  16pt;
+	font-weight:    bold;
+	color: #000000;
+}
+
+H2  {
+	font-family: Tahoma, Arial, Helvetica;
+	font-size:  14pt;
+	font-weight:    bold;
+	color: #000000;
+}
+
+H3  {
+	font-family: Tahoma, Arial, Helvetica;
+	font-size:  12pt;
+	font-weight:    bold;
+	color: #000000;
+}
+
+H4  {
+	font-family: Tahoma, Arial, Helvetica;
+	font-size:  11pt;
+	font-weight:    normal;
+	color: #000000;
+}
+
+H5, DT  {
+	font-family: Tahoma, Arial, Helvetica;
+	font-size:  8pt;
+	font-weight:    bold;
+	color: #000000;
+}
+
+H6  {
+	font-family: Tahoma, Arial, Helvetica;
+	font-size:  8pt;
+	font-weight:    bold;
+	color: #000000;
+}
+
+TFOOT, THEAD    {
+	font-family: Tahoma, Arial, Helvetica;
+	font-size:  8pt;
+	color: #000000;
+}
+
+TH  {
+	vertical-align: baseline;
+	font-family: Tahoma, Arial, Helvetica;
+	font-size:  8pt;
+	font-weight:    bold;
+	color: #000000;
+}
+
+A:link  {
+	text-decoration:    none;
+	color:  #0099CC;
+}
+
+A:visited   {
+	text-decoration:    none;
+	color:  #0099CC;
+}
+
+A:active    {
+	text-decoration:    none;
+	color:  #0099CC;
+}
+
+A:hover {
+	text-decoration:    underline;
+	color:  #ff0000;
+}
+
+SMALL   {
+	font-size:  8px;
+}
+
+BIG {
+	font-size:  14px;
+}
+
+
+
+UL LI   {
+	list-style-type:    square ;
+}
+
+UL LI LI    {
+	list-style-type:    disc;
+}
+
+UL LI LI LI {
+	list-style-type:    circle;
+}
+
+OL LI   {
+	list-style-type:    decimal;
+}
+
+OL OL LI    {
+	list-style-type:    lower-alpha;
+}
+
+OL OL OL LI {
+	list-style-type:    lower-roman;
+}
+
+HR {
+	color: dimgrey;
+	height:1pt;
+	text-align:left
+}
+
+/* Menu-Styles */
+/* Module Title Menu */
+.ModuleTitle_MenuContainer {
+	border-bottom: blue 0px solid; 
+	border-left: blue 0px solid; 
+	border-top: blue 0px solid; 
+	border-right: blue 0px solid; 
+}
+
+.ModuleTitle_MenuBar {
+	cursor: pointer; 
+	cursor: hand;
+	height:21;
+	background-color: Transparent;
+}
+
+.ModuleTitle_MenuItem {
+	cursor: pointer; 
+	cursor: hand; 
+	color: black; 
+	font-family: Tahoma, Arial, Helvetica; 
+	font-size: 9pt; 
+	font-weight: bold; 
+	font-style: normal; 
+	border-left: #CCCC99 0px solid; 
+	border-bottom: #CCCC99 1px solid; 
+	border-top: #CCCC99 1px solid; 
+	border-right: #CCCC99 0px solid;
+	background-color: Transparent;
+}
+
+.ModuleTitle_MenuIcon {
+	cursor: pointer; 
+	cursor: hand; 
+	background-color: #CCCC99; 
+	border-left: #CCCC99 1px solid; 
+	border-bottom: #CCCC99 1px solid; 
+	border-top: #CCCC99 1px solid; 
+	text-align: center; 
+	width: 15; 
+	height: 21;
+}
+
+.ModuleTitle_SubMenu {
+	z-index: 1000; 
+	cursor: pointer; 
+	cursor: hand; 
+	background-color: #CCCC99; 
+	filter:progid:DXImageTransform.Microsoft.Shadow(color='DimGray', Direction=135, Strength=3); 
+	border-bottom: #404040 0px solid; 
+	border-left: #FF8080 0px solid; 
+	border-top: #FF8080 0px solid; 
+	border-right: #404040 0px solid;
+}
+
+.ModuleTitle_MenuBreak {
+	border-bottom: #CCCC99 1px solid; 
+	border-left: #CCCC99 0px solid; 
+	border-top: #CCCC99 1px solid;  
+	border-right: #CCCC99 0px solid; 
+	background-color: #0099CC; 
+	height: 1px;
+}
+
+.ModuleTitle_MenuItemSel {
+
+	cursor: pointer; 
+	cursor: hand; 
+	color: black; 
+	font-family: Tahoma, Arial, Helvetica; 
+	font-size: 9pt; 
+	font-weight: bold; 
+	font-style: normal;
+
+	background-color: White;
+}
+
+.ModuleTitle_MenuArrow {
+	font-family: webdings; 
+	font-size: 8pt; 
+	cursor: pointer; 
+	cursor: hand; 
+	border-right: #CCCC99 1px solid; 
+	border-bottom: #CCCC99 1px solid; 
+	border-top: #FF8080 0px solid;
+}
+
+.ModuleTitle_RootMenuArrow {
+	font-family: webdings; 
+	font-size: 8pt; 
+	cursor: pointer; 
+	cursor: hand;
+}
+
+/*--------------------- Main Menu --------------------------------*/
+.main_dnnmenu_container {
+	background-color: #CCCC99; 
+}
+.main_dnnmenu_bar {
+	cursor: pointer; 
+	cursor: hand;
+	height:23px;
+	background-color: #CCCC99;
+	outline: 0 none;
+}
+.main_dnnmenu_item td { /*TD if menu option for using tables is on*/
+	cursor: pointer; 
+	cursor: hand; 
+	color: #000000; 
+	font-size: 9pt; 
+	font-weight: bold; 
+	font-style: normal; 
+	background-color: Transparent;
+	font-family: Tahoma, Arial, Helvetica; 
+	white-space: nowrap;  /*Word wrapping menu item now optional*/
+	padding: 1px 3px 3px 1px;	
+}
+
+.main_dnnmenu_rootitem  { /*TD if menu option for using tables is on*/
+	cursor: pointer; 
+	cursor: hand; 
+	color: #000000; 
+	font-size: 9pt; 
+	font-weight: bold; 
+	font-style: normal; 
+	background-color: Transparent;
+	font-family: Tahoma, Arial, Helvetica; 
+	white-space: nowrap;  /*Word wrapping menu item now optional*/	    
+	padding: 0px 12px 2px 5px;   /*explicitly set padding for root menu items*/
+}
+
+.main_dnnmenu_itemhover {  
+	background-color: white; 
+}
+
+.main_dnnmenu_itemhover td {  
+	background-color: white; 
+}
+
+
+.main_dnnmenu_icon {
+	cursor: pointer; 
+	cursor: hand; 
+	text-align: center; 
+	width: 15px; 
+	height: 100%;
+}
+.main_dnnmenu_submenu {
+	background-color:#CCCC99;  
+	z-index: 1000; 
+	cursor: pointer; 
+	cursor: hand; 
+	filter:progid:DXImageTransform.Microsoft.Shadow(color='#696969', Direction=135, Strength=3); 
+	padding: 1px 1px 1px 1px;   /*explicitly set padding for sub-menus */
+}
+.main_dnnmenu_break {
+	height: 1px;
+	font-size: 1px;
+}
+
+.main_dnnmenu_arrow {
+	border-right: #cad5ea 1px solid; 
+	border-bottom: #cad5ea 1px solid; 
+	border-top: #cad5ea 0px solid;
+	font-family: webdings; 
+	font-size: 10pt; 
+	cursor: pointer; 
+	cursor: hand; 
+}
+.main_dnnmenu_rootmenuarrow {
+	font-family: webdings; 
+	font-size: 10pt; 
+	cursor: pointer; 
+	cursor: hand;
+}

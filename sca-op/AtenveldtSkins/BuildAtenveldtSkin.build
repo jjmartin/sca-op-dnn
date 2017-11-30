@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<!-- targets to be executed, when omitted from command line default is run -->
+<project name="SCAOnlineOP" default="BuildAndZip" xmlns="http://nant.sf.net/release/0.91-alpha1/nant.xsd">
+  <target name="init">
+    <property name="nant.settings.currentframework" value="net-4.0" />
+
+    <!-- This is where your packaged zips will build to from within the module folder -->
+    <property name="package.dir" value="package" overwrite="false" />
+
+    <property name="skinzip.dir" value="SkinZip" />
+    <property name="skin.dir" value="Atenveldt/skins" />
+    <property name="container.dir" value="Atenveldt/containers" />
+
+    <property  name="package.name" value="Atenveldt" />
+
+    <property name="verbose" value="true" overwrite="false" />
+
+    <if test="${verbose}">
+      <echo message="Package Name: ${package.name}" />
+    </if>
+
+  </target>
+
+  <target name="CleanPackage" depends="init">
+    <delete file="${package.dir}/${package.name}.zip" if="${file::exists('${package.dir}/${package.name}.zip')}" />
+  </target>
+
+  <target name="BuildManifest" depends="init">
+   
+  </target>
+
+
+  <!-- Begin area for creating resourcezip for installable PA zips (should depend on target that clears where this will build zip file to)-->
+  <target name="CreatePackageZip" depends="CreateSkinZip, CreateContainerZip">
+    <zip zipfile="${package.dir}/${package.name}.zip">
+      <fileset basedir="${package.dir}">
+        <include name="skin-${package.name}.zip" />
+        <include name="container-${package.name}.zip" />
+      </fileset>
+    </zip>
+
+    
+    <delete file="${package.dir}/skin-${package.name}.zip" failonerror="true" />
+    <delete file="${package.dir}/container-${package.name}.zip" failonerror="true" />
+    
+  </target>
+
+  <target name="CreateSkinZip" depends="BuildManifest, CleanPackage">
+    <!-- create a flat directory to zip for install -->
+    <mkdir dir="temp" unless="${directory::exists('temp')}" />
+    <!-- DO NOT flatten this as we want to retain folder structure in this and ONLY this zip -->
+    <copy todir="temp" flatten="false">
+      <fileset basedir="${skin.dir}">
+        <!-- Tell nant what files to grab -->
+        <include name="**/*" />
+        <exclude name="**/*.ascx" />
+        <exclude name="**/thumbs.db" />
+        <exclude name="**/desktop.ini" />
+      </fileset>
+    </copy>
+
+    <mkdir dir="${package.dir}" unless="${directory::exists(package.dir)}" />
+    <zip zipfile="${package.dir}/skin-${package.name}.zip">
+      <fileset basedir="temp">
+        <include name="**/*" />
+      </fileset>
+    </zip>
+
+    <!--Delete temp directory -->
+    <delete dir="temp" failonerror="false" />
+
+  </target>
+
+
+  <target name="CreateContainerZip" depends="BuildManifest, CleanPackage">
+    <!-- create a flat directory to zip for install -->
+    <mkdir dir="temp" unless="${directory::exists('temp')}" />
+    <!-- DO NOT flatten this as we want to retain folder structure in this and ONLY this zip -->
+    <copy todir="temp" flatten="false">
+      <fileset basedir="${container.dir}">
+        <!-- Tell nant what files to grab -->
+        <include name="**/*" />
+        <exclude name="**/*.ascx" />
+        <exclude name="**/thumbs.db" />
+        <exclude name="**/desktop.ini" />
+      </fileset>
+    </copy>
+
+    <mkdir dir="${package.dir}" unless="${directory::exists(package.dir)}" />
+    <zip zipfile="${package.dir}/container-${package.name}.zip">
+      <fileset basedir="temp">
+        <include name="**/*" />
+      </fileset>
+    </zip>
+
+    <!--Delete temp directory -->
+    <delete dir="temp" failonerror="false" />
+
+  </target>
+
+
+  <!-- End area for skin creation -->
+
+
+
+  <!--  SYNTHETIC TASKS  -->
+
+  <target name="BuildAndZip" depends="CreatePackageZip" description="This builds the skin zip." />
+
+</project>

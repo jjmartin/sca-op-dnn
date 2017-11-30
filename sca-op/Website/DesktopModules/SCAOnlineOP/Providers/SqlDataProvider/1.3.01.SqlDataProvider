@@ -1,0 +1,86 @@
+﻿/************************************************************/
+/*****              SQLDataProvider                     *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}SCAPeopleOfficerGetByOfficerPosition]    Script Date: 11/14/2010 15:34:52 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}SCAPeopleOfficerGetByOfficerPosition]') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}[{objectQualifier}SCAPeopleOfficerGetByOfficerPosition]
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}SCAPeopleOfficerGetByOfficerPosition]    Script Date: 11/14/2010 15:34:52 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}SCAPeopleOfficerGetByOfficerPosition]
+	@OfficerPositionId int
+AS
+
+WITH NewFiles(FileName, Width, Height, FileId,Folder, FileJoin) AS
+(
+Select FileName, Width, Height, FileId, Folder, 'fileid='+ convert(varchar,FileID)
+FROM {databaseOwner}{objectQualifier}Files
+)
+
+SELECT
+	PeopleOfficer.PeopleOfficerId as ID,
+	PeopleOfficer.PeopleId,
+	OfficerPosition.Title,
+	OfficerPosition.OfficerPositionId,
+	ISNULL(BadgeFiles.Folder + BadgeFiles.FileName,'')  BadgeUrl,
+	case when BadgeFiles.Width is null then 0 else BadgeFiles.Width end as BadgeURLWidth,
+	case when BadgeFiles.Height is null then 0 else BadgeFiles.Height end as BadgeURLHeight,
+	People.SCAName,
+	MundaneName,
+	Address1,
+	Address2,
+	City,
+	State,
+	Zip,
+	Phone1,
+	Phone2,
+	EmailAddress,
+	case when photoFiles.FileName is null then People.PhotoURL else photoFiles.Folder + photoFiles.FileName end as PhotoUrl,
+	case when photoFiles.Width is null then 0 else photoFiles.Width end as PhotoURLWidth,
+	case when photoFiles.Height is null then 0 else photoFiles.Height end as PhotoURLHeight,
+showpicpermission,
+	case when armsFiles.FileName is null then People.ArmsURL else armsFiles.Folder + armsFiles.FileName end as ArmsURL,
+	case when armsFiles.Width is null then 0 else armsFiles.Width end as ArmsURLWidth,
+	case when armsFiles.Height is null then 0 else armsFiles.Height end as ArmsURLHeight,
+	OfficerNotes,
+	[TitlePrefix],
+	[HonorsSuffix],
+	Groups.Name AS GroupName,
+	Groups.GroupId,
+	PeopleOfficer.StartDate,
+	PeopleOfficer.EndDate,
+	PeopleOfficer.CurrentlyHeld,
+	PeopleOfficer.Acting,
+	PeopleOfficer.Verified,
+	PeopleOfficer.PositionSubTitle,
+	PeopleOfficer.PositionNotes,
+	OfficerPosition.ListOrder
+FROM {databaseOwner}{objectQualifier}SCAPeopleOfficer PeopleOfficer
+JOIN {databaseOwner}{objectQualifier}SCAOfficerPosition OfficerPosition ON PeopleOfficer.OfficerPositionId = OfficerPosition.OfficerPositionId 
+JOIN {databaseOwner}{objectQualifier}SCAGroups Groups ON OfficerPosition.GroupId = Groups.GroupId
+JOIN {databaseOwner}{objectQualifier}SCAPeople People on PeopleOfficer.PeopleId = People.PeopleId
+left join NewFiles photoFiles on People.PhotoURL = photoFiles.FileJoin
+left join NewFiles badgeFiles on OfficerPosition.FileId = badgeFiles.FileId
+left join NewFiles armsFiles on People.ArmsURL = armsFiles.FileJoin
+WHERE (OfficerPosition.OfficerPositionId = @OfficerPositionId) 
+
+Order By PeopleOfficer.StartDate DESC
+
+
+GO
+
+

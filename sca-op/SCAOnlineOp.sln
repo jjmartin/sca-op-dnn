@@ -1,0 +1,101 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", "{BA4E8805-6C4D-4E00-ADFE-18967550172D}"
+	ProjectSection(SolutionItems) = preProject
+		SCAOnlineOPModuleDeployment\SCAOnlineOP.Build = SCAOnlineOPModuleDeployment\SCAOnlineOP.Build
+	EndProjectSection
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "DotNetNuke", "http://localhost/DotNetNuke", "{A2C72F38-A58D-4E9D-8214-58ECEBED78B7}"
+	ProjectSection(WebsiteProperties) = preProject
+		SccProjectName = ""
+		SccAuxPath = ""
+		SccLocalPath = ""
+		SccProvider = ""
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		ProjectReferences = "{04503590-9289-43A6-B026-C816F05E8AE6}|SCAOnlineOPSqlDataProvider.dll;{A24AFB7F-3713-4065-A146-DDE028FCF53F}|SCAOnlineOPDataProvider.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/DotNetNuke"
+		Debug.AspNetCompiler.PhysicalPath = "Website\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\DotNetNuke\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/DotNetNuke"
+		Release.AspNetCompiler.PhysicalPath = "Website\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\DotNetNuke\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "..\..\..\Website\"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCAData", "SCAData\SCAData.csproj", "{98AEA3BB-A15D-4DA9-A3F7-45B978C4F7F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCAOnlineOPDataProvider", "SCAOnlineOPDataProvider\SCAOnlineOPDataProvider.csproj", "{A24AFB7F-3713-4065-A146-DDE028FCF53F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCAOnlineOPSqlDataProvider", "SCAOnlineOPSqlDataProvider\SCAOnlineOPSqlDataProvider.csproj", "{04503590-9289-43A6-B026-C816F05E8AE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCAOnlineOp", "Website\DesktopModules\SCAOnlineOp\SCAOnlineOp.csproj", "{59E815D4-51A7-4BF9-B3D1-E4DAD8B13471}"
+	ProjectSection(ProjectDependencies) = postProject
+		{04503590-9289-43A6-B026-C816F05E8AE6} = {04503590-9289-43A6-B026-C816F05E8AE6}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCAOnlineOpTest", "SCAOnlineOpTest\SCAOnlineOpTest.csproj", "{D5517BC8-1C7C-48A6-88F5-8C3763A4330A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{708DAE81-4CC0-4D0F-985C-24F93BF5C23C}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		SCAOnlineOp.vsmdi = SCAOnlineOp.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = SCAOnlineOp.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		SCAOnlineOP Only|Any CPU = SCAOnlineOP Only|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A2C72F38-A58D-4E9D-8214-58ECEBED78B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2C72F38-A58D-4E9D-8214-58ECEBED78B7}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2C72F38-A58D-4E9D-8214-58ECEBED78B7}.SCAOnlineOP Only|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2C72F38-A58D-4E9D-8214-58ECEBED78B7}.SCAOnlineOP Only|Any CPU.Build.0 = Debug|Any CPU
+		{98AEA3BB-A15D-4DA9-A3F7-45B978C4F7F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98AEA3BB-A15D-4DA9-A3F7-45B978C4F7F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98AEA3BB-A15D-4DA9-A3F7-45B978C4F7F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98AEA3BB-A15D-4DA9-A3F7-45B978C4F7F5}.SCAOnlineOP Only|Any CPU.ActiveCfg = SCAOnlineOP Only|Any CPU
+		{98AEA3BB-A15D-4DA9-A3F7-45B978C4F7F5}.SCAOnlineOP Only|Any CPU.Build.0 = SCAOnlineOP Only|Any CPU
+		{A24AFB7F-3713-4065-A146-DDE028FCF53F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A24AFB7F-3713-4065-A146-DDE028FCF53F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A24AFB7F-3713-4065-A146-DDE028FCF53F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A24AFB7F-3713-4065-A146-DDE028FCF53F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A24AFB7F-3713-4065-A146-DDE028FCF53F}.SCAOnlineOP Only|Any CPU.ActiveCfg = SCAOnlineOP Only|Any CPU
+		{A24AFB7F-3713-4065-A146-DDE028FCF53F}.SCAOnlineOP Only|Any CPU.Build.0 = SCAOnlineOP Only|Any CPU
+		{04503590-9289-43A6-B026-C816F05E8AE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04503590-9289-43A6-B026-C816F05E8AE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04503590-9289-43A6-B026-C816F05E8AE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04503590-9289-43A6-B026-C816F05E8AE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04503590-9289-43A6-B026-C816F05E8AE6}.SCAOnlineOP Only|Any CPU.ActiveCfg = SCAOnlineOP Only|Any CPU
+		{04503590-9289-43A6-B026-C816F05E8AE6}.SCAOnlineOP Only|Any CPU.Build.0 = SCAOnlineOP Only|Any CPU
+		{59E815D4-51A7-4BF9-B3D1-E4DAD8B13471}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59E815D4-51A7-4BF9-B3D1-E4DAD8B13471}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59E815D4-51A7-4BF9-B3D1-E4DAD8B13471}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59E815D4-51A7-4BF9-B3D1-E4DAD8B13471}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59E815D4-51A7-4BF9-B3D1-E4DAD8B13471}.SCAOnlineOP Only|Any CPU.ActiveCfg = SCAOnlineOP Only|Any CPU
+		{59E815D4-51A7-4BF9-B3D1-E4DAD8B13471}.SCAOnlineOP Only|Any CPU.Build.0 = SCAOnlineOP Only|Any CPU
+		{D5517BC8-1C7C-48A6-88F5-8C3763A4330A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5517BC8-1C7C-48A6-88F5-8C3763A4330A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5517BC8-1C7C-48A6-88F5-8C3763A4330A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5517BC8-1C7C-48A6-88F5-8C3763A4330A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5517BC8-1C7C-48A6-88F5-8C3763A4330A}.SCAOnlineOP Only|Any CPU.ActiveCfg = Release|Any CPU
+		{D5517BC8-1C7C-48A6-88F5-8C3763A4330A}.SCAOnlineOP Only|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

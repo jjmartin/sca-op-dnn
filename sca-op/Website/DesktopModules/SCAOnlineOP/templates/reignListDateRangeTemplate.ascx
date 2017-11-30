@@ -1,0 +1,2 @@
+﻿<%@ Language="C#" %>
+<asp:Label runat="server" Text='<%# String.Format("{0:d}",Eval("StartDate") as DateTime?) %>' /> - <asp:Label ID="Label1" runat="server" Text='<%#String.Format("{0:d}",Eval("EndDate") as DateTime?)%>' /><%# (DateTime.Now > (Eval("StartDate") as DateTime? ?? DateTime.MinValue) && DateTime.Now < ( Eval("EndDate") as DateTime? ?? DateTime.MinValue) ?"(Current)":(Convert.ToBoolean(Eval("Heir"))?"(Heirs)":"") )%>

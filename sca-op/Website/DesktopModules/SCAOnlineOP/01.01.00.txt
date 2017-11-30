@@ -1,0 +1,18 @@
+﻿'remove cs files
+DesktopModules\SCAOnlineOp\SCAOfficerList.ascx.cs
+DesktopModules\SCAOnlineOp\SCAOfficerListEdit.ascx.cs
+DesktopModules\SCAOnlineOp\SCAOfficerListSettings.ascx.cs
+DesktopModules\SCAOnlineOp\SCAOnlineMobileOPSettings.ascx.cs
+DesktopModules\SCAOnlineOp\SCAOnlineOP.ascx.cs
+DesktopModules\SCAOnlineOp\SCAOnlineOPAwardEdit.ascx.cs
+DesktopModules\SCAOnlineOp\SCAOnlineOPAwardGroupEdit.ascx.cs
+DesktopModules\SCAOnlineOp\SCAOnlineOPBaronialAwardsReport.ascx.cs
+DesktopModules\SCAOnlineOp\SCAOnlineOPCrownEdit.ascx.cs
+DesktopModules\SCAOnlineOp\SCAOnlineOPDisplayCrown.ascx.cs
+DesktopModules\SCAOnlineOp\SCAOnlineOPDisplayGroup.ascx.cs
+DesktopModules\SCAOnlineOp\SCAOnlineOPEdit.ascx.cs
+DesktopModules\SCAOnlineOp\SCAOnlineOPGroupEdit.ascx.cs
+DesktopModules\SCAOnlineOp\SCAOnlineOPMatchGame.ascx.cs
+DesktopModules\SCAOnlineOp\SCAOnlineOPOfficeEdit.ascx.cs
+DesktopModules\SCAOnlineOp\SCAOnlineOPSettings.ascx.cs
+DesktopModules\SCAOnlineOp\SCAOPEverything.ascx.cs

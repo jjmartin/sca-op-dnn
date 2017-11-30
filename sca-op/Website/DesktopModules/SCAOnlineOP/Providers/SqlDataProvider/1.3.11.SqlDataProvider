@@ -1,0 +1,276 @@
+﻿/************************************************************/
+/*****              SQLDataProvider                     *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}SCAPeopleOfficerListGroupRulers]    Script Date: 01/23/2011 12:44:35 ******/
+DROP PROCEDURE {databaseOwner}[{objectQualifier}SCAPeopleOfficerListGroupRulers]
+GO
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}SCAPeopleOfficerListGroupRulers]    Script Date: 01/23/2011 12:44:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- Stored Procedure
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}SCAPeopleOfficerListGroupRulers]
+ @GroupId int,
+ @CrownId int
+AS
+
+WITH NewFiles(FileName, Width, Height, FileId,Folder, FileJoin) AS
+(
+Select FileName, Width, Height, FileId, Folder, 'fileid='+ convert(varchar,FileID)
+FROM {objectQualifier}Files
+),
+GroupTree(GroupId, Name, GroupName, Level, Sort)
+AS 
+(
+SELECT
+	Groups.GroupId,
+	Groups.Name,
+	Groups.Name as GroupName,
+	1,
+    CONVERT(varchar(max), CONVERT(char(50), Groups.Name) + '|')
+FROM {objectQualifier}SCAGroups Groups
+where ParentGroupId is null
+UNION ALL 
+SELECT 
+Groups.GroupId,
+	Groups.Name,
+	Groups.Name as GroupName,
+    Level + 1,
+CONVERT(varchar(max), Sort + CONVERT(char(50), Groups.Name) + '|')
+FROM {objectQualifier}SCAGroups Groups
+JOIN GroupTree  ON Groups.ParentGroupId = GroupTree.GroupId
+)
+
+SELECT
+	Crowns.CrownId as ID,
+	Crowns.SovereignId AS PeopleId,
+	CASE WHEN heir =0  THEN '' ELSE 'Heir to the ' END + 
+	CASE gender WHEN 'M' THEN SovereignMaleTitle WHEN 'F' THEN SovereignFemaleTitle ELSE 'Sovereign' END  
+	 AS Title,
+	-1 as OfficerPositionId,
+   	Cast( null as varchar) as BadgeUrl, --case when SovereignArmsFiles.FileName is null then Groups.SovereignArmsUrl else SovereignArmsFiles.Folder + SovereignArmsFiles.FileName end as BadgeUrl,
+	0 as BadgeURLWidth,
+	0 as BadgeURLHeight,
+	People.SCAName,
+	MundaneName,
+	Address1,
+	Address2,
+	City,
+	State,
+	Zip,
+	Phone1,
+	Phone2,
+	EmailAddress,
+	Crowns.Email as OfficeEmail,
+	case when photoFiles.FileName is null then People.PhotoURL else photoFiles.Folder + photoFiles.FileName end as PhotoUrl,
+	case when photoFiles.Width is null then 0 else photoFiles.Width end as PhotoURLWidth,
+	case when photoFiles.Height is null then 0 else photoFiles.Height end as PhotoURLHeight,
+ case when armsFiles.FileName is null then People.ArmsURL else armsFiles.Folder + armsFiles.FileName end as ArmsURL,
+	case when armsFiles.Width is null then 0 else armsFiles.Width end as ArmsURLWidth,
+	case when armsFiles.Height is null then 0 else armsFiles.Height end as ArmsURLHeight,
+	OfficerNotes,
+	[TitlePrefix],
+	[HonorsSuffix],
+	Groups.Name AS GroupName,
+	Groups.GroupId,
+	Crowns.StartDate,
+	Crowns.EndDate,
+	CAST( CASE WHEN (GETDATE() BETWEEN Crowns.StartDate AND Crowns.EndDate) OR (Crowns.EndDate is null) THEN 1 ELSE 0 END as bit) AS CurrentlyHeld,
+	CAST(0 as bit) as Acting,
+	CAST(1 as bit) as Verified,
+'' as PositionSubTitle,
+'' as PositionNotes,
+	-1004 as ListOrder,
+	GroupTree.GroupName as HomeBranch,
+	RTRIM(SUBSTRING(GroupTree.sort, 1, 50)) as HomeKingdom
+FROM {objectQualifier}SCACrowns Crowns
+JOIN {objectQualifier}SCAGroups Groups ON Crowns.GroupId = Groups.GroupId 
+JOIN {objectQualifier}SCAPeople People ON Crowns.SovereignId = People.PeopleId
+left join NewFiles photoFiles on People.PhotoURL =photoFiles.FileJoin
+left join NewFiles SovereignArmsFiles on Groups.SovereignArmsUrl = SovereignArmsFiles.FileJoin
+left join NewFiles armsFiles on People.ArmsURL = armsFiles.FileJoin
+LEFT JOIN GroupTree on People.BranchResidenceId = GroupTree.GroupId
+WHERE (Crowns.GroupId = @GroupId) 
+and ((@CrownId = -1 AND  Crowns.Reign = (SELECT MAX(Reign) 
+						FROM {objectQualifier}SCACrowns wC
+						WHERE wC.GroupId = Groups.GroupId and Heir=0) 
+						and Heir=0 
+						AND ((GETDATE() BETWEEN Crowns.StartDate AND Crowns.EndDate) OR (Crowns.EndDate is null)))
+	OR Crowns.CrownId = @CrownId)
+UNION ALL --Consort Sovereign of Group
+SELECT
+	Crowns.CrownId as ID,
+	Crowns.ConsortId AS PeopleId,
+	CASE WHEN heir =0  THEN '' ELSE 'Heir to the ' END + 
+	CASE gender WHEN 'M' THEN ConsortMaleTitle WHEN 'F' THEN ConsortFemaleTitle ELSE 'Consort' END
+	 AS Title,
+	-1 as OfficerPositionId,
+    Cast( null as varchar) as BadgeUrl, --case when ConsortArmsFiles.FileName is null then Groups.ConsortArmsUrl else ConsortArmsFiles.Folder + ConsortArmsFiles.FileName end as BadgeUrl,
+	0 as BadgeURLWidth,
+	0 as BadgeURLHeight,
+	People.SCAName,
+	MundaneName,
+	Address1,
+	Address2,
+	City,
+	State,
+	Zip,
+	Phone1,
+	Phone2,
+	EmailAddress,
+	Crowns.Email as OfficeEmail,
+	case when photoFiles.FileName is null then People.PhotoURL else photoFiles.Folder + photoFiles.FileName end as PhotoUrl,
+	case when photoFiles.Width is null then 0 else photoFiles.Width end as PhotoURLWidth,
+	case when photoFiles.Height is null then 0 else photoFiles.Height end as PhotoURLHeight,
+ case when armsFiles.FileName is null then People.ArmsURL else armsFiles.Folder + armsFiles.FileName end as ArmsURL,
+	case when armsFiles.Width is null then 0 else armsFiles.Width end as ArmsURLWidth,
+	case when armsFiles.Height is null then 0 else armsFiles.Height end as ArmsURLHeight,
+	OfficerNotes,
+	[TitlePrefix],
+	[HonorsSuffix],
+	Groups.Name AS GroupName,
+	Groups.GroupId,
+	Crowns.StartDate,
+	Crowns.EndDate,
+	CAST( CASE WHEN (GETDATE() BETWEEN Crowns.StartDate AND Crowns.EndDate) OR (Crowns.EndDate is null) THEN 1 ELSE 0 END as bit) AS CurrentlyHeld,
+	CAST(0 as bit) as Acting,
+	CAST(1 as bit) as Verified,
+'' as PositionSubTitle,
+'' as PositionNotes,
+	-1003 as ListOrder,
+	GroupTree.GroupName as HomeBranch,
+	RTRIM(SUBSTRING(GroupTree.sort, 1, 50)) as HomeKingdom
+FROM {objectQualifier}SCACrowns Crowns
+JOIN {objectQualifier}SCAGroups Groups ON Crowns.GroupId = Groups.GroupId 
+JOIN {objectQualifier}SCAPeople People ON Crowns.Consortid = People.PeopleId
+left join NewFiles photoFiles on People.PhotoURL =photoFiles.FileJoin
+left join NewFiles ConsortArmsFiles on Groups.ConsortArmsUrl = ConsortArmsFiles.FileJoin
+left join NewFiles armsFiles on People.ArmsURL = armsFiles.FileJoin
+LEFT JOIN GroupTree on People.BranchResidenceId = GroupTree.GroupId
+WHERE (Crowns.GroupId = @GroupId) 
+and ((@CrownId = -1 AND  Crowns.Reign = (SELECT MAX(Reign) 
+						FROM {objectQualifier}SCACrowns wC
+						WHERE wC.GroupId = Groups.GroupId and Heir=0) 
+						and Heir=0 
+						AND ((GETDATE() BETWEEN Crowns.StartDate AND Crowns.EndDate) OR (Crowns.EndDate is null)))
+	OR Crowns.CrownId = @CrownId)
+UNION ALL  -- Heir to Soveren
+SELECT
+	Crowns.CrownId as ID,
+	Crowns.SovereignId AS PeopleId,
+	CASE WHEN heir =0  THEN '' ELSE 'Heir to the ' END + 
+	CASE gender WHEN 'M' THEN SovereignMaleTitle WHEN 'F' THEN SovereignFemaleTitle ELSE 'Sovereign' END  
+	 AS Title,
+	-1 as OfficerPositionId,
+	Cast( null as varchar) as BadgeUrl, --case when SovereignArmsFiles.FileName is null then Groups.SovereignArmsUrl else SovereignArmsFiles.Folder + SovereignArmsFiles.FileName end as BadgeUrl,
+	0 as BadgeURLWidth,
+	0 as BadgeURLHeight,
+	People.SCAName,
+	MundaneName,
+	Address1,
+	Address2,
+	City,
+	State,
+	Zip,
+	Phone1,
+	Phone2,
+	EmailAddress,
+	Crowns.Email as OfficeEmail,
+	case when photoFiles.FileName is null then People.PhotoURL else photoFiles.Folder + photoFiles.FileName end as PhotoURL,
+	case when photoFiles.Width is null then 0 else photoFiles.Width end as PhotoURLWidth,
+	case when photoFiles.Height is null then 0 else photoFiles.Height end as PhotoURLHeight,
+ case when armsFiles.FileName is null then People.ArmsURL else armsFiles.Folder + armsFiles.FileName end as ArmsURL,
+	case when armsFiles.Width is null then 0 else armsFiles.Width end as ArmsURLWidth,
+	case when armsFiles.Height is null then 0 else armsFiles.Height end as ArmsURLHeight,
+	OfficerNotes,
+	[TitlePrefix],
+	[HonorsSuffix],
+	Groups.Name AS GroupName,
+	Groups.GroupId,
+	Crowns.StartDate,
+	Crowns.EndDate,
+	CAST( CASE WHEN (GETDATE() BETWEEN Crowns.StartDate AND Crowns.EndDate) OR (Crowns.EndDate is null) THEN 1 ELSE 0 END as bit) AS CurrentlyHeld,
+	CAST(0 as bit) as Acting,
+	CAST(1 as bit) as Verified,
+'' as PositionSubTitle,
+'' as PositionNotes,
+	-1002 as ListOrder,
+	GroupTree.GroupName as HomeBranch,
+	RTRIM(SUBSTRING(GroupTree.sort, 1, 50)) as HomeKingdom
+FROM {objectQualifier}SCACrowns Crowns
+JOIN {objectQualifier}SCAGroups Groups ON Crowns.GroupId = Groups.GroupId 
+JOIN {objectQualifier}SCAPeople People ON Crowns.SovereignId = People.PeopleId
+left join NewFiles photoFiles on People.PhotoURL =photoFiles.FileJoin
+left join NewFiles SovereignArmsFiles on Groups.SovereignArmsUrl = SovereignArmsFiles.FileJoin
+left join NewFiles armsFiles on People.ArmsURL = armsFiles.FileJoin
+LEFT JOIN GroupTree on People.BranchResidenceId = GroupTree.GroupId
+WHERE (Crowns.GroupId = @GroupId) 
+		and (@CrownId = -1 AND Crowns.Reign = (SELECT MAX(Reign) 
+								FROM {objectQualifier}SCACrowns wC
+								WHERE wC.GroupId = Groups.GroupId and Heir=1) 
+								and Heir=1 AND ((GETDATE() BETWEEN Crowns.StartDate AND Crowns.EndDate) OR (Crowns.EndDate is null)))
+UNION ALL -- heir to consort
+SELECT
+	Crowns.CrownId as ID,
+	Crowns.ConsortId AS PeopleId,
+	CASE WHEN heir =0  THEN '' ELSE 'Heir to the ' END + 
+	CASE gender WHEN 'M' THEN ConsortMaleTitle WHEN 'F' THEN ConsortFemaleTitle ELSE 'Consort' END
+	 AS Title,
+	-1 as OfficerPositionId,
+    Cast( null as varchar) as BadgeUrl, --case when ConsortArmsFiles.FileName is null then Groups.ConsortArmsUrl else ConsortArmsFiles.Folder + ConsortArmsFiles.FileName end as BadgeUrl,
+	0 as BadgeURLWidth,
+	0 as BadgeURLHeight,
+	People.SCAName,
+	MundaneName,
+	Address1,
+	Address2,
+	City,
+	State,
+	Zip,
+	Phone1,
+	Phone2,
+	EmailAddress,
+	Crowns.Email as OfficeEmail,
+	case when photoFiles.FileName is null then People.PhotoURL else photoFiles.Folder + photoFiles.FileName end as PhotoURL,
+	case when photoFiles.Width is null then 0 else photoFiles.Width end as PhotoURLWidth,
+	case when photoFiles.Height is null then 0 else photoFiles.Height end as PhotoURLHeight,
+ case when armsFiles.FileName is null then People.ArmsURL else armsFiles.Folder + armsFiles.FileName end as ArmsURL,
+	case when armsFiles.Width is null then 0 else armsFiles.Width end as ArmsURLWidth,
+	case when armsFiles.Height is null then 0 else armsFiles.Height end as ArmsURLHeight,
+	OfficerNotes,
+	[TitlePrefix],
+	[HonorsSuffix],
+	Groups.Name AS GroupName,
+	Groups.GroupId,
+	Crowns.StartDate,
+	Crowns.EndDate,
+	CAST( CASE WHEN (GETDATE() BETWEEN Crowns.StartDate AND Crowns.EndDate) OR (Crowns.EndDate is null) THEN 1 ELSE 0 END as bit) AS CurrentlyHeld,
+	CAST(0 as bit) as Acting,
+	CAST(1 as bit) as Verified,
+'' as PositionSubTitle,
+'' as PositionNotes,
+	-1001 as ListOrder,
+	GroupTree.GroupName as HomeBranch,
+	RTRIM(SUBSTRING(GroupTree.sort, 1, 50)) as HomeKingdom
+FROM {objectQualifier}SCACrowns Crowns
+JOIN {objectQualifier}SCAGroups Groups ON Crowns.GroupId = Groups.GroupId 
+JOIN {objectQualifier}SCAPeople People ON Crowns.Consortid = People.PeopleId
+left join NewFiles photoFiles on People.PhotoURL =photoFiles.FileJoin
+left join NewFiles ConsortArmsFiles on Groups.ConsortArmsUrl = ConsortArmsFiles.FileJoin
+left join NewFiles armsFiles on People.ArmsURL = armsFiles.FileJoin
+LEFT JOIN GroupTree on People.BranchResidenceId = GroupTree.GroupId
+WHERE (Crowns.GroupId = @GroupId) 
+				and (@CrownId = -1 AND Crowns.Reign = (SELECT MAX(Reign) 
+								FROM {objectQualifier}SCACrowns wC
+								WHERE wC.GroupId = Groups.GroupId and Heir=1) 
+								and Heir=1 AND ((GETDATE() BETWEEN Crowns.StartDate AND Crowns.EndDate) OR (Crowns.EndDate is null)))
+Order By ListOrder ASC, SCAName ASC
+GO

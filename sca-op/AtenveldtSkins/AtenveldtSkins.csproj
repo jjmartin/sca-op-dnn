@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{770136BE-E76B-4A48-8C1F-68E895722A6D}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AtenveldtSkins</RootNamespace>
+    <AssemblyName>AtenveldtSkins</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="Atenveldt\skins\desktop.ini" />
+    <None Include="Atenveldt\skins\Thumbs.db" />
+    <None Include="Atenveldt\_Atenveldt.dnn" />
+    <None Include="BuildAtenveldtSkin.build">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MinimalExtropy\Container\MinimalExtropy.dnn" />
+    <None Include="MinimalExtropy\Skin\MinimalExtropy.dnn" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Atenveldt\containers\H2_Header.css" />
+    <Content Include="Atenveldt\containers\H2_Header.htm" />
+    <Content Include="Atenveldt\skins\atenveldt.doctype.xml" />
+    <Content Include="Atenveldt\skins\atenveldt.htm" />
+    <Content Include="Atenveldt\skins\atenveldt.jpg" />
+    <Content Include="Atenveldt\skins\bg_blue.gif" />
+    <Content Include="Atenveldt\skins\bg_gold.gif" />
+    <Content Include="Atenveldt\skins\blank.htm" />
+    <Content Include="Atenveldt\skins\border_01.gif" />
+    <Content Include="Atenveldt\skins\border_02.gif" />
+    <Content Include="Atenveldt\skins\breadcrumb.gif" />
+    <Content Include="Atenveldt\skins\dot.gif" />
+    <Content Include="Atenveldt\skins\front1a.gif" />
+    <Content Include="Atenveldt\skins\skin.css" />
+    <Content Include="Atenveldt\skins\skin.xml" />
+    <Content Include="Atenveldt\skins\spacer.gif" />
+    <Content Include="Atenveldt\skins\thumbnail_atenveldt.jpg" />
+    <Content Include="MinimalExtropy\Container\container.css" />
+    <Content Include="MinimalExtropy\Container\images\DNN-minus.gif" />
+    <Content Include="MinimalExtropy\Container\images\DNN-plus.gif" />
+    <Content Include="MinimalExtropy\Container\license.txt" />
+    <Content Include="MinimalExtropy\Container\releaseNotes.txt" />
+    <Content Include="MinimalExtropy\Container\thumbnail_title_blue.jpg" />
+    <Content Include="MinimalExtropy\Container\thumbnail_title_grey.jpg" />
+    <Content Include="MinimalExtropy\Container\thumbnail_title_red.jpg" />
+    <Content Include="MinimalExtropy\Container\Title_Blue.ascx" />
+    <Content Include="MinimalExtropy\Container\Title_Blue.css" />
+    <Content Include="MinimalExtropy\Container\Title_Blue.htm" />
+    <Content Include="MinimalExtropy\Container\Title_Blue.jpg" />
+    <Content Include="MinimalExtropy\Container\Title_Grey.ascx" />
+    <Content Include="MinimalExtropy\Container\Title_Grey.css" />
+    <Content Include="MinimalExtropy\Container\Title_Grey.htm" />
+    <Content Include="MinimalExtropy\Container\Title_Grey.jpg" />
+    <Content Include="MinimalExtropy\Container\Title_Red.ascx" />
+    <Content Include="MinimalExtropy\Container\Title_Red.css" />
+    <Content Include="MinimalExtropy\Container\Title_Red.htm" />
+    <Content Include="MinimalExtropy\Container\Title_Red.jpg" />
+    <Content Include="MinimalExtropy\Skin\css\ie6skin.css" />
+    <Content Include="MinimalExtropy\Skin\css\menu.css" />
+    <Content Include="MinimalExtropy\Skin\css\variations\img\gif\textlarge.gif" />
+    <Content Include="MinimalExtropy\Skin\css\variations\img\gif\textlargehover.gif" />
+    <Content Include="MinimalExtropy\Skin\css\variations\img\gif\textmedium.gif" />
+    <Content Include="MinimalExtropy\Skin\css\variations\img\gif\textmediumhover.gif" />
+    <Content Include="MinimalExtropy\Skin\css\variations\img\gif\textsmall.gif" />
+    <Content Include="MinimalExtropy\Skin\css\variations\img\gif\textsmallhover.gif" />
+    <Content Include="MinimalExtropy\Skin\css\variations\img\gif\width1024.gif" />
+    <Content Include="MinimalExtropy\Skin\css\variations\img\gif\width1024hover.gif" />
+    <Content Include="MinimalExtropy\Skin\css\variations\img\gif\width1280.gif" />
+    <Content Include="MinimalExtropy\Skin\css\variations\img\gif\width1280hover.gif" />
+    <Content Include="MinimalExtropy\Skin\css\variations\img\gif\widthfull.gif" />
+    <Content Include="MinimalExtropy\Skin\css\variations\img\gif\widthfullhover.gif" />
+    <Content Include="MinimalExtropy\Skin\css\variations\img\textlarge.png" />
+    <Content Include="MinimalExtropy\Skin\css\variations\img\textlargehover.png" />
+    <Content Include="MinimalExtropy\Skin\css\variations\img\textmedium.png" />
+    <Content Include="MinimalExtropy\Skin\css\variations\img\textmediumhover.png" />
+    <Content Include="MinimalExtropy\Skin\css\variations\img\textsmall.png" />
+    <Content Include="MinimalExtropy\Skin\css\variations\img\textsmallhover.png" />
+    <Content Include="MinimalExtropy\Skin\css\variations\img\width1024.png" />
+    <Content Include="MinimalExtropy\Skin\css\variations\img\width1024hover.png" />
+    <Content Include="MinimalExtropy\Skin\css\variations\img\width1280.png" />
+    <Content Include="MinimalExtropy\Skin\css\variations\img\width1280hover.png" />
+    <Content Include="MinimalExtropy\Skin\css\variations\img\widthfull.png" />
+    <Content Include="MinimalExtropy\Skin\css\variations\img\widthfullhover.png" />
+    <Content Include="MinimalExtropy\Skin\css\variations\largetext.css" />
+    <Content Include="MinimalExtropy\Skin\css\variations\mediumtext.css" />
+    <Content Include="MinimalExtropy\Skin\css\variations\smalltext.css" />
+    <Content Include="MinimalExtropy\Skin\css\variations\stylesheetwidget.css" />
+    <Content Include="MinimalExtropy\Skin\css\variations\stylesheetwidget_ie6.css" />
+    <Content Include="MinimalExtropy\Skin\css\variations\width1024.css" />
+    <Content Include="MinimalExtropy\Skin\css\variations\width1280.css" />
+    <Content Include="MinimalExtropy\Skin\css\variations\widthfull.css" />
+    <Content Include="MinimalExtropy\Skin\images\add.gif" />
+    <Content Include="MinimalExtropy\Skin\images\body_bg.png" />
+    <Content Include="MinimalExtropy\Skin\images\bot_bg.png" />
+    <Content Include="MinimalExtropy\Skin\images\bot_left.png" />
+    <Content Include="MinimalExtropy\Skin\images\bot_right.png" />
+    <Content Include="MinimalExtropy\Skin\images\bread_bg.png" />
+    <Content Include="MinimalExtropy\Skin\images\bread_left.png" />
+    <Content Include="MinimalExtropy\Skin\images\bread_right.png" />
+    <Content Include="MinimalExtropy\Skin\images\center_bg.png" />
+    <Content Include="MinimalExtropy\Skin\images\cpanel_center.png" />
+    <Content Include="MinimalExtropy\Skin\images\cpanel_left.png" />
+    <Content Include="MinimalExtropy\Skin\images\cpanel_right.png" />
+    <Content Include="MinimalExtropy\Skin\images\ie\bot_bg.gif" />
+    <Content Include="MinimalExtropy\Skin\images\ie\bot_left.gif" />
+    <Content Include="MinimalExtropy\Skin\images\ie\bot_right.gif" />
+    <Content Include="MinimalExtropy\Skin\images\ie\bread_left.gif" />
+    <Content Include="MinimalExtropy\Skin\images\ie\bread_right.gif" />
+    <Content Include="MinimalExtropy\Skin\images\ie\center_bg.gif" />
+    <Content Include="MinimalExtropy\Skin\images\ie\cpanel_center.gif" />
+    <Content Include="MinimalExtropy\Skin\images\ie\cpanel_left.gif" />
+    <Content Include="MinimalExtropy\Skin\images\ie\cpanel_right.gif" />
+    <Content Include="MinimalExtropy\Skin\images\ie\left_bg.gif" />
+    <Content Include="MinimalExtropy\Skin\images\ie\logo_left.gif" />
+    <Content Include="MinimalExtropy\Skin\images\ie\logo_right.gif" />
+    <Content Include="MinimalExtropy\Skin\images\ie\logo_top_left.gif" />
+    <Content Include="MinimalExtropy\Skin\images\ie\logo_top_right.gif" />
+    <Content Include="MinimalExtropy\Skin\images\ie\menu_left.gif" />
+    <Content Include="MinimalExtropy\Skin\images\ie\menu_right.gif" />
+    <Content Include="MinimalExtropy\Skin\images\ie\right_bg.gif" />
+    <Content Include="MinimalExtropy\Skin\images\left_bg.png" />
+    <Content Include="MinimalExtropy\Skin\images\logo_left.png" />
+    <Content Include="MinimalExtropy\Skin\images\logo_right.png" />
+    <Content Include="MinimalExtropy\Skin\images\logo_top_bg.png" />
+    <Content Include="MinimalExtropy\Skin\images\logo_top_left.png" />
+    <Content Include="MinimalExtropy\Skin\images\logo_top_right.png" />
+    <Content Include="MinimalExtropy\Skin\images\lt.gif" />
+    <Content Include="MinimalExtropy\Skin\images\menu_active.png" />
+    <Content Include="MinimalExtropy\Skin\images\menu_bg.png" />
+    <Content Include="MinimalExtropy\Skin\images\menu_hover.png" />
+    <Content Include="MinimalExtropy\Skin\images\menu_left.png" />
+    <Content Include="MinimalExtropy\Skin\images\menu_right.png" />
+    <Content Include="MinimalExtropy\Skin\images\right_bg.png" />
+    <Content Include="MinimalExtropy\Skin\images\save.gif" />
+    <Content Include="MinimalExtropy\Skin\images\search.gif" />
+    <Content Include="MinimalExtropy\Skin\images\submenu_active.png" />
+    <Content Include="MinimalExtropy\Skin\images\submenu_hover.png" />
+    <Content Include="MinimalExtropy\Skin\index 1024.ascx" />
+    <Content Include="MinimalExtropy\Skin\index 1024.css" />
+    <Content Include="MinimalExtropy\Skin\index 1024.doctype.xml" />
+    <Content Include="MinimalExtropy\Skin\index 1024.html" />
+    <Content Include="MinimalExtropy\Skin\index 1024.jpg" />
+    <Content Include="MinimalExtropy\Skin\index 1280.ascx" />
+    <Content Include="MinimalExtropy\Skin\index 1280.css" />
+    <Content Include="MinimalExtropy\Skin\index 1280.doctype.xml" />
+    <Content Include="MinimalExtropy\Skin\index 1280.html" />
+    <Content Include="MinimalExtropy\Skin\index 1280.jpg" />
+    <Content Include="MinimalExtropy\Skin\index full.ascx" />
+    <Content Include="MinimalExtropy\Skin\index full.css" />
+    <Content Include="MinimalExtropy\Skin\index full.doctype.xml" />
+    <Content Include="MinimalExtropy\Skin\index full.html" />
+    <Content Include="MinimalExtropy\Skin\index full.jpg" />
+    <Content Include="MinimalExtropy\Skin\index leftmenu 1024.ascx" />
+    <Content Include="MinimalExtropy\Skin\index leftmenu 1024.css" />
+    <Content Include="MinimalExtropy\Skin\index leftmenu 1024.doctype.xml" />
+    <Content Include="MinimalExtropy\Skin\index leftmenu 1024.html" />
+    <Content Include="MinimalExtropy\Skin\index leftmenu 1024.jpg" />
+    <Content Include="MinimalExtropy\Skin\index leftmenu 1280.ascx" />
+    <Content Include="MinimalExtropy\Skin\index leftmenu 1280.css" />
+    <Content Include="MinimalExtropy\Skin\index leftmenu 1280.doctype.xml" />
+    <Content Include="MinimalExtropy\Skin\index leftmenu 1280.html" />
+    <Content Include="MinimalExtropy\Skin\index leftmenu 1280.jpg" />
+    <Content Include="MinimalExtropy\Skin\index leftmenu full.ascx" />
+    <Content Include="MinimalExtropy\Skin\index leftmenu full.css" />
+    <Content Include="MinimalExtropy\Skin\index leftmenu full.doctype.xml" />
+    <Content Include="MinimalExtropy\Skin\index leftmenu full.html" />
+    <Content Include="MinimalExtropy\Skin\index leftmenu full.jpg" />
+    <Content Include="MinimalExtropy\Skin\index leftmenu.ascx" />
+    <Content Include="MinimalExtropy\Skin\index leftmenu.css" />
+    <Content Include="MinimalExtropy\Skin\index leftmenu.doctype.xml" />
+    <Content Include="MinimalExtropy\Skin\index leftmenu.html" />
+    <Content Include="MinimalExtropy\Skin\index leftmenu.jpg" />
+    <Content Include="MinimalExtropy\Skin\index.ascx" />
+    <Content Include="MinimalExtropy\Skin\index.css" />
+    <Content Include="MinimalExtropy\Skin\index.doctype.xml" />
+    <Content Include="MinimalExtropy\Skin\index.html" />
+    <Content Include="MinimalExtropy\Skin\index.jpg" />
+    <Content Include="MinimalExtropy\Skin\license.txt" />
+    <Content Include="MinimalExtropy\Skin\releasenotes.txt" />
+    <Content Include="MinimalExtropy\Skin\skin.css" />
+    <Content Include="MinimalExtropy\Skin\thumbnail_index 1024.jpg" />
+    <Content Include="MinimalExtropy\Skin\thumbnail_index 1280.jpg" />
+    <Content Include="MinimalExtropy\Skin\thumbnail_index full.jpg" />
+    <Content Include="MinimalExtropy\Skin\thumbnail_index leftmenu 1024.jpg" />
+    <Content Include="MinimalExtropy\Skin\thumbnail_index leftmenu 1280.jpg" />
+    <Content Include="MinimalExtropy\Skin\thumbnail_index leftmenu full.jpg" />
+    <Content Include="MinimalExtropy\Skin\thumbnail_index leftmenu.jpg" />
+    <Content Include="MinimalExtropy\Skin\thumbnail_index.jpg" />
+    <Content Include="MinimalExtropy\Skin\WebControlSkin\MinimalExtropy\PanelBar.MinimalExtropy.css" />
+    <Content Include="MinimalExtropy\Skin\WebControlSkin\MinimalExtropy\PanelBar\Expandable.png" />
+    <Content Include="MinimalExtropy\Skin\WebControlSkin\MinimalExtropy\PanelBar\MinimalExtropy.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MinimalExtropy\Skin\app_localresources\index 1024.ascx.resx" />
+    <EmbeddedResource Include="MinimalExtropy\Skin\app_localresources\index 1280.ascx.resx" />
+    <EmbeddedResource Include="MinimalExtropy\Skin\app_localresources\index full.ascx.resx" />
+    <EmbeddedResource Include="MinimalExtropy\Skin\app_localresources\index leftmenu 1024.ascx.resx" />
+    <EmbeddedResource Include="MinimalExtropy\Skin\app_localresources\index leftmenu 1280.ascx.resx" />
+    <EmbeddedResource Include="MinimalExtropy\Skin\app_localresources\index leftmenu full.ascx.resx" />
+    <EmbeddedResource Include="MinimalExtropy\Skin\app_localresources\index leftmenu.ascx.resx" />
+    <EmbeddedResource Include="MinimalExtropy\Skin\app_localresources\index.ascx.resx" />
+  </ItemGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

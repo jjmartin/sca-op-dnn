@@ -1,0 +1,5 @@
+SCC = This is a source code control file
+
+[JeffMartin.SCAOnlineOP.SqlDataProvider.csproj]
+SCC_Aux_Path = http://jeffxps/VaultService|Jeff:1
+SCC_Project_Name = $/SCAOnlineOP/Providers/SqlDataProvider

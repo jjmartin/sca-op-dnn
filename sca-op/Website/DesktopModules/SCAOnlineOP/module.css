@@ -1,0 +1,293 @@
+@import "print.css" print;
+/* ================================
+    CSS STYLES FOR Module [!output PROJECT_NAME]
+   ================================
+*/
+.ResultList
+{
+	border-collapse:collapse;
+	border-color:#000000;
+}
+.ResultList TD
+{
+	padding:3px 7px 3px 7px;
+	margin:3px;
+	border-color:#000000;
+}
+.ListTitle
+{
+	font-weight:bold;
+	font-size:16px;
+	font-family:Tahoma, Arial, Helvetica;
+}
+.InstructionNote
+{
+	font-size:9px;
+	clear:right;
+	display:block;
+	float:right;
+	width:100%;
+}
+.EditContainer
+{
+	text-align:left;
+}
+select.awardList
+{
+	font-size:9px;
+}
+.SCAEditMember
+{
+	float:left;
+}
+.SCAMemberName
+{
+	margin-bottom:5px;
+}
+.SCAMemberArms
+{
+	float:left;
+clear:right;
+width:50%;
+}
+.SCAMemberBlazon
+{
+	display:inline;
+}
+.SCAMemberArms h1
+{ 
+	margin-top:0px;
+}
+.SCAMemberArms IMG
+{
+	 
+	display:block;
+}
+.SCAMemberRankImage
+{
+	float:right;
+}
+.SCAMemberRankImage IMG
+{
+	margin-bottom:5px;
+	display:block;
+}
+.SCAMemberAliases
+{
+	float:right;
+	text-align:right;
+	clear:right;
+}
+.SCAMemberAliases table
+{
+	width:auto;
+	float:right;
+	
+}
+.DeceasedText
+{
+	font-style:italic;
+}
+
+.SCAMemberHeader
+{
+ width:100%;
+	float:left;
+	clear:both;
+}
+.SCAMemberAwardsHeader
+{
+	clear:both;
+	float:left;
+	width:50%;
+}
+.RecommendLink
+{
+	display:block;
+	float:right;
+	margin:15px 0px 15px 0;
+}
+.SCAOPGame
+{
+	font-family: Tahoma, Arial, Helvetica;
+    font-size: 12px;
+    font-weight: normal;
+}
+Fieldset Legend
+{
+	margin-left:3px;
+}
+Fieldset.SCAOPGameInstructions
+{
+	padding:0px;
+	margin:0px;
+}
+Fieldset.SCAOPGameInstructions p
+{
+	margin:5px;
+}
+Fieldset.SCAOPGameSettings
+{
+	float:left;
+	margin:0px;
+	margin-right:5px;
+	padding:0px;
+	width:330px;
+}
+Fieldset.SCAOPGameSettings div
+{
+	margin: 5px;
+}
+
+.SCAOPGamePictures INPUT
+{
+	width:20px;
+	vertical-align:top;
+}
+.SCAOPGamePictures 
+{
+	float:left;
+}
+.SCAOPGameNames
+{
+	float:left;
+	margin-left:50px;
+}
+.SCAOPGameClear
+{
+	clear:both;
+}
+.SCAOPGameResponse
+{
+	font-size:18px;
+	font-weight:bold;
+	color:Navy;
+}
+
+.SCAOPEverything
+{
+	font-family: Verdana, Arial, Helvetica;
+	font-size:7pt;
+}
+.SCAOPEverything .SCAName
+{
+	font-size:9pt;
+}
+.SCAOPReportFieldLabel
+{
+	font-weight:bold;
+	margin-right:5px;
+}
+.SCAOPReportHeader
+{
+	background-color:Silver;
+	margin-top:3px;
+	border:solid 1px black;
+	border-bottom:solid 0px transparent;
+}
+.SCAOPEverything .Rank
+{
+	float:right;
+	margin-right:10px;
+}
+
+.break
+{
+	clear:both;
+	margin:0px;
+}
+
+.SearchBox
+{
+	
+	clear:both;
+}
+h3
+{
+	margin-top:3px;
+	margin-bottom:3px;
+}
+.SearchBox h5
+{
+	margin-bottom:2px;
+}
+.ControlBox h4, .OtherListBox h4
+{
+	font-weight:bold;
+	font-size:10pt;
+	margin-bottom:2px;
+}
+.ControlBox
+{
+	float:left;
+	margin:5px;
+	white-space:nowrap;
+}
+.RadioList
+{
+	margin-left:10px;
+	display:block;
+	margin-bottom:0px;
+}
+.OtherListBox
+{
+	float:left;
+	margin:3px;
+	width: 30%;
+}
+.Outline
+{
+	border: solid 1px #AAAAAA;
+	padding: 2px;
+}
+
+.SearchBox .SearchOPTextBox
+{
+	width: 300px;
+}
+.ResultItemBlazon
+{
+	margin-top:3px;
+	font-size:10pt;
+	text-align:left;
+}
+.ResultItemName
+{
+text-align:left;
+}
+.ResultDevice{}
+.ResultPhoto
+{
+	vertical-align:top;
+}
+.ImageResultListContainer
+{
+	
+}
+.ImageResultList
+{
+
+	
+}
+.ResultItem
+{
+	margin: 2px;
+	border:solid 1px #AAAAAA;
+	text-align:center;
+	overflow:hidden;
+	padding:2px;
+	float:left;
+}
+.OtherLinkList UL
+{
+	margin-top:2px;
+	margin-bottom:4px;
+}
+.TemplateInstructions
+{
+	float:right;
+}
+.SettingsLabelColumn
+{
+	width:200px;
+}

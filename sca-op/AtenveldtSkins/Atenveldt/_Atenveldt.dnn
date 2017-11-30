@@ -1,0 +1,60 @@
+<dotnetnuke type="Package" version="5.0">
+  <packages>
+    <package name="atenveldt-Skin" type="Skin" version="1.0.0">
+      <friendlyName>Atenveldt Skin</friendlyName>
+      <description />
+      <owner>
+        <name />
+        <organization />
+        <url />
+        <email />
+      </owner>
+      <license>The license for this package is not currently included within the installation file, please check with the vendor for full license details.</license>
+      <releaseNotes />
+      <components>
+        <component type="Skin">
+          <skinFiles>
+            <skinName>Atenveldt</skinName>
+            <basePath>Portals\_default\Skins\atenveldt</basePath>
+          </skinFiles>
+        </component>
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>Portals\_default\Skins\atenveldt</basePath>
+            <resourceFile>
+              <name>Resources-Skins.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
+      </components>
+    </package>
+    <package name="Atenveldt-Containers" type="Container" version="1.0.0">
+      <friendlyName>Atenveldt</friendlyName>
+      <description />
+      <owner>
+        <name>Jeff Martin</name>
+        <organization>SCA Inc, Kingdom of Atenveldt</organization>
+        <url>http://www.atenveldt.org</url>
+        <email>webmin@atenveldt.org</email>
+      </owner>
+      <license>The license for this package is not currently included within the installation file, please check with the vendor for full license details.</license>
+      <releaseNotes />
+      <components>
+        <component type="Container">
+          <containerFiles>
+            <containerName>Atenveldt</containerName>
+            <basePath>Portals\_default\Containers\atenveldt</basePath>
+          </containerFiles>
+        </component>
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>Portals\_default\Containers\atenveldt</basePath>
+            <resourceFile>
+              <name>Resources-Skins.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
+      </components>
+    </package>
+  </packages>
+  </dotnetnuke>

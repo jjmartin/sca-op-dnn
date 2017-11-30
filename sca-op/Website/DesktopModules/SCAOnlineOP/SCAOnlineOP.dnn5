@@ -1,0 +1,424 @@
+<dotnetnuke type="Package" version="5.0">
+  <packages>
+    <package name="SCAOnlineOP" type="Module" version="1.5.0.0">
+      <friendlyName>SCA Online OP</friendlyName>
+      <description>Database, Search and Edit facilities for an Order of Precedence.</description>
+      <owner>
+        <name>Godfrey von Rheinfels, mka Jeff Martin</name>
+        <organization>SCA, Inc., Kingdom of Atenveldt</organization>
+        <url>http://www.atenveldt.org</url>
+        <email>jeff@jeffmartin.com</email>
+      </owner>
+      <license src="SCAOnlineOP License.txt" />
+      <releaseNotes src="releasenotes.htm" />
+      <components>
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>DesktopModules\SCAOnlineOP</basePath>
+            <resourceFile>
+              <name>Resources.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
+        <component type="Script">
+          <scripts>
+            <basePath>DesktopModules\SCAOnlineOP</basePath>
+            <script type="Install">
+              <path>Providers\SqlDataProvider</path>
+              <name>01.00.00.SqlDataProvider</name>
+              <version>01.00.00</version>
+            </script>
+            <script type="Install">
+              <path>Providers\SqlDataProvider</path>
+              <name>1.3.0.SqlDataProvider</name>
+              <version>1.3.0</version>
+            </script>
+            <script type="Install">
+              <path>Providers\SqlDataProvider</path>
+              <name>1.3.01.SqlDataProvider</name>
+              <version>1.3.01</version>
+            </script>
+            <script type="Install">
+              <path>Providers\SqlDataProvider</path>
+              <name>1.3.04.SqlDataProvider</name>
+              <version>1.3.04</version>
+            </script>
+            <script type="Install">
+              <path>Providers\SqlDataProvider</path>
+              <name>1.3.11.SqlDataProvider</name>
+              <version>1.3.11</version>
+            </script>
+            <script type="Install">
+              <path>Providers\SqlDataProvider</path>
+              <name>1.4.0.SqlDataProvider</name>
+              <version>1.4.0</version>
+            </script>
+            <script type="UnInstall">
+              <path>Providers\SqlDataProvider</path>
+              <name>Uninstall.SqlDataProvider</name>
+              <version>1.0.0</version>
+            </script>
+          </scripts>
+        </component>
+        <component type="Module">
+          <desktopModule>
+            <moduleName>SCA Online OP</moduleName>
+            <foldername>SCAOnlineOP</foldername>
+            <businessControllerClass />
+            <supportedFeatures />
+            <moduleDefinitions>
+              <moduleDefinition>
+                <friendlyName>SCAOnlineOP</friendlyName>
+                <defaultCacheTime>0</defaultCacheTime>
+                <moduleControls>
+                  <moduleControl>
+                    <controlKey />
+                    <controlSrc>DesktopModules/SCAOnlineOP/SCAOnlineOP.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle />
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Award</controlKey>
+                    <controlSrc>DesktopModules/SCAOnlineOP/SCAOnlineOPAwardEdit.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Edit Award</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>AwardGroups</controlKey>
+                    <controlSrc>DesktopModules/SCAOnlineOP/SCAOnlineOPAwardGroupEdit.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Edit AwardGroups</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Crown</controlKey>
+                    <controlSrc>DesktopModules/SCAOnlineOP/SCAOnlineOPCrownEdit.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Edit Crown</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Edit</controlKey>
+                    <controlSrc>DesktopModules/SCAOnlineOP/SCAOnlineOPEdit.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Edit Online OP</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Group</controlKey>
+                    <controlSrc>DesktopModules/SCAOnlineOP/SCAOnlineOPGroupEdit.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Edit Group</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>OfficeType</controlKey>
+                    <controlSrc>DesktopModules/SCAOnlineOP/SCAOnlineOPOfficePositionTypeEdit.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Edit Office Types</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Office</controlKey>
+                    <controlSrc>DesktopModules/SCAOnlineOP/SCAOnlineOPOfficeEdit.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Edit Offices</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Settings</controlKey>
+                    <controlSrc>DesktopModules/SCAOnlineOP/SCAOnlineOPSettings.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Settings for Online OP</controlTitle>
+                    <controlType>Host</controlType>
+                    <iconFile />
+                    <helpUrl />
+                  </moduleControl>
+                </moduleControls>
+              </moduleDefinition>
+            </moduleDefinitions>
+          </desktopModule>
+        </component>
+        <component type="File">
+          <files>
+            <basePath>DesktopModules\SCAOnlineOp</basePath>
+            <file>
+              <name>SCAOnlineOP License.txt</name>
+            </file>
+            <file>
+              <name>releasenotes.htm</name>
+            </file>
+            <file>
+              <name>web.config</name>
+            </file>
+          </files>
+        </component>
+        <component type="Assembly">
+          <assemblies>
+            <basePath>bin</basePath>
+            <assembly>
+              <name>SCAOnlineOp.dll</name>
+            </assembly>
+            <assembly>
+              <name>itextsharp.dll</name>
+            </assembly>
+            <assembly>
+              <name>SCAOnlineOpDataProvider.dll</name>
+            </assembly>
+            <assembly>
+              <name>SCAOnlineOpSqlDataProvider.dll</name>
+            </assembly>
+            <assembly>
+              <name>SCAData.dll</name>
+            </assembly>
+            <assembly>
+              <name>AjaxControlToolkit.dll</name>
+            </assembly>
+          </assemblies>
+        </component>
+        <component type="Cleanup" version="01.01.00" fileName="01.01.00.txt" />
+        <component type="Cleanup" version="1.2.0.2" fileName="1.2.0.1.txt" />
+      </components>
+    </package>
+    <package name="SCA Mobile OP" type="Module" version="1.5.0.0">
+      <friendlyName>SCA Mobile OP</friendlyName>
+      <description>Database, Search and Edit facilities for an Order of Precedence.</description>
+      <owner>
+        <name>Godfrey von Rheinfels, mka Jeff Martin</name>
+        <organization>SCA, Inc. , Kingdom of Atenveldt</organization>
+        <url>http://www.atenveldt.org</url>
+        <email>jeff@jeffmartin.com</email>
+      </owner>
+      <license src="SCAOnlineOP License.txt" />
+      <releaseNotes src="releasenotes.htm" />
+      <components>
+        <component type="Module">
+          <desktopModule>
+            <moduleName>SCA Mobile OP</moduleName>
+            <foldername>SCAOnlineOP</foldername>
+            <businessControllerClass />
+            <supportedFeatures />
+            <moduleDefinitions>
+              <moduleDefinition>
+                <friendlyName>MobileOP</friendlyName>
+                <defaultCacheTime>0</defaultCacheTime>
+                <moduleControls>
+                  <moduleControl>
+                    <controlKey />
+                    <controlSrc>DesktopModules/SCAOnlineOP/SCAOnlineMobileOP.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle />
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Settings</controlKey>
+                    <controlSrc>DesktopModules/SCAOnlineOP/SCAOnlineMobileOPSettings.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Settings</controlTitle>
+                    <controlType>Admin</controlType>
+                    <iconFile />
+                    <helpUrl />
+                  </moduleControl>
+                </moduleControls>
+              </moduleDefinition>
+            </moduleDefinitions>
+          </desktopModule>
+        </component>
+      </components>
+    </package>
+    <package name="SCA Officer List (OP)" type="Module" version="1.5.0.0">
+      <friendlyName>Officer List (OP)</friendlyName>
+      <description>Database, Search and Edit facilities for an Order of Precedence.</description>
+      <owner>
+        <name>Godfrey von Rheinfels, mka Jeff Martin</name>
+        <organization>SCA, Inc. , Kingdom of Atenveldt</organization>
+        <url>http://www.atenveldt.org</url>
+        <email>jeff@jeffmartin.com</email>
+      </owner>
+      <license src="SCAOnlineOP License.txt" />
+      <releaseNotes src="releasenotes.htm" />
+      <components>
+        <component type="Module">
+          <desktopModule>
+            <moduleName>SCA Officer List (OP)</moduleName>
+            <foldername>SCAOnlineOP</foldername>
+            <businessControllerClass />
+            <supportedFeatures />
+            <moduleDefinitions>
+              <moduleDefinition>
+                <friendlyName>Officer List (OP)</friendlyName>
+                <defaultCacheTime>0</defaultCacheTime>
+                <moduleControls>
+                  <moduleControl>
+                    <controlKey />
+                    <controlSrc>DesktopModules/SCAOnlineOP/SCAOfficerList.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle />
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Edit</controlKey>
+                    <controlSrc>DesktopModules/SCAOnlineOP/SCAOfficerListEdit.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Edit Officer List</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Settings</controlKey>
+                    <controlSrc>DesktopModules/SCAOnlineOP/SCAOfficerListSettings.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Officer List Settings</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                  </moduleControl>
+                </moduleControls>
+              </moduleDefinition>
+            </moduleDefinitions>
+          </desktopModule>
+        </component>
+      </components>
+    </package>
+    <package name="OP Report Generator" type="Module" version="1.5.0.0">
+      <friendlyName>OP Report Generator</friendlyName>
+      <description>Database, Search and Edit facilities for an Order of Precedence.</description>
+      <owner>
+        <name>Godfrey von Rheinfels, mka Jeff Martin</name>
+        <organization>SCA, Inc. , Kingdom of Atenveldt</organization>
+        <url>http://www.atenveldt.org</url>
+        <email>jeff@jeffmartin.com</email>
+      </owner>
+      <license src="SCAOnlineOP License.txt" />
+      <releaseNotes src="releasenotes.htm" />
+      <components>
+        <component type="Module">
+          <desktopModule>
+            <moduleName>OP Report Generator</moduleName>
+            <foldername>SCAOnlineOP</foldername>
+            <businessControllerClass />
+            <supportedFeatures />
+            <moduleDefinitions>
+              <moduleDefinition>
+                <friendlyName>SCA OP Report</friendlyName>
+                <defaultCacheTime>0</defaultCacheTime>
+                <moduleControls>
+                  <moduleControl>
+                    <controlKey />
+                    <controlSrc>DesktopModules/SCAOnlineOP/SCAOPEverything.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle />
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                  </moduleControl>
+                </moduleControls>
+              </moduleDefinition>
+            </moduleDefinitions>
+          </desktopModule>
+        </component>
+      </components>
+    </package>
+    <package name="SCA Baronial OP Report Generator" type="Module" version="1.5.0.0">
+      <friendlyName>SCA Baronial OP Report Generator</friendlyName>
+      <description>Database, Search and Edit facilities for an Order of Precedence.</description>
+      <owner>
+        <name>Godfrey von Rheinfels, mka Jeff Martin</name>
+        <organization>SCA, Inc. , Kingdom of Atenveldt</organization>
+        <url>http://www.atenveldt.org</url>
+        <email>jeff@jeffmartin.com</email>
+      </owner>
+      <license src="SCAOnlineOP License.txt" />
+      <releaseNotes src="releasenotes.htm" />
+      <components>
+        <component type="Module">
+          <desktopModule>
+            <moduleName>SCA Baronial OP Report Generator</moduleName>
+            <foldername>SCAOnlineOp</foldername>
+            <businessControllerClass />
+            <supportedFeatures />
+            <moduleDefinitions>
+              <moduleDefinition>
+                <friendlyName>SCA Baronial OP Report Generator</friendlyName>
+                <defaultCacheTime>0</defaultCacheTime>
+                <moduleControls>
+                  <moduleControl>
+                    <controlKey />
+                    <controlSrc>DesktopModules/SCAOnlineOP/SCAOnlineOPBaronialAwardsReport.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle />
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                  </moduleControl>
+                </moduleControls>
+              </moduleDefinition>
+            </moduleDefinitions>
+          </desktopModule>
+        </component>
+      </components>
+    </package>
+    <package name="SCA OP Match Game" type="Module" version="1.5.0.0">
+      <friendlyName>SCA OP Match Game</friendlyName>
+      <description>Database, Search and Edit facilities for an Order of Precedence.</description>
+      <owner>
+        <name>Godfrey von Rheinfels, mka Jeff Martin</name>
+        <organization>SCA, Inc. , Kingdom of Atenveldt</organization>
+        <url>http://www.atenveldt.org</url>
+        <email>jeff@jeffmartin.com</email>
+      </owner>
+      <license src="SCAOnlineOP License.txt" />
+      <releaseNotes src="releasenotes.htm" />
+      <components>
+        <component type="Module">
+          <desktopModule>
+            <moduleName>SCA OP Match Game</moduleName>
+            <foldername>SCAOnlineOP</foldername>
+            <businessControllerClass />
+            <supportedFeatures />
+            <moduleDefinitions>
+              <moduleDefinition>
+                <friendlyName>SCA OP Match Game</friendlyName>
+                <defaultCacheTime>0</defaultCacheTime>
+                <moduleControls>
+                  <moduleControl>
+                    <controlKey />
+                    <controlSrc>DesktopModules/SCAOnlineOP/SCAOnlineOPMatchGame.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle />
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                  </moduleControl>
+                </moduleControls>
+              </moduleDefinition>
+            </moduleDefinitions>
+          </desktopModule>
+        </component>
+      </components>
+    </package>
+  </packages>
+</dotnetnuke>

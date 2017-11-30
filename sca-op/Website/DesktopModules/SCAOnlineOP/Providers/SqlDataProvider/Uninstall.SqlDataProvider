@@ -1,0 +1,12 @@
+/************************************************************/
+/*****              SQLDataProvider                     *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+/* Insert here the code to remove tables and stored procs   */
+
+-- Maybe one day

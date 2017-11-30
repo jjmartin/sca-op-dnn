@@ -1,0 +1,160 @@
+﻿/************************************************************/
+/*****              SQLDataProvider                     *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}SCAPeopleCombinedOfficesGet]    ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}SCAPeopleCombinedOfficesGet]') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}[{objectQualifier}SCAPeopleCombinedOfficesGet]
+GO
+
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}SCAPeopleCombinedOfficesGet]     ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}SCAPeopleCombinedOfficesGet]
+	@PeopleId int
+AS
+
+SELECT
+	PeopleOfficer.PeopleOfficerId as ID,
+	PeopleOfficer.PeopleId,
+	OfficerPosition.Title,
+	OfficerPosition.OfficerPositionId,
+	OfficerPosition.OfficeEmail,
+	PeopleOfficer.EmailToUse,
+	PeopleOfficer.EmailOverride,
+	CASE ISNULL(OfficerPositionType.TypeFlags, 0) & 2 WHEN 0 THEN 0 ELSE 1 END  LinkedToCrown, --TypeFlag2 = Related to Crown see enum in code
+	OfficerPositionType.Name as PositionType,
+	IsNull(OfficerPositionType.SortOrder, 999)  as PositionTypeSortOrder,
+	Groups.Name AS GroupName,
+	Groups.GroupId,
+	PeopleOfficer.StartDate,
+	PeopleOfficer.EndDate,
+	PeopleOfficer.CurrentlyHeld,
+	PeopleOfficer.Acting,
+	PeopleOfficer.Verified,
+	PeopleOfficer.PositionSubTitle,
+	PeopleOfficer.PositionNotes,
+	PeopleOfficer.VerifiedNotes,
+	Cast(0 as bit) as RulingOffice,
+	LinkedCrownId,
+			CASE 
+				WHEN LEFT(Sovereign.SCAName, CASE WHEN PATINDEX('% %',Sovereign.SCAName)>0 THEN PATINDEX('% %',Sovereign.SCAName) -1 ELSE 0 END) = '' THEN Sovereign.SCAName 
+				ELSE LEFT(Sovereign.SCAName, CASE WHEN PATINDEX('% %',Sovereign.SCAName)>0 THEN PATINDEX('% %',Sovereign.SCAName) -1 ELSE 0 END) END + 
+			CASE 
+				WHEN Consort.SCAName IS NULL THEN '' 
+				ELSE ' and ' END + 
+			CASE 
+				WHEN Consort.SCAName IS NULL THEN ''  
+				WHEN LEFT(Consort.SCAName,CASE WHEN PATINDEX('% %',Consort.SCAName)>0 THEN PATINDEX('% %',Consort.SCAName) -1 ELSE 0 END) = '' THEN Consort.SCAName 
+				ELSE LEFT(Consort.SCAName,CASE WHEN PATINDEX('% %',Consort.SCAName)>0 THEN PATINDEX('% %',Consort.SCAName) -1 ELSE 0 END) END 
+	AS LinkedCrownDisplay
+FROM {databaseOwner}{objectQualifier}SCAPeopleOfficer  PeopleOfficer 
+JOIN {databaseOwner}{objectQualifier}SCAOfficerPosition OfficerPosition ON PeopleOfficer.OfficerPositionId = OfficerPosition.OfficerPositionId 
+JOIN {databaseOwner}{objectQualifier}SCAGroups Groups ON OfficerPosition.GroupId = Groups.GroupId
+Left join {databaseOwner}{objectQualifier}SCAOfficerPositionType OfficerPositionType on OfficerPosition.OfficerPositionTypeId = OfficerPositionType.OfficerPositionTypeId
+left join {databaseOwner}{objectQualifier}SCACrowns Crowns on PeopleOfficer.LinkedCrownId = Crowns.CrownId
+LEFT JOIN {databaseOwner}{objectQualifier}SCAPeople Consort ON Crowns.ConsortId = Consort.PeopleId
+LEFT JOIN {databaseOwner}{objectQualifier}SCAPeople Sovereign ON Crowns.SovereignId = Sovereign.PeopleId
+WHERE (PeopleOfficer.PeopleId = @PeopleId)
+UNION ALL  /****** Sovereign Offices ******/
+SELECT
+	Crowns.CrownId as ID,
+	Crowns.SovereignId AS PeopleId,
+	CASE WHEN heir =0  THEN '' ELSE 'Heir to the ' END + 
+	CASE WHEN regent = 0 THEN
+	CASE gender WHEN 'M' THEN SovereignMaleTitle WHEN 'F' THEN SovereignFemaleTitle ELSE 'Sovereign' END  
+	ELSE
+	CASE gender WHEN 'M' THEN RegentMaleTitle WHEN 'F' THEN RegentFemaleTitle ELSE 'Regent' END  
+	 END
+	 AS Title ,
+	'-1' as OfficerPositionId,
+	Crowns.Email,
+	'' as EmailToUse,
+	'' as EmailOverride,
+	Cast(0 as bit) as LinkedToCrown,
+	'Reign' as PositionType,
+	'0' as PositionTypeSortOrder,
+	Groups.Name AS GroupName,
+	Groups.GroupId,
+	Crowns.StartDate,
+	Crowns.EndDate,
+			CASE WHEN (Crowns.Reign = (SELECT
+			MAX(Reign)
+			FROM {databaseOwner}{objectQualifier}SCACrowns wC
+			WHERE wC.GroupId = Groups.GroupId  AND wC.Heir=0) OR heir =1)
+			AND Groups.BranchStatusId = 1 AND 
+			(Crowns.EndDate IS NULL OR Crowns.EndDate> GetDate())
+			THEN 1 ELSE 0 END
+	AS CurrentlyHeld,
+	0 as Acting,
+	1 as Verified,
+	'' as PositionSubTitle,
+	'' as PositionNotes,
+	'' as VerifiedNotes,
+	Cast(1 as bit) as RulingOffice,
+	Null as LinkedCrownId, 
+	Null As LinkedCrownDisplay
+FROM {databaseOwner}{objectQualifier}SCACrowns  Crowns
+JOIN {databaseOwner}{objectQualifier}SCAGroups Groups ON Crowns.GroupId = Groups.GroupId 
+JOIN {databaseOwner}{objectQualifier}SCAPeople People ON Crowns.SovereignId = People.PeopleId
+WHERE (Crowns.SovereignId = @PeopleId)
+UNION ALL /****** Consort Offices ******/
+SELECT
+	Crowns.CrownId as ID,
+	Crowns.SovereignId AS PeopleId,
+	CASE WHEN heir =0  THEN '' ELSE 'Heir to the ' END + 
+	CASE WHEN regent = 0 THEN
+	CASE gender WHEN 'M' THEN ConsortMaleTitle WHEN 'F' THEN ConsortFemaleTitle ELSE 'Consort' END
+	ELSE
+	CASE gender WHEN 'M' THEN RegentMaleTitle WHEN 'F' THEN RegentFemaleTitle ELSE 'Regent' END  
+	 END
+	 AS Title ,
+	'-1' as OfficerPositionId,
+	Crowns.Email,
+	'' as EmailToUse,
+	'' as EmailOverride,
+	Cast(0 as bit) as LinkedToCrown,
+	'Reign' as PositionType,
+	'0' as PositionTypeSortOrder,
+	Groups.Name AS GroupName,
+	Groups.GroupId,
+	Crowns.StartDate,
+	Crowns.EndDate,
+			CASE WHEN (Crowns.Reign = (SELECT
+			MAX(Reign)
+			FROM {databaseOwner}{objectQualifier}SCACrowns wC
+			WHERE wC.GroupId = Groups.GroupId  AND wC.Heir=0) OR heir =1)
+			AND Groups.BranchStatusId = 1 AND 
+			(Crowns.EndDate IS NULL OR Crowns.EndDate> GetDate())
+			THEN 1 ELSE 0 END
+	AS CurrentlyHeld,
+	0 as Acting,
+	1 as Verified,
+	'' as PositionSubTitle,
+	'' as PositionNotes,
+	'' as VerifiedNotes,
+	Cast(1 as bit) as RulingOffice,
+	Null as LinkedCrownId, 
+	Null As LinkedCrownDisplay
+FROM {databaseOwner}{objectQualifier}SCACrowns  Crowns
+JOIN {databaseOwner}{objectQualifier}SCAGroups Groups ON Crowns.GroupId = Groups.GroupId 
+JOIN {databaseOwner}{objectQualifier}SCAPeople People ON Crowns.ConsortId = People.PeopleId
+WHERE (Crowns.ConsortId = @PeopleId)
+
+Order By  PositionTypeSortOrder, CurrentlyHeld DESC, StartDate DESC
+
+
+GO

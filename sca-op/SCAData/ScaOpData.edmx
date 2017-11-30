@@ -1,0 +1,2093 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ScaData.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="ScaDataStoreContainer">
+          <EntitySet Name="Files" EntityType="ScaData.Store.Files" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SCAAlias" EntityType="ScaData.Store.SCAAlias" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SCAAwardedBy" EntityType="ScaData.Store.SCAAwardedBy" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SCAAwardGroups" EntityType="ScaData.Store.SCAAwardGroups" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SCAAwards" EntityType="ScaData.Store.SCAAwards" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SCABranchStatus" EntityType="ScaData.Store.SCABranchStatus" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SCACrowns" EntityType="ScaData.Store.SCACrowns" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SCAGroupDesignation" EntityType="ScaData.Store.SCAGroupDesignation" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SCAGroups" EntityType="ScaData.Store.SCAGroups" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SCAOfficerPosition" EntityType="ScaData.Store.SCAOfficerPosition" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SCAOfficerPositionType" EntityType="ScaData.Store.SCAOfficerPositionType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SCAPeople" EntityType="ScaData.Store.SCAPeople" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SCAPeopleAward" EntityType="ScaData.Store.SCAPeopleAward" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SCAPeopleOfficer" EntityType="ScaData.Store.SCAPeopleOfficer" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_SCAAlias_SCAPeople" Association="ScaData.Store.FK_SCAAlias_SCAPeople">
+            <End Role="SCAPeople" EntitySet="SCAPeople" />
+            <End Role="SCAAlias" EntitySet="SCAAlias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAAwardGroups_SCAGroups" Association="ScaData.Store.FK_SCAAwardGroups_SCAGroups">
+            <End Role="SCAGroups" EntitySet="SCAGroups" />
+            <End Role="SCAAwardGroups" EntitySet="SCAAwardGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAAwards_SCAAwardedBy" Association="ScaData.Store.FK_SCAAwards_SCAAwardedBy">
+            <End Role="SCAAwardedBy" EntitySet="SCAAwardedBy" />
+            <End Role="SCAAwards" EntitySet="SCAAwards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAAwards_SCAAwardGroups" Association="ScaData.Store.FK_SCAAwards_SCAAwardGroups">
+            <End Role="SCAAwardGroups" EntitySet="SCAAwardGroups" />
+            <End Role="SCAAwards" EntitySet="SCAAwards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAAwards_SCAGroups" Association="ScaData.Store.FK_SCAAwards_SCAGroups">
+            <End Role="SCAGroups" EntitySet="SCAGroups" />
+            <End Role="SCAAwards" EntitySet="SCAAwards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCACrowns_SCAGroups" Association="ScaData.Store.FK_SCACrowns_SCAGroups">
+            <End Role="SCAGroups" EntitySet="SCAGroups" />
+            <End Role="SCACrowns" EntitySet="SCACrowns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAGroups_SCABranchStatusId" Association="ScaData.Store.FK_SCAGroups_SCABranchStatusId">
+            <End Role="SCABranchStatus" EntitySet="SCABranchStatus" />
+            <End Role="SCAGroups" EntitySet="SCAGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAGroups_SCAGroupDesignation" Association="ScaData.Store.FK_SCAGroups_SCAGroupDesignation">
+            <End Role="SCAGroupDesignation" EntitySet="SCAGroupDesignation" />
+            <End Role="SCAGroups" EntitySet="SCAGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAGroups_SCAGroups" Association="ScaData.Store.FK_SCAGroups_SCAGroups">
+            <End Role="SCAGroups" EntitySet="SCAGroups" />
+            <End Role="SCAGroups1" EntitySet="SCAGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAOfficerPosition_SCAGroups" Association="ScaData.Store.FK_SCAOfficerPosition_SCAGroups">
+            <End Role="SCAGroups" EntitySet="SCAGroups" />
+            <End Role="SCAOfficerPosition" EntitySet="SCAOfficerPosition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAOfficerPosition_SCAOfficerPositionType" Association="ScaData.Store.FK_SCAOfficerPosition_SCAOfficerPositionType">
+            <End Role="SCAOfficerPositionType" EntitySet="SCAOfficerPositionType" />
+            <End Role="SCAOfficerPosition" EntitySet="SCAOfficerPosition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAPeople_SCAGroups" Association="ScaData.Store.FK_SCAPeople_SCAGroups">
+            <End Role="SCAGroups" EntitySet="SCAGroups" />
+            <End Role="SCAPeople" EntitySet="SCAPeople" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAPeopleAward_SCAAlias" Association="ScaData.Store.FK_SCAPeopleAward_SCAAlias">
+            <End Role="SCAAlias" EntitySet="SCAAlias" />
+            <End Role="SCAPeopleAward" EntitySet="SCAPeopleAward" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAPeopleAward_SCAAwards" Association="ScaData.Store.FK_SCAPeopleAward_SCAAwards">
+            <End Role="SCAAwards" EntitySet="SCAAwards" />
+            <End Role="SCAPeopleAward" EntitySet="SCAPeopleAward" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAPeopleAward_SCACrowns" Association="ScaData.Store.FK_SCAPeopleAward_SCACrowns">
+            <End Role="SCACrowns" EntitySet="SCACrowns" />
+            <End Role="SCAPeopleAward" EntitySet="SCAPeopleAward" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAPeopleAward_SCAPeople" Association="ScaData.Store.FK_SCAPeopleAward_SCAPeople">
+            <End Role="SCAPeople" EntitySet="SCAPeople" />
+            <End Role="SCAPeopleAward" EntitySet="SCAPeopleAward" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAPeopleOfficer_SCACrowns" Association="ScaData.Store.FK_SCAPeopleOfficer_SCACrowns">
+            <End Role="SCACrowns" EntitySet="SCACrowns" />
+            <End Role="SCAPeopleOfficer" EntitySet="SCAPeopleOfficer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAPeopleOfficer_SCAOfficerPosition" Association="ScaData.Store.FK_SCAPeopleOfficer_SCAOfficerPosition">
+            <End Role="SCAOfficerPosition" EntitySet="SCAOfficerPosition" />
+            <End Role="SCAPeopleOfficer" EntitySet="SCAPeopleOfficer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAPeopleOfficer_SCAPeople" Association="ScaData.Store.FK_SCAPeopleOfficer_SCAPeople">
+            <End Role="SCAPeople" EntitySet="SCAPeople" />
+            <End Role="SCAPeopleOfficer" EntitySet="SCAPeopleOfficer" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Files">
+          <Key>
+            <PropertyRef Name="FileId" />
+          </Key>
+          <Property Name="FileId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PortalId" Type="int" />
+          <Property Name="FileName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Extension" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Size" Type="int" Nullable="false" />
+          <Property Name="Width" Type="int" />
+          <Property Name="Height" Type="int" />
+          <Property Name="ContentType" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="Folder" Type="nvarchar" MaxLength="200" />
+          <Property Name="FolderID" Type="int" Nullable="false" />
+          <Property Name="Content" Type="image" />
+          <Property Name="CreatedByUserID" Type="int" />
+          <Property Name="CreatedOnDate" Type="datetime" />
+          <Property Name="LastModifiedByUserID" Type="int" />
+          <Property Name="LastModifiedOnDate" Type="datetime" />
+          <Property Name="UniqueId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="VersionGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SHA1Hash" Type="varchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="SCAAlias">
+          <Key>
+            <PropertyRef Name="AliasId" />
+          </Key>
+          <Property Name="AliasId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PeopleId" Type="int" Nullable="false" />
+          <Property Name="SCAName" Type="nvarchar" Nullable="false" MaxLength="300" />
+          <Property Name="Registered" Type="bit" Nullable="false" />
+          <Property Name="Preferred" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SCAAwardedBy">
+          <Key>
+            <PropertyRef Name="AwardedById" />
+          </Key>
+          <Property Name="AwardedById" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AwardedBy" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SCAAwardGroups">
+          <Key>
+            <PropertyRef Name="AwardGroupId" />
+          </Key>
+          <Property Name="AwardGroupId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AwardGroupName" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="Precedence" Type="int" Nullable="false" />
+          <Property Name="SortOrder" Type="int" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SCAAwards">
+          <Key>
+            <PropertyRef Name="AwardId" />
+          </Key>
+          <Property Name="AwardId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="Charter" Type="ntext" />
+          <Property Name="Precedence" Type="int" />
+          <Property Name="BadgeUrl" Type="varchar" MaxLength="300" />
+          <Property Name="BadgeBlazon" Type="nvarchar" />
+          <Property Name="Closed" Type="bit" Nullable="false" />
+          <Property Name="AwardedById" Type="int" />
+          <Property Name="SortOrder" Type="int" />
+          <Property Name="AwardGroupId" Type="int" />
+          <Property Name="Honorary" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SCABranchStatus">
+          <Key>
+            <PropertyRef Name="BranchStatusId" />
+          </Key>
+          <Property Name="BranchStatusId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SCACrowns">
+          <Key>
+            <PropertyRef Name="CrownId" />
+          </Key>
+          <Property Name="CrownId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="Reign" Type="int" Nullable="false" />
+          <Property Name="SovereignId" Type="int" Nullable="false" />
+          <Property Name="ConsortId" Type="int" />
+          <Property Name="Notes" Type="varchar" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="CoronationLocation" Type="varchar" MaxLength="500" />
+          <Property Name="CrownTournamentDate" Type="datetime" />
+          <Property Name="CrownTournamentLocation" Type="varchar" MaxLength="500" />
+          <Property Name="SteppingDownLocation" Type="varchar" MaxLength="500" />
+          <Property Name="InternalUrl" Type="varchar" MaxLength="300" />
+          <Property Name="Heir" Type="bit" Nullable="false" />
+          <Property Name="Picture1Url" Type="varchar" MaxLength="300" />
+          <Property Name="Picture2Url" Type="varchar" MaxLength="300" />
+          <Property Name="Picture1Caption" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Picture2Caption" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Picture1Credit" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Picture2Credit" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Regent" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SCAGroupDesignation">
+          <Key>
+            <PropertyRef Name="GroupDesignationId" />
+          </Key>
+          <Property Name="GroupDesignationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="CeremonialHead" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SCAGroups">
+          <Key>
+            <PropertyRef Name="GroupId" />
+          </Key>
+          <Property Name="GroupId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="300" />
+          <Property Name="Code" Type="varchar" MaxLength="50" />
+          <Property Name="Location" Type="varchar" MaxLength="200" />
+          <Property Name="Precedence" Type="int" />
+          <Property Name="FoundingDate" Type="datetime" />
+          <Property Name="GroupDesignationId" Type="int" />
+          <Property Name="Hidden" Type="bit" Nullable="false" />
+          <Property Name="ArmsUrl" Type="varchar" MaxLength="300" />
+          <Property Name="ArmsBlazon" Type="nvarchar" />
+          <Property Name="BranchStatusId" Type="int" Nullable="false" />
+          <Property Name="Notes" Type="text" />
+          <Property Name="SovereignMaleTitle" Type="varchar" MaxLength="50" />
+          <Property Name="SovereignFemaleTitle" Type="varchar" MaxLength="50" />
+          <Property Name="ConsortMaleTitle" Type="varchar" MaxLength="50" />
+          <Property Name="ConsortFemaleTitle" Type="varchar" MaxLength="50" />
+          <Property Name="ParentGroupId" Type="int" />
+          <Property Name="SovereignArmsUrl" Type="varchar" MaxLength="300" />
+          <Property Name="SovereignBlazon" Type="varchar" MaxLength="300" />
+          <Property Name="ConsortArmsUrl" Type="varchar" MaxLength="300" />
+          <Property Name="WebSiteUrl" Type="varchar" MaxLength="300" />
+          <Property Name="InternalUrl" Type="varchar" MaxLength="300" />
+          <Property Name="ConsortBlazon" Type="varchar" MaxLength="300" />
+          <Property Name="ReignType" Type="varchar" MaxLength="50" />
+          <Property Name="RegentMaleTitle" Type="varchar" MaxLength="50" />
+          <Property Name="RegentFemaleTitle" Type="varchar" MaxLength="50" />
+          <Property Name="RegentType" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SCAOfficerPosition">
+          <Key>
+            <PropertyRef Name="OfficerPositionId" />
+          </Key>
+          <Property Name="OfficerPositionId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="GroupId" Type="int" />
+          <Property Name="ListOrder" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="OfficeEmail" Type="nvarchar" MaxLength="100" />
+          <Property Name="OfficerPositionTypeId" Type="int" />
+          <Property Name="FileId" Type="int" />
+        </EntityType>
+        <EntityType Name="SCAOfficerPositionType">
+          <Key>
+            <PropertyRef Name="OfficerPositionTypeId" />
+          </Key>
+          <Property Name="OfficerPositionTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="TypeFlags" Type="int" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SCAPeople">
+          <Key>
+            <PropertyRef Name="PeopleId" />
+          </Key>
+          <Property Name="PeopleId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SCAName" Type="nvarchar" Nullable="false" MaxLength="300" />
+          <Property Name="MundaneName" Type="varchar" MaxLength="300" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="100" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="100" />
+          <Property Name="City" Type="nvarchar" MaxLength="100" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" />
+          <Property Name="Zip" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone2" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="100" />
+          <Property Name="PhotoURL" Type="nvarchar" MaxLength="300" />
+          <Property Name="ArmsURL" Type="nvarchar" MaxLength="300" />
+          <Property Name="ArmsBlazon" Type="nvarchar(max)" />
+          <Property Name="ShowPicPermission" Type="bit" Nullable="false" />
+          <Property Name="ShowEmailPermission" Type="bit" Nullable="false" />
+          <Property Name="AdminNotes" Type="varchar" />
+          <Property Name="OfficerNotes" Type="varchar" MaxLength="1000" />
+          <Property Name="OPNum" Type="int" />
+          <Property Name="Gender" Type="char" MaxLength="1" />
+          <Property Name="TitlePrefix" Type="nvarchar" MaxLength="50" />
+          <Property Name="HonorsSuffix" Type="nvarchar" MaxLength="50" />
+          <Property Name="Deceased" Type="bit" Nullable="false" />
+          <Property Name="DeceasedWhen" Type="int" />
+          <Property Name="BranchResidenceId" Type="int" />
+          <Property Name="HighestAwardName" Type="nvarchar" MaxLength="200" />
+          <Property Name="HighestAwardPrecedence" Type="int" />
+          <Property Name="HighestAwardDate" Type="datetime" />
+          <Property Name="HighestAwardId" Type="datetime" />
+          <Property Name="CrownId" Type="int" />
+        </EntityType>
+        <EntityType Name="SCAPeopleAward">
+          <Key>
+            <PropertyRef Name="PeopleAwardId" />
+          </Key>
+          <Property Name="PeopleAwardId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AwardId" Type="int" Nullable="false" />
+          <Property Name="PeopleId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="CrownId" Type="int" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="500" />
+          <Property Name="AliasId" Type="int" />
+          <Property Name="Retired" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SCAPeopleOfficer">
+          <Key>
+            <PropertyRef Name="PeopleOfficerId" />
+          </Key>
+          <Property Name="PeopleOfficerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PeopleId" Type="int" Nullable="false" />
+          <Property Name="OfficerPositionId" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="CurrentlyHeld" Type="bit" Nullable="false" />
+          <Property Name="Acting" Type="bit" Nullable="false" />
+          <Property Name="Verified" Type="bit" Nullable="false" />
+          <Property Name="PositionSubTitle" Type="varchar" MaxLength="250" />
+          <Property Name="PositionNotes" Type="varchar(max)" />
+          <Property Name="EmailToUse" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="EmailOverride" Type="nvarchar" MaxLength="100" />
+          <Property Name="VerifiedNotes" Type="varchar(max)" />
+          <Property Name="LinkedCrownId" Type="int" />
+        </EntityType>
+        <Association Name="FK_SCAAlias_SCAPeople">
+          <End Role="SCAPeople" Type="ScaData.Store.SCAPeople" Multiplicity="1" />
+          <End Role="SCAAlias" Type="ScaData.Store.SCAAlias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAPeople">
+              <PropertyRef Name="PeopleId" />
+            </Principal>
+            <Dependent Role="SCAAlias">
+              <PropertyRef Name="PeopleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAAwardGroups_SCAGroups">
+          <End Role="SCAGroups" Type="ScaData.Store.SCAGroups" Multiplicity="1" />
+          <End Role="SCAAwardGroups" Type="ScaData.Store.SCAAwardGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAGroups">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="SCAAwardGroups">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAAwards_SCAAwardedBy">
+          <End Role="SCAAwardedBy" Type="ScaData.Store.SCAAwardedBy" Multiplicity="0..1" />
+          <End Role="SCAAwards" Type="ScaData.Store.SCAAwards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAAwardedBy">
+              <PropertyRef Name="AwardedById" />
+            </Principal>
+            <Dependent Role="SCAAwards">
+              <PropertyRef Name="AwardedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAAwards_SCAAwardGroups">
+          <End Role="SCAAwardGroups" Type="ScaData.Store.SCAAwardGroups" Multiplicity="0..1" />
+          <End Role="SCAAwards" Type="ScaData.Store.SCAAwards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAAwardGroups">
+              <PropertyRef Name="AwardGroupId" />
+            </Principal>
+            <Dependent Role="SCAAwards">
+              <PropertyRef Name="AwardGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAAwards_SCAGroups">
+          <End Role="SCAGroups" Type="ScaData.Store.SCAGroups" Multiplicity="1" />
+          <End Role="SCAAwards" Type="ScaData.Store.SCAAwards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAGroups">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="SCAAwards">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCACrowns_SCAGroups">
+          <End Role="SCAGroups" Type="ScaData.Store.SCAGroups" Multiplicity="1" />
+          <End Role="SCACrowns" Type="ScaData.Store.SCACrowns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAGroups">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="SCACrowns">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAGroups_SCABranchStatusId">
+          <End Role="SCABranchStatus" Type="ScaData.Store.SCABranchStatus" Multiplicity="1" />
+          <End Role="SCAGroups" Type="ScaData.Store.SCAGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCABranchStatus">
+              <PropertyRef Name="BranchStatusId" />
+            </Principal>
+            <Dependent Role="SCAGroups">
+              <PropertyRef Name="BranchStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAGroups_SCAGroupDesignation">
+          <End Role="SCAGroupDesignation" Type="ScaData.Store.SCAGroupDesignation" Multiplicity="0..1" />
+          <End Role="SCAGroups" Type="ScaData.Store.SCAGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAGroupDesignation">
+              <PropertyRef Name="GroupDesignationId" />
+            </Principal>
+            <Dependent Role="SCAGroups">
+              <PropertyRef Name="GroupDesignationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAGroups_SCAGroups">
+          <End Role="SCAGroups" Type="ScaData.Store.SCAGroups" Multiplicity="0..1" />
+          <End Role="SCAGroups1" Type="ScaData.Store.SCAGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAGroups">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="SCAGroups1">
+              <PropertyRef Name="ParentGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAOfficerPosition_SCAGroups">
+          <End Role="SCAGroups" Type="ScaData.Store.SCAGroups" Multiplicity="0..1" />
+          <End Role="SCAOfficerPosition" Type="ScaData.Store.SCAOfficerPosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAGroups">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="SCAOfficerPosition">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAOfficerPosition_SCAOfficerPositionType">
+          <End Role="SCAOfficerPositionType" Type="ScaData.Store.SCAOfficerPositionType" Multiplicity="0..1" />
+          <End Role="SCAOfficerPosition" Type="ScaData.Store.SCAOfficerPosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAOfficerPositionType">
+              <PropertyRef Name="OfficerPositionTypeId" />
+            </Principal>
+            <Dependent Role="SCAOfficerPosition">
+              <PropertyRef Name="OfficerPositionTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAPeople_SCAGroups">
+          <End Role="SCAGroups" Type="ScaData.Store.SCAGroups" Multiplicity="0..1" />
+          <End Role="SCAPeople" Type="ScaData.Store.SCAPeople" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAGroups">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="SCAPeople">
+              <PropertyRef Name="BranchResidenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAPeopleAward_SCAAlias">
+          <End Role="SCAAlias" Type="ScaData.Store.SCAAlias" Multiplicity="0..1" />
+          <End Role="SCAPeopleAward" Type="ScaData.Store.SCAPeopleAward" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAAlias">
+              <PropertyRef Name="AliasId" />
+            </Principal>
+            <Dependent Role="SCAPeopleAward">
+              <PropertyRef Name="AliasId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAPeopleAward_SCAAwards">
+          <End Role="SCAAwards" Type="ScaData.Store.SCAAwards" Multiplicity="1" />
+          <End Role="SCAPeopleAward" Type="ScaData.Store.SCAPeopleAward" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAAwards">
+              <PropertyRef Name="AwardId" />
+            </Principal>
+            <Dependent Role="SCAPeopleAward">
+              <PropertyRef Name="AwardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAPeopleAward_SCACrowns">
+          <End Role="SCACrowns" Type="ScaData.Store.SCACrowns" Multiplicity="0..1" />
+          <End Role="SCAPeopleAward" Type="ScaData.Store.SCAPeopleAward" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCACrowns">
+              <PropertyRef Name="CrownId" />
+            </Principal>
+            <Dependent Role="SCAPeopleAward">
+              <PropertyRef Name="CrownId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAPeopleAward_SCAPeople">
+          <End Role="SCAPeople" Type="ScaData.Store.SCAPeople" Multiplicity="1" />
+          <End Role="SCAPeopleAward" Type="ScaData.Store.SCAPeopleAward" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAPeople">
+              <PropertyRef Name="PeopleId" />
+            </Principal>
+            <Dependent Role="SCAPeopleAward">
+              <PropertyRef Name="PeopleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAPeopleOfficer_SCACrowns">
+          <End Role="SCACrowns" Type="ScaData.Store.SCACrowns" Multiplicity="0..1" />
+          <End Role="SCAPeopleOfficer" Type="ScaData.Store.SCAPeopleOfficer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCACrowns">
+              <PropertyRef Name="CrownId" />
+            </Principal>
+            <Dependent Role="SCAPeopleOfficer">
+              <PropertyRef Name="LinkedCrownId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAPeopleOfficer_SCAOfficerPosition">
+          <End Role="SCAOfficerPosition" Type="ScaData.Store.SCAOfficerPosition" Multiplicity="1" />
+          <End Role="SCAPeopleOfficer" Type="ScaData.Store.SCAPeopleOfficer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAOfficerPosition">
+              <PropertyRef Name="OfficerPositionId" />
+            </Principal>
+            <Dependent Role="SCAPeopleOfficer">
+              <PropertyRef Name="OfficerPositionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAPeopleOfficer_SCAPeople">
+          <End Role="SCAPeople" Type="ScaData.Store.SCAPeople" Multiplicity="1" />
+          <End Role="SCAPeopleOfficer" Type="ScaData.Store.SCAPeopleOfficer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAPeople">
+              <PropertyRef Name="PeopleId" />
+            </Principal>
+            <Dependent Role="SCAPeopleOfficer">
+              <PropertyRef Name="PeopleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SCAAliasAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PeopleId" Type="int" Mode="In" />
+          <Parameter Name="SCAName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Registered" Type="bit" Mode="In" />
+          <Parameter Name="Preferred" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SCAAliasDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AliasId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAAliasGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AliasId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAAliasGetByPeople" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PeopleId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAAliasList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SCAAliasUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AliasId" Type="int" Mode="In" />
+          <Parameter Name="PeopleId" Type="int" Mode="In" />
+          <Parameter Name="SCAName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Registered" Type="bit" Mode="In" />
+          <Parameter Name="Preferred" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SCAAwardGroupsAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AwardGroupName" Type="varchar" Mode="In" />
+          <Parameter Name="Precedence" Type="int" Mode="In" />
+          <Parameter Name="SortOrder" Type="int" Mode="In" />
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAAwardGroupsDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AwardGroupId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAAwardGroupsGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AwardGroupId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAAwardGroupsGetByGroups" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAAwardGroupsGetSameName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AwardGroupId" Type="int" Mode="In" />
+          <Parameter Name="ShowAll" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SCAAwardGroupsList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SCAAwardGroupsUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AwardGroupId" Type="int" Mode="In" />
+          <Parameter Name="AwardGroupName" Type="varchar" Mode="In" />
+          <Parameter Name="Precedence" Type="int" Mode="In" />
+          <Parameter Name="SortOrder" Type="int" Mode="In" />
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAAwardsAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Charter" Type="ntext" Mode="In" />
+          <Parameter Name="Precedence" Type="int" Mode="In" />
+          <Parameter Name="SortOrder" Type="int" Mode="In" />
+          <Parameter Name="BadgeUrl" Type="varchar" Mode="In" />
+          <Parameter Name="BadgeBlazon" Type="nvarchar" Mode="In" />
+          <Parameter Name="Closed" Type="bit" Mode="In" />
+          <Parameter Name="AwardedById" Type="int" Mode="In" />
+          <Parameter Name="AwardGroupId" Type="int" Mode="In" />
+          <Parameter Name="Honorary" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SCAAwardsDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AwardId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAAwardsGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AwardId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAAwardsGetByAwardGroups" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AwardGroupId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAAwardsGetByGroups" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="filter" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SCAAwardsGetCountByCrowns" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CrownId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAAwardsGetCountByTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+          <Parameter Name="TimeStart" Type="datetime" Mode="In" />
+          <Parameter Name="TimeEnd" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="SCAAwardsGetSameName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AwardId" Type="int" Mode="In" />
+          <Parameter Name="ShowAll" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SCAAwardsList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SCAAwardsListByGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAAwardsUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AwardId" Type="int" Mode="In" />
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Charter" Type="ntext" Mode="In" />
+          <Parameter Name="Precedence" Type="int" Mode="In" />
+          <Parameter Name="SortOrder" Type="int" Mode="In" />
+          <Parameter Name="BadgeUrl" Type="varchar" Mode="In" />
+          <Parameter Name="BadgeBlazon" Type="nvarchar" Mode="In" />
+          <Parameter Name="Closed" Type="bit" Mode="In" />
+          <Parameter Name="AwardedById" Type="int" Mode="In" />
+          <Parameter Name="AwardGroupId" Type="int" Mode="In" />
+          <Parameter Name="Honorary" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SCAAwardYears" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SCABranchStatusAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SCABranchStatusDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BranchStatusId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCABranchStatusGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BranchStatusId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCABranchStatusList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SCABranchStatusUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BranchStatusId" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SCACrownLettersAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CrownId" Type="int" Mode="In" />
+          <Parameter Name="Title" Type="varchar" Mode="In" />
+          <Parameter Name="Letter" Type="ntext" Mode="In" />
+        </Function>
+        <Function Name="SCACrownLettersDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CrownLetterId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCACrownLettersGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CrownLetterId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCACrownLettersGetByCrowns" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CrownId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCACrownLettersList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SCACrownLettersUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CrownLetterId" Type="int" Mode="In" />
+          <Parameter Name="CrownId" Type="int" Mode="In" />
+          <Parameter Name="Title" Type="varchar" Mode="In" />
+          <Parameter Name="Letter" Type="ntext" Mode="In" />
+        </Function>
+        <Function Name="SCACrownsAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+          <Parameter Name="Reign" Type="int" Mode="In" />
+          <Parameter Name="SovereignId" Type="int" Mode="In" />
+          <Parameter Name="ConsortId" Type="int" Mode="In" />
+          <Parameter Name="Notes" Type="varchar" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="CoronationLocation" Type="varchar" Mode="In" />
+          <Parameter Name="CrownTournamentDate" Type="datetime" Mode="In" />
+          <Parameter Name="CrownTournamentLocation" Type="varchar" Mode="In" />
+          <Parameter Name="SteppingDownLocation" Type="varchar" Mode="In" />
+          <Parameter Name="InternalUrl" Type="varchar" Mode="In" />
+          <Parameter Name="Heir" Type="bit" Mode="In" />
+          <Parameter Name="Picture1Url" Type="varchar" Mode="In" />
+          <Parameter Name="Picture2Url" Type="varchar" Mode="In" />
+          <Parameter Name="Picture1Caption" Type="nvarchar" Mode="In" />
+          <Parameter Name="Picture2Caption" Type="nvarchar" Mode="In" />
+          <Parameter Name="Picture1Credit" Type="nvarchar" Mode="In" />
+          <Parameter Name="Picture2Credit" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Regent" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SCACrownsDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CrownId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCACrownsGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CrownId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCACrownsGetByGroups" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCACrownsList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SCACrownsUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CrownId" Type="int" Mode="In" />
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+          <Parameter Name="Reign" Type="int" Mode="In" />
+          <Parameter Name="SovereignId" Type="int" Mode="In" />
+          <Parameter Name="ConsortId" Type="int" Mode="In" />
+          <Parameter Name="Notes" Type="varchar" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="CoronationLocation" Type="varchar" Mode="In" />
+          <Parameter Name="CrownTournamentDate" Type="datetime" Mode="In" />
+          <Parameter Name="CrownTournamentLocation" Type="varchar" Mode="In" />
+          <Parameter Name="SteppingDownLocation" Type="varchar" Mode="In" />
+          <Parameter Name="InternalUrl" Type="varchar" Mode="In" />
+          <Parameter Name="Heir" Type="bit" Mode="In" />
+          <Parameter Name="Picture1Url" Type="varchar" Mode="In" />
+          <Parameter Name="Picture2Url" Type="varchar" Mode="In" />
+          <Parameter Name="Picture1Caption" Type="nvarchar" Mode="In" />
+          <Parameter Name="Picture2Caption" Type="nvarchar" Mode="In" />
+          <Parameter Name="Picture1Credit" Type="nvarchar" Mode="In" />
+          <Parameter Name="Picture2Credit" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Regent" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SCAGroupDesignationAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="CeremonialHead" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SCAGroupDesignationDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GroupDesignationId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAGroupDesignationGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GroupDesignationId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAGroupDesignationList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SCAGroupDesignationUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GroupDesignationId" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="CeremonialHead" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SCAGroupHistoryAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Date" Type="datetime" Mode="In" />
+          <Parameter Name="FromGroupId" Type="int" Mode="In" />
+          <Parameter Name="ToGroupId" Type="int" Mode="In" />
+          <Parameter Name="Note" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SCAGroupHistoryDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GroupHistoryId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAGroupHistoryGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GroupHistoryId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAGroupHistoryGetByFromGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FromGroupId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAGroupHistoryGetByToGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ToGroupId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAGroupHistoryList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SCAGroupHistoryUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GroupHistoryId" Type="int" Mode="In" />
+          <Parameter Name="Date" Type="datetime" Mode="In" />
+          <Parameter Name="FromGroupId" Type="int" Mode="In" />
+          <Parameter Name="ToGroupId" Type="int" Mode="In" />
+          <Parameter Name="Note" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SCAGroupsAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Code" Type="varchar" Mode="In" />
+          <Parameter Name="Location" Type="varchar" Mode="In" />
+          <Parameter Name="Precedence" Type="int" Mode="In" />
+          <Parameter Name="FoundingDate" Type="datetime" Mode="In" />
+          <Parameter Name="GroupDesignationId" Type="int" Mode="In" />
+          <Parameter Name="Hidden" Type="bit" Mode="In" />
+          <Parameter Name="ArmsUrl" Type="varchar" Mode="In" />
+          <Parameter Name="ArmsBlazon" Type="nvarchar" Mode="In" />
+          <Parameter Name="BranchStatusId" Type="int" Mode="In" />
+          <Parameter Name="Notes" Type="text" Mode="In" />
+          <Parameter Name="SovereignMaleTitle" Type="varchar" Mode="In" />
+          <Parameter Name="SovereignFemaleTitle" Type="varchar" Mode="In" />
+          <Parameter Name="ConsortMaleTitle" Type="varchar" Mode="In" />
+          <Parameter Name="ConsortFemaleTitle" Type="varchar" Mode="In" />
+          <Parameter Name="ParentGroupId" Type="int" Mode="In" />
+          <Parameter Name="SovereignArmsUrl" Type="varchar" Mode="In" />
+          <Parameter Name="SovereignBlazon" Type="varchar" Mode="In" />
+          <Parameter Name="ConsortArmsUrl" Type="varchar" Mode="In" />
+          <Parameter Name="WebSiteUrl" Type="varchar" Mode="In" />
+          <Parameter Name="InternalUrl" Type="varchar" Mode="In" />
+          <Parameter Name="ConsortBlazon" Type="varchar" Mode="In" />
+          <Parameter Name="ReignType" Type="varchar" Mode="In" />
+          <Parameter Name="RegentMaleTitle" Type="varchar" Mode="In" />
+          <Parameter Name="RegentFemaleTitle" Type="varchar" Mode="In" />
+          <Parameter Name="RegentType" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SCAGroupsDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAGroupsGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAGroupsGetByBranchStatusId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BranchStatusId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAGroupsGetByGroupDesignation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GroupDesignationId" Type="int" Mode="In" />
+          <Parameter Name="GroupDesignation" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SCAGroupsList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SCAGroupsListByGroupsGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="filter" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SCAGroupsListForAwards" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SCAGroupsListForOffices" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SCAGroupsListForReigns" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SCAGroupsListGroups" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SCAGroupsUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Code" Type="varchar" Mode="In" />
+          <Parameter Name="Location" Type="varchar" Mode="In" />
+          <Parameter Name="Precedence" Type="int" Mode="In" />
+          <Parameter Name="FoundingDate" Type="datetime" Mode="In" />
+          <Parameter Name="GroupDesignationId" Type="int" Mode="In" />
+          <Parameter Name="Hidden" Type="bit" Mode="In" />
+          <Parameter Name="ArmsUrl" Type="varchar" Mode="In" />
+          <Parameter Name="ArmsBlazon" Type="nvarchar" Mode="In" />
+          <Parameter Name="BranchStatusId" Type="int" Mode="In" />
+          <Parameter Name="Notes" Type="text" Mode="In" />
+          <Parameter Name="SovereignMaleTitle" Type="varchar" Mode="In" />
+          <Parameter Name="SovereignFemaleTitle" Type="varchar" Mode="In" />
+          <Parameter Name="ConsortMaleTitle" Type="varchar" Mode="In" />
+          <Parameter Name="ConsortFemaleTitle" Type="varchar" Mode="In" />
+          <Parameter Name="ParentGroupId" Type="int" Mode="In" />
+          <Parameter Name="SovereignArmsUrl" Type="varchar" Mode="In" />
+          <Parameter Name="SovereignBlazon" Type="varchar" Mode="In" />
+          <Parameter Name="ConsortArmsUrl" Type="varchar" Mode="In" />
+          <Parameter Name="WebSiteUrl" Type="varchar" Mode="In" />
+          <Parameter Name="InternalUrl" Type="varchar" Mode="In" />
+          <Parameter Name="ConsortBlazon" Type="varchar" Mode="In" />
+          <Parameter Name="ReignType" Type="varchar" Mode="In" />
+          <Parameter Name="RegentMaleTitle" Type="varchar" Mode="In" />
+          <Parameter Name="RegentFemaleTitle" Type="varchar" Mode="In" />
+          <Parameter Name="RegentType" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SCAOfficerPositionAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Title" Type="varchar" Mode="In" />
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+          <Parameter Name="ListOrder" Type="int" Mode="In" />
+          <Parameter Name="BadgeURL" Type="nvarchar" Mode="In" />
+          <Parameter Name="OfficeEmail" Type="nvarchar" Mode="In" />
+          <Parameter Name="LinkedToCrown" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SCAOfficerPositionDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OfficerPositionId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAOfficerPositionList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SCAOfficerPositionListByGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAOfficerPositionUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OfficerPositionId" Type="int" Mode="In" />
+          <Parameter Name="Title" Type="varchar" Mode="In" />
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+          <Parameter Name="ListOrder" Type="int" Mode="In" />
+          <Parameter Name="BadgeURL" Type="nvarchar" Mode="In" />
+          <Parameter Name="OfficeEmail" Type="nvarchar" Mode="In" />
+          <Parameter Name="LinkedToCrown" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SCAOfficers_Add" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ModuleId" Type="int" Mode="In" />
+          <Parameter Name="SocietyName" Type="nvarchar" Mode="In" />
+          <Parameter Name="MundaneName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Address1" Type="nvarchar" Mode="In" />
+          <Parameter Name="Address2" Type="nvarchar" Mode="In" />
+          <Parameter Name="City" Type="nvarchar" Mode="In" />
+          <Parameter Name="State" Type="nvarchar" Mode="In" />
+          <Parameter Name="Zip" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phone1" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phone2" Type="nvarchar" Mode="In" />
+          <Parameter Name="EmailAddress" Type="nvarchar" Mode="In" />
+          <Parameter Name="Notes" Type="nvarchar" Mode="In" />
+          <Parameter Name="ViewOrder" Type="int" Mode="In" />
+          <Parameter Name="IconPath" Type="nvarchar" Mode="In" />
+          <Parameter Name="PhotoPath" Type="nvarchar" Mode="In" />
+          <Parameter Name="ArmsPath" Type="nvarchar" Mode="In" />
+          <Parameter Name="OfficerPosition" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SCAOfficers_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SCAOfficerId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAOfficers_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SCAOfficerId" Type="int" Mode="In" />
+          <Parameter Name="ModuleId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAOfficers_GetList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ModuleId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAOfficers_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SCAOfficerId" Type="int" Mode="In" />
+          <Parameter Name="SocietyName" Type="nvarchar" Mode="In" />
+          <Parameter Name="MundaneName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Address1" Type="nvarchar" Mode="In" />
+          <Parameter Name="Address2" Type="nvarchar" Mode="In" />
+          <Parameter Name="City" Type="nvarchar" Mode="In" />
+          <Parameter Name="State" Type="nvarchar" Mode="In" />
+          <Parameter Name="Zip" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phone1" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phone2" Type="nvarchar" Mode="In" />
+          <Parameter Name="EmailAddress" Type="nvarchar" Mode="In" />
+          <Parameter Name="Notes" Type="nvarchar" Mode="In" />
+          <Parameter Name="ViewOrder" Type="int" Mode="In" />
+          <Parameter Name="IconPath" Type="nvarchar" Mode="In" />
+          <Parameter Name="PhotoPath" Type="nvarchar" Mode="In" />
+          <Parameter Name="ArmsPath" Type="nvarchar" Mode="In" />
+          <Parameter Name="OfficerPosition" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SCAName" Type="nvarchar" Mode="In" />
+          <Parameter Name="MundaneName" Type="varchar" Mode="In" />
+          <Parameter Name="Address1" Type="nvarchar" Mode="In" />
+          <Parameter Name="Address2" Type="nvarchar" Mode="In" />
+          <Parameter Name="City" Type="nvarchar" Mode="In" />
+          <Parameter Name="State" Type="nvarchar" Mode="In" />
+          <Parameter Name="Zip" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phone1" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phone2" Type="nvarchar" Mode="In" />
+          <Parameter Name="EmailAddress" Type="nvarchar" Mode="In" />
+          <Parameter Name="PhotoURL" Type="nvarchar" Mode="In" />
+          <Parameter Name="ArmsURL" Type="nvarchar" Mode="In" />
+          <Parameter Name="ArmsBlazon" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ShowPicPermission" Type="bit" Mode="In" />
+          <Parameter Name="ShowEmailPermission" Type="bit" Mode="In" />
+          <Parameter Name="AdminNotes" Type="varchar" Mode="In" />
+          <Parameter Name="OfficerNotes" Type="varchar" Mode="In" />
+          <Parameter Name="Gender" Type="char" Mode="In" />
+          <Parameter Name="TitlePrefix" Type="nvarchar" Mode="In" />
+          <Parameter Name="HonorsSuffix" Type="nvarchar" Mode="In" />
+          <Parameter Name="Deceased" Type="bit" Mode="In" />
+          <Parameter Name="DeceasedWhen" Type="int" Mode="In" />
+          <Parameter Name="BranchResidenceId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleAwardAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AwardId" Type="int" Mode="In" />
+          <Parameter Name="PeopleId" Type="int" Mode="In" />
+          <Parameter Name="Date" Type="datetime" Mode="In" />
+          <Parameter Name="CrownId" Type="int" Mode="In" />
+          <Parameter Name="Notes" Type="nvarchar" Mode="In" />
+          <Parameter Name="AliasId" Type="int" Mode="In" />
+          <Parameter Name="Retired" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleAwardDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PeopleAwardId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleAwardGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PeopleAwardId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleAwardGetByAlias" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AliasId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleAwardGetByAwardGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AwardGroupId" Type="int" Mode="In" />
+          <Parameter Name="SameName" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleAwardGetByAwards" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AwardId" Type="int" Mode="In" />
+          <Parameter Name="SameName" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleAwardGetByCrowns" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CrownId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleAwardGetByPeople" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PeopleId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleAwardGetByTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+          <Parameter Name="TimeStart" Type="datetime" Mode="In" />
+          <Parameter Name="TimeEnd" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleAwardList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SCAPeopleAwardUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PeopleAwardId" Type="int" Mode="In" />
+          <Parameter Name="AwardId" Type="int" Mode="In" />
+          <Parameter Name="PeopleId" Type="int" Mode="In" />
+          <Parameter Name="Date" Type="datetime" Mode="In" />
+          <Parameter Name="CrownId" Type="int" Mode="In" />
+          <Parameter Name="Notes" Type="nvarchar" Mode="In" />
+          <Parameter Name="AliasId" Type="int" Mode="In" />
+          <Parameter Name="Retired" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleCombinedOfficesGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PeopleId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PeopleId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PeopleId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleGetRegisteredName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PeopleId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SCAPeopleListAlphaCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SCAPeopleListFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Filter" Type="varchar" Mode="In" />
+          <Parameter Name="SearchField" Type="varchar" Mode="In" />
+          <Parameter Name="OrderBy" Type="varchar" Mode="In" />
+          <Parameter Name="OnlyPhotos" Type="bit" Mode="In" />
+          <Parameter Name="OnlyDevices" Type="bit" Mode="In" />
+          <Parameter Name="IncludeAliases" Type="bit" Mode="In" />
+          <Parameter Name="OnlyDeceased" Type="bit" Mode="In" />
+          <Parameter Name="OnlyLiving" Type="bit" Mode="In" />
+          <Parameter Name="BaseKingdom" Type="int" Mode="In" />
+          <Parameter Name="OnlyResidents" Type="bit" Mode="In" />
+          <Parameter Name="OnlyNonResidents" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleListGame" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Difficulty" Type="int" Mode="In" />
+          <Parameter Name="GameType" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleListOP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SCAPeopleOfficerAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PeopleId" Type="int" Mode="In" />
+          <Parameter Name="OfficerPositionId" Type="int" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="CurrentlyHeld" Type="bit" Mode="In" />
+          <Parameter Name="Acting" Type="bit" Mode="In" />
+          <Parameter Name="Verified" Type="bit" Mode="In" />
+          <Parameter Name="PositionSubTitle" Type="varchar" Mode="In" />
+          <Parameter Name="PositionNotes" Type="varchar(max)" Mode="In" />
+          <Parameter Name="EmailToUse" Type="varchar" Mode="In" />
+          <Parameter Name="EmailOverride" Type="nvarchar" Mode="In" />
+          <Parameter Name="VerifiedNotes" Type="varchar(max)" Mode="In" />
+          <Parameter Name="LinkedCrownId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleOfficerDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PeopleOfficerId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleOfficerGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PeopleOfficerId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleOfficerGetByOfficerPosition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OfficerPositionId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleOfficerGetByPeople" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PeopleId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleOfficerList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SCAPeopleOfficerListByOfficerPositionIDs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OfficerPositionIds" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ShowVacant" Type="bit" Mode="In" />
+          <Parameter Name="ShowHistory" Type="bit" Mode="In" />
+          <Parameter Name="UseCrownLink" Type="bit" Mode="In" />
+          <Parameter Name="CrownId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleOfficerListGroupRegnum" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleOfficerListGroupRulers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+          <Parameter Name="CrownId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleOfficerListRegnum" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleOfficerUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PeopleOfficerId" Type="int" Mode="In" />
+          <Parameter Name="PeopleId" Type="int" Mode="In" />
+          <Parameter Name="OfficerPositionId" Type="int" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="CurrentlyHeld" Type="bit" Mode="In" />
+          <Parameter Name="Acting" Type="bit" Mode="In" />
+          <Parameter Name="Verified" Type="bit" Mode="In" />
+          <Parameter Name="PositionSubTitle" Type="varchar" Mode="In" />
+          <Parameter Name="PositionNotes" Type="varchar(max)" Mode="In" />
+          <Parameter Name="EmailToUse" Type="varchar" Mode="In" />
+          <Parameter Name="EmailOverride" Type="nvarchar" Mode="In" />
+          <Parameter Name="VerifiedNotes" Type="varchar(max)" Mode="In" />
+          <Parameter Name="LinkedCrownId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleSingleGroupEnchiladaReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PeopleId" Type="int" Mode="In" />
+          <Parameter Name="SCAName" Type="nvarchar" Mode="In" />
+          <Parameter Name="MundaneName" Type="varchar" Mode="In" />
+          <Parameter Name="Address1" Type="nvarchar" Mode="In" />
+          <Parameter Name="Address2" Type="nvarchar" Mode="In" />
+          <Parameter Name="City" Type="nvarchar" Mode="In" />
+          <Parameter Name="State" Type="nvarchar" Mode="In" />
+          <Parameter Name="Zip" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phone1" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phone2" Type="nvarchar" Mode="In" />
+          <Parameter Name="EmailAddress" Type="nvarchar" Mode="In" />
+          <Parameter Name="PhotoURL" Type="nvarchar" Mode="In" />
+          <Parameter Name="ArmsURL" Type="nvarchar" Mode="In" />
+          <Parameter Name="ArmsBlazon" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ShowPicPermission" Type="bit" Mode="In" />
+          <Parameter Name="ShowEmailPermission" Type="bit" Mode="In" />
+          <Parameter Name="AdminNotes" Type="varchar" Mode="In" />
+          <Parameter Name="OfficerNotes" Type="varchar" Mode="In" />
+          <Parameter Name="Gender" Type="char" Mode="In" />
+          <Parameter Name="TitlePrefix" Type="nvarchar" Mode="In" />
+          <Parameter Name="HonorsSuffix" Type="nvarchar" Mode="In" />
+          <Parameter Name="Deceased" Type="bit" Mode="In" />
+          <Parameter Name="DeceasedWhen" Type="int" Mode="In" />
+          <Parameter Name="BranchResidenceId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SCAPeopleUpdatePrecedence" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SCAPeopleWholeEnchiladaReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SCAUpdatePeopleOPNum" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="JeffMartin.ScaData" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="ScaOpEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Aliases" EntityType="JeffMartin.ScaData.Alias" />
+          <EntitySet Name="WhoGivesAward" EntityType="JeffMartin.ScaData.AwardedByWho" />
+          <EntitySet Name="AwardGroups" EntityType="JeffMartin.ScaData.AwardGroup" />
+          <EntitySet Name="Awards" EntityType="JeffMartin.ScaData.Award" />
+          <EntitySet Name="BranchStatuses" EntityType="JeffMartin.ScaData.BranchStatus" />
+          <EntitySet Name="Crowns" EntityType="JeffMartin.ScaData.Crown" />
+          <EntitySet Name="GroupDesignations" EntityType="JeffMartin.ScaData.GroupDesignation" />
+          <EntitySet Name="Groups" EntityType="JeffMartin.ScaData.Group" />
+          <EntitySet Name="OfficerPositions" EntityType="JeffMartin.ScaData.OfficerPosition" />
+          <EntitySet Name="OfficerPositionTypes" EntityType="JeffMartin.ScaData.OfficerPositionType" />
+          <EntitySet Name="People" EntityType="JeffMartin.ScaData.Person" />
+          <EntitySet Name="PersonAwards" EntityType="JeffMartin.ScaData.PersonAward" />
+          <EntitySet Name="PersonOfficers" EntityType="JeffMartin.ScaData.PersonOfficer" />
+          <AssociationSet Name="FK_SCAAlias_SCAPeople" Association="JeffMartin.ScaData.FK_SCAAlias_SCAPeople">
+            <End Role="SCAPeople" EntitySet="People" />
+            <End Role="SCAAlias" EntitySet="Aliases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAPeopleAward_SCAAlias" Association="JeffMartin.ScaData.FK_SCAPeopleAward_SCAAlias">
+            <End Role="SCAAlias" EntitySet="Aliases" />
+            <End Role="SCAPeopleAward" EntitySet="PersonAwards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAAwards_SCAAwardedBy" Association="JeffMartin.ScaData.FK_SCAAwards_SCAAwardedBy">
+            <End Role="SCAAwardedBy" EntitySet="WhoGivesAward" />
+            <End Role="SCAAwards" EntitySet="Awards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAAwardGroups_SCAGroups" Association="JeffMartin.ScaData.FK_SCAAwardGroups_SCAGroups">
+            <End Role="SCAGroups" EntitySet="Groups" />
+            <End Role="SCAAwardGroups" EntitySet="AwardGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAAwards_SCAAwardGroups" Association="JeffMartin.ScaData.FK_SCAAwards_SCAAwardGroups">
+            <End Role="SCAAwardGroups" EntitySet="AwardGroups" />
+            <End Role="SCAAwards" EntitySet="Awards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAAwards_SCAGroups" Association="JeffMartin.ScaData.FK_SCAAwards_SCAGroups">
+            <End Role="SCAGroups" EntitySet="Groups" />
+            <End Role="SCAAwards" EntitySet="Awards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAPeopleAward_SCAAwards" Association="JeffMartin.ScaData.FK_SCAPeopleAward_SCAAwards">
+            <End Role="SCAAwards" EntitySet="Awards" />
+            <End Role="SCAPeopleAward" EntitySet="PersonAwards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAGroups_SCABranchStatusId" Association="JeffMartin.ScaData.FK_SCAGroups_SCABranchStatusId">
+            <End Role="SCABranchStatus" EntitySet="BranchStatuses" />
+            <End Role="SCAGroups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCACrowns_SCAGroups" Association="JeffMartin.ScaData.FK_SCACrowns_SCAGroups">
+            <End Role="SCAGroups" EntitySet="Groups" />
+            <End Role="SCACrowns" EntitySet="Crowns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAPeopleAward_SCACrowns" Association="JeffMartin.ScaData.FK_SCAPeopleAward_SCACrowns">
+            <End Role="SCACrowns" EntitySet="Crowns" />
+            <End Role="SCAPeopleAward" EntitySet="PersonAwards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAPeopleOfficer_SCACrowns" Association="JeffMartin.ScaData.FK_SCAPeopleOfficer_SCACrowns">
+            <End Role="SCACrowns" EntitySet="Crowns" />
+            <End Role="SCAPeopleOfficer" EntitySet="PersonOfficers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAGroups_SCAGroupDesignation" Association="JeffMartin.ScaData.FK_SCAGroups_SCAGroupDesignation">
+            <End Role="SCAGroupDesignation" EntitySet="GroupDesignations" />
+            <End Role="SCAGroups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAGroups_SCAGroups" Association="JeffMartin.ScaData.FK_SCAGroups_SCAGroups">
+            <End Role="SCAGroups" EntitySet="Groups" />
+            <End Role="SCAGroups1" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAOfficerPosition_SCAGroups" Association="JeffMartin.ScaData.FK_SCAOfficerPosition_SCAGroups">
+            <End Role="SCAGroups" EntitySet="Groups" />
+            <End Role="SCAOfficerPosition" EntitySet="OfficerPositions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAPeople_SCAGroups" Association="JeffMartin.ScaData.FK_SCAPeople_SCAGroups">
+            <End Role="SCAGroups" EntitySet="Groups" />
+            <End Role="SCAPeople" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAOfficerPosition_SCAOfficerPositionType" Association="JeffMartin.ScaData.FK_SCAOfficerPosition_SCAOfficerPositionType">
+            <End Role="SCAOfficerPositionType" EntitySet="OfficerPositionTypes" />
+            <End Role="SCAOfficerPosition" EntitySet="OfficerPositions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAPeopleOfficer_SCAOfficerPosition" Association="JeffMartin.ScaData.FK_SCAPeopleOfficer_SCAOfficerPosition">
+            <End Role="SCAOfficerPosition" EntitySet="OfficerPositions" />
+            <End Role="SCAPeopleOfficer" EntitySet="PersonOfficers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAPeopleAward_SCAPeople" Association="JeffMartin.ScaData.FK_SCAPeopleAward_SCAPeople">
+            <End Role="SCAPeople" EntitySet="People" />
+            <End Role="SCAPeopleAward" EntitySet="PersonAwards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCAPeopleOfficer_SCAPeople" Association="JeffMartin.ScaData.FK_SCAPeopleOfficer_SCAPeople">
+            <End Role="SCAPeople" EntitySet="People" />
+            <End Role="SCAPeopleOfficer" EntitySet="PersonOfficers" />
+          </AssociationSet>
+          <EntitySet Name="Files" EntityType="JeffMartin.ScaData.File" />
+          <AssociationSet Name="FileOfficerPosition" Association="JeffMartin.ScaData.FileOfficerPosition">
+            <End Role="File" EntitySet="Files" />
+            <End Role="OfficerPosition" EntitySet="OfficerPositions" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Alias">
+          <Key>
+            <PropertyRef Name="AliasId" />
+          </Key>
+          <Property Name="AliasId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PeopleId" Type="Int32" Nullable="false" />
+          <Property Name="SCAName" Type="String" Nullable="false" MaxLength="300" Unicode="true" FixedLength="false" />
+          <Property Name="Registered" Type="Boolean" Nullable="false" />
+          <Property Name="Preferred" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SCAPeople" Relationship="JeffMartin.ScaData.FK_SCAAlias_SCAPeople" FromRole="SCAAlias" ToRole="SCAPeople" />
+          <NavigationProperty Name="SCAPeopleAwards" Relationship="JeffMartin.ScaData.FK_SCAPeopleAward_SCAAlias" FromRole="SCAAlias" ToRole="SCAPeopleAward" />
+        </EntityType>
+        <EntityType Name="AwardedByWho">
+          <Key>
+            <PropertyRef Name="AwardedById" />
+          </Key>
+          <Property Name="AwardedById" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AwardedBy" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="SCAAwards" Relationship="JeffMartin.ScaData.FK_SCAAwards_SCAAwardedBy" FromRole="SCAAwardedBy" ToRole="SCAAwards" />
+        </EntityType>
+        <EntityType Name="AwardGroup">
+          <Key>
+            <PropertyRef Name="AwardGroupId" />
+          </Key>
+          <Property Name="AwardGroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AwardGroupName" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="Precedence" Type="Int32" Nullable="false" />
+          <Property Name="SortOrder" Type="Int32" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SCAGroup" Relationship="JeffMartin.ScaData.FK_SCAAwardGroups_SCAGroups" FromRole="SCAAwardGroups" ToRole="SCAGroups" />
+          <NavigationProperty Name="SCAAwards" Relationship="JeffMartin.ScaData.FK_SCAAwards_SCAAwardGroups" FromRole="SCAAwardGroups" ToRole="SCAAwards" />
+        </EntityType>
+        <EntityType Name="Award">
+          <Key>
+            <PropertyRef Name="AwardId" />
+          </Key>
+          <Property Name="AwardId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="Charter" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Precedence" Type="Int32" />
+          <Property Name="BadgeUrl" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+          <Property Name="BadgeBlazon" Type="String" MaxLength="4000" Unicode="true" FixedLength="false" />
+          <Property Name="Closed" Type="Boolean" Nullable="false" />
+          <Property Name="AwardedById" Type="Int32" />
+          <Property Name="SortOrder" Type="Int32" />
+          <Property Name="AwardGroupId" Type="Int32" />
+          <Property Name="Honorary" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SCAAwardedBy" Relationship="JeffMartin.ScaData.FK_SCAAwards_SCAAwardedBy" FromRole="SCAAwards" ToRole="SCAAwardedBy" />
+          <NavigationProperty Name="SCAAwardGroup" Relationship="JeffMartin.ScaData.FK_SCAAwards_SCAAwardGroups" FromRole="SCAAwards" ToRole="SCAAwardGroups" />
+          <NavigationProperty Name="SCAGroup" Relationship="JeffMartin.ScaData.FK_SCAAwards_SCAGroups" FromRole="SCAAwards" ToRole="SCAGroups" />
+          <NavigationProperty Name="SCAPeopleAwards" Relationship="JeffMartin.ScaData.FK_SCAPeopleAward_SCAAwards" FromRole="SCAAwards" ToRole="SCAPeopleAward" />
+        </EntityType>
+        <EntityType Name="BranchStatus">
+          <Key>
+            <PropertyRef Name="BranchStatusId" />
+          </Key>
+          <Property Name="BranchStatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="SCAGroups" Relationship="JeffMartin.ScaData.FK_SCAGroups_SCABranchStatusId" FromRole="SCABranchStatus" ToRole="SCAGroups" />
+        </EntityType>
+        <EntityType Name="Crown">
+          <Key>
+            <PropertyRef Name="CrownId" />
+          </Key>
+          <Property Name="CrownId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="Reign" Type="Int32" Nullable="false" />
+          <Property Name="SovereignId" Type="Int32" Nullable="false" />
+          <Property Name="ConsortId" Type="Int32" />
+          <Property Name="Notes" Type="String" MaxLength="8000" Unicode="false" FixedLength="false" />
+          <Property Name="StartDate" Type="DateTime" />
+          <Property Name="EndDate" Type="DateTime" />
+          <Property Name="CoronationLocation" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="CrownTournamentDate" Type="DateTime" />
+          <Property Name="CrownTournamentLocation" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="SteppingDownLocation" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="InternalUrl" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+          <Property Name="Heir" Type="Boolean" Nullable="false" />
+          <Property Name="Picture1Url" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+          <Property Name="Picture2Url" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+          <Property Name="Picture1Caption" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="Picture2Caption" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="Picture1Credit" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="Picture2Credit" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Regent" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SCAGroup" Relationship="JeffMartin.ScaData.FK_SCACrowns_SCAGroups" FromRole="SCACrowns" ToRole="SCAGroups" />
+          <NavigationProperty Name="SCAPeopleAwards" Relationship="JeffMartin.ScaData.FK_SCAPeopleAward_SCACrowns" FromRole="SCACrowns" ToRole="SCAPeopleAward" />
+          <NavigationProperty Name="SCAPeopleOfficers" Relationship="JeffMartin.ScaData.FK_SCAPeopleOfficer_SCACrowns" FromRole="SCACrowns" ToRole="SCAPeopleOfficer" />
+        </EntityType>
+        <EntityType Name="GroupDesignation">
+          <Key>
+            <PropertyRef Name="GroupDesignationId" />
+          </Key>
+          <Property Name="GroupDesignationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="CeremonialHead" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SCAGroups" Relationship="JeffMartin.ScaData.FK_SCAGroups_SCAGroupDesignation" FromRole="SCAGroupDesignation" ToRole="SCAGroups" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="GroupId" />
+          </Key>
+          <Property Name="GroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="300" Unicode="false" FixedLength="false" />
+          <Property Name="Code" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Location" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="Precedence" Type="Int32" />
+          <Property Name="FoundingDate" Type="DateTime" />
+          <Property Name="GroupDesignationId" Type="Int32" />
+          <Property Name="Hidden" Type="Boolean" Nullable="false" />
+          <Property Name="ArmsUrl" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+          <Property Name="ArmsBlazon" Type="String" MaxLength="4000" Unicode="true" FixedLength="false" />
+          <Property Name="BranchStatusId" Type="Int32" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="SovereignMaleTitle" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="SovereignFemaleTitle" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ConsortMaleTitle" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ConsortFemaleTitle" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ParentGroupId" Type="Int32" />
+          <Property Name="SovereignArmsUrl" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+          <Property Name="SovereignBlazon" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+          <Property Name="ConsortArmsUrl" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+          <Property Name="WebSiteUrl" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+          <Property Name="InternalUrl" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+          <Property Name="ConsortBlazon" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+          <Property Name="ReignType" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="RegentMaleTitle" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="RegentFemaleTitle" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="RegentType" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="AwardGroups" Relationship="JeffMartin.ScaData.FK_SCAAwardGroups_SCAGroups" FromRole="SCAGroups" ToRole="SCAAwardGroups" />
+          <NavigationProperty Name="Awards" Relationship="JeffMartin.ScaData.FK_SCAAwards_SCAGroups" FromRole="SCAGroups" ToRole="SCAAwards" />
+          <NavigationProperty Name="BranchStatus" Relationship="JeffMartin.ScaData.FK_SCAGroups_SCABranchStatusId" FromRole="SCAGroups" ToRole="SCABranchStatus" />
+          <NavigationProperty Name="Crowns" Relationship="JeffMartin.ScaData.FK_SCACrowns_SCAGroups" FromRole="SCAGroups" ToRole="SCACrowns" />
+          <NavigationProperty Name="GroupDesignation" Relationship="JeffMartin.ScaData.FK_SCAGroups_SCAGroupDesignation" FromRole="SCAGroups" ToRole="SCAGroupDesignation" />
+          <NavigationProperty Name="SubGroups" Relationship="JeffMartin.ScaData.FK_SCAGroups_SCAGroups" FromRole="SCAGroups" ToRole="SCAGroups1" />
+          <NavigationProperty Name="ParentGroup" Relationship="JeffMartin.ScaData.FK_SCAGroups_SCAGroups" FromRole="SCAGroups1" ToRole="SCAGroups" />
+          <NavigationProperty Name="OfficerPositions" Relationship="JeffMartin.ScaData.FK_SCAOfficerPosition_SCAGroups" FromRole="SCAGroups" ToRole="SCAOfficerPosition" />
+          <NavigationProperty Name="Residents" Relationship="JeffMartin.ScaData.FK_SCAPeople_SCAGroups" FromRole="SCAGroups" ToRole="SCAPeople" />
+        </EntityType>
+        <EntityType Name="OfficerPosition">
+          <Key>
+            <PropertyRef Name="OfficerPositionId" />
+          </Key>
+          <Property Name="OfficerPositionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="GroupId" Type="Int32" />
+          <Property Name="ListOrder" Type="Int32" Nullable="false" />
+          <Property Name="OfficeEmail" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="OfficerPositionTypeId" Type="Int32" />
+          <NavigationProperty Name="Group" Relationship="JeffMartin.ScaData.FK_SCAOfficerPosition_SCAGroups" FromRole="SCAOfficerPosition" ToRole="SCAGroups" />
+          <NavigationProperty Name="OfficePositionType" Relationship="JeffMartin.ScaData.FK_SCAOfficerPosition_SCAOfficerPositionType" FromRole="SCAOfficerPosition" ToRole="SCAOfficerPositionType" />
+          <NavigationProperty Name="People" Relationship="JeffMartin.ScaData.FK_SCAPeopleOfficer_SCAOfficerPosition" FromRole="SCAOfficerPosition" ToRole="SCAPeopleOfficer" />
+          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Badge" Relationship="JeffMartin.ScaData.FileOfficerPosition" FromRole="OfficerPosition" ToRole="File" />
+          <Property Type="Int32" Name="FileId" />
+        </EntityType>
+        <EntityType Name="OfficerPositionType">
+          <Key>
+            <PropertyRef Name="OfficerPositionTypeId" />
+          </Key>
+          <Property Name="OfficerPositionTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="intTypeFlags" Nullable="false" Type="Int32" />
+          <NavigationProperty Name="OfficePostionsOfThisType" Relationship="JeffMartin.ScaData.FK_SCAOfficerPosition_SCAOfficerPositionType" FromRole="SCAOfficerPositionType" ToRole="SCAOfficerPosition" />
+          <Property Type="Int32" Name="SortOrder" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ScaName" Type="String" Nullable="false" MaxLength="300" Unicode="true" FixedLength="false" />
+          <Property Name="MundaneName" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+          <Property Name="Address1" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Address2" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="City" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="State" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Zip" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Phone1" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Phone2" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="PhotoURL" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+          <Property Name="ArmsURL" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+          <Property Name="ArmsBlazon" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ShowPicPermission" Type="Boolean" Nullable="false" />
+          <Property Name="ShowEmailPermission" Type="Boolean" Nullable="false" />
+          <Property Name="AdminNotes" Type="String" MaxLength="8000" Unicode="false" FixedLength="false" />
+          <Property Name="OfficerNotes" Type="String" MaxLength="1000" Unicode="false" FixedLength="false" />
+          <Property Name="OPNum" Type="Int32" />
+          <Property Name="Gender" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="TitlePrefix" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="HonorsSuffix" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Deceased" Type="Boolean" Nullable="false" />
+          <Property Name="DeceasedWhen" Type="Int32" />
+          <Property Name="BranchResidenceId" Type="Int32" />
+          <Property Name="HighestAwardName" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="HighestAwardPrecedence" Type="Int32" />
+          <Property Name="HighestAwardDate" Type="DateTime" />
+          <Property Name="HighestAwardId" Type="DateTime" />
+          <Property Name="CrownId" Type="Int32" />
+          <NavigationProperty Name="SCAAlias" Relationship="JeffMartin.ScaData.FK_SCAAlias_SCAPeople" FromRole="SCAPeople" ToRole="SCAAlias" />
+          <NavigationProperty Name="SCAGroup" Relationship="JeffMartin.ScaData.FK_SCAPeople_SCAGroups" FromRole="SCAPeople" ToRole="SCAGroups" />
+          <NavigationProperty Name="SCAPeopleAwards" Relationship="JeffMartin.ScaData.FK_SCAPeopleAward_SCAPeople" FromRole="SCAPeople" ToRole="SCAPeopleAward" />
+          <NavigationProperty Name="SCAPeopleOfficers" Relationship="JeffMartin.ScaData.FK_SCAPeopleOfficer_SCAPeople" FromRole="SCAPeople" ToRole="SCAPeopleOfficer" />
+        </EntityType>
+        <EntityType Name="PersonAward">
+          <Key>
+            <PropertyRef Name="PeopleAwardId" />
+          </Key>
+          <Property Name="PeopleAwardId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AwardId" Type="Int32" Nullable="false" />
+          <Property Name="PeopleId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="CrownId" Type="Int32" />
+          <Property Name="Notes" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="AliasId" Type="Int32" />
+          <Property Name="Retired" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SCAAlia" Relationship="JeffMartin.ScaData.FK_SCAPeopleAward_SCAAlias" FromRole="SCAPeopleAward" ToRole="SCAAlias" />
+          <NavigationProperty Name="SCAAward" Relationship="JeffMartin.ScaData.FK_SCAPeopleAward_SCAAwards" FromRole="SCAPeopleAward" ToRole="SCAAwards" />
+          <NavigationProperty Name="SCACrown" Relationship="JeffMartin.ScaData.FK_SCAPeopleAward_SCACrowns" FromRole="SCAPeopleAward" ToRole="SCACrowns" />
+          <NavigationProperty Name="SCAPeople" Relationship="JeffMartin.ScaData.FK_SCAPeopleAward_SCAPeople" FromRole="SCAPeopleAward" ToRole="SCAPeople" />
+        </EntityType>
+        <EntityType Name="PersonOfficer">
+          <Key>
+            <PropertyRef Name="PeopleOfficerId" />
+          </Key>
+          <Property Name="PeopleOfficerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PeopleId" Type="Int32" Nullable="false" />
+          <Property Name="OfficerPositionId" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" />
+          <Property Name="EndDate" Type="DateTime" />
+          <Property Name="CurrentlyHeld" Type="Boolean" Nullable="false" />
+          <Property Name="Acting" Type="Boolean" Nullable="false" />
+          <Property Name="Verified" Type="Boolean" Nullable="false" />
+          <Property Name="PositionSubTitle" Type="String" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="PositionNotes" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="EmailToUse" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="EmailOverride" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="VerifiedNotes" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="LinkedCrownId" Type="Int32" />
+          <NavigationProperty Name="SCACrown" Relationship="JeffMartin.ScaData.FK_SCAPeopleOfficer_SCACrowns" FromRole="SCAPeopleOfficer" ToRole="SCACrowns" />
+          <NavigationProperty Name="SCAOfficerPosition" Relationship="JeffMartin.ScaData.FK_SCAPeopleOfficer_SCAOfficerPosition" FromRole="SCAPeopleOfficer" ToRole="SCAOfficerPosition" />
+          <NavigationProperty Name="SCAPeople" Relationship="JeffMartin.ScaData.FK_SCAPeopleOfficer_SCAPeople" FromRole="SCAPeopleOfficer" ToRole="SCAPeople" />
+        </EntityType>
+        <Association Name="FK_SCAAlias_SCAPeople">
+          <End Role="SCAPeople" Type="JeffMartin.ScaData.Person" Multiplicity="1" />
+          <End Role="SCAAlias" Type="JeffMartin.ScaData.Alias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAPeople">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="SCAAlias">
+              <PropertyRef Name="PeopleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAPeopleAward_SCAAlias">
+          <End Role="SCAAlias" Type="JeffMartin.ScaData.Alias" Multiplicity="0..1" />
+          <End Role="SCAPeopleAward" Type="JeffMartin.ScaData.PersonAward" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAAlias">
+              <PropertyRef Name="AliasId" />
+            </Principal>
+            <Dependent Role="SCAPeopleAward">
+              <PropertyRef Name="AliasId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAAwards_SCAAwardedBy">
+          <End Role="SCAAwardedBy" Type="JeffMartin.ScaData.AwardedByWho" Multiplicity="0..1" />
+          <End Role="SCAAwards" Type="JeffMartin.ScaData.Award" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAAwardedBy">
+              <PropertyRef Name="AwardedById" />
+            </Principal>
+            <Dependent Role="SCAAwards">
+              <PropertyRef Name="AwardedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAAwardGroups_SCAGroups">
+          <End Role="SCAGroups" Type="JeffMartin.ScaData.Group" Multiplicity="1" />
+          <End Role="SCAAwardGroups" Type="JeffMartin.ScaData.AwardGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAGroups">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="SCAAwardGroups">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAAwards_SCAAwardGroups">
+          <End Role="SCAAwardGroups" Type="JeffMartin.ScaData.AwardGroup" Multiplicity="0..1" />
+          <End Role="SCAAwards" Type="JeffMartin.ScaData.Award" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAAwardGroups">
+              <PropertyRef Name="AwardGroupId" />
+            </Principal>
+            <Dependent Role="SCAAwards">
+              <PropertyRef Name="AwardGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAAwards_SCAGroups">
+          <End Role="SCAGroups" Type="JeffMartin.ScaData.Group" Multiplicity="1" />
+          <End Role="SCAAwards" Type="JeffMartin.ScaData.Award" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAGroups">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="SCAAwards">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAPeopleAward_SCAAwards">
+          <End Role="SCAAwards" Type="JeffMartin.ScaData.Award" Multiplicity="1" />
+          <End Role="SCAPeopleAward" Type="JeffMartin.ScaData.PersonAward" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAAwards">
+              <PropertyRef Name="AwardId" />
+            </Principal>
+            <Dependent Role="SCAPeopleAward">
+              <PropertyRef Name="AwardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAGroups_SCABranchStatusId">
+          <End Role="SCABranchStatus" Type="JeffMartin.ScaData.BranchStatus" Multiplicity="1" />
+          <End Role="SCAGroups" Type="JeffMartin.ScaData.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCABranchStatus">
+              <PropertyRef Name="BranchStatusId" />
+            </Principal>
+            <Dependent Role="SCAGroups">
+              <PropertyRef Name="BranchStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCACrowns_SCAGroups">
+          <End Role="SCAGroups" Type="JeffMartin.ScaData.Group" Multiplicity="1" />
+          <End Role="SCACrowns" Type="JeffMartin.ScaData.Crown" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAGroups">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="SCACrowns">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAPeopleAward_SCACrowns">
+          <End Role="SCACrowns" Type="JeffMartin.ScaData.Crown" Multiplicity="0..1" />
+          <End Role="SCAPeopleAward" Type="JeffMartin.ScaData.PersonAward" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCACrowns">
+              <PropertyRef Name="CrownId" />
+            </Principal>
+            <Dependent Role="SCAPeopleAward">
+              <PropertyRef Name="CrownId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAPeopleOfficer_SCACrowns">
+          <End Role="SCACrowns" Type="JeffMartin.ScaData.Crown" Multiplicity="0..1" />
+          <End Role="SCAPeopleOfficer" Type="JeffMartin.ScaData.PersonOfficer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCACrowns">
+              <PropertyRef Name="CrownId" />
+            </Principal>
+            <Dependent Role="SCAPeopleOfficer">
+              <PropertyRef Name="LinkedCrownId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAGroups_SCAGroupDesignation">
+          <End Role="SCAGroupDesignation" Type="JeffMartin.ScaData.GroupDesignation" Multiplicity="0..1" />
+          <End Role="SCAGroups" Type="JeffMartin.ScaData.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAGroupDesignation">
+              <PropertyRef Name="GroupDesignationId" />
+            </Principal>
+            <Dependent Role="SCAGroups">
+              <PropertyRef Name="GroupDesignationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAGroups_SCAGroups">
+          <End Role="SCAGroups" Type="JeffMartin.ScaData.Group" Multiplicity="0..1" />
+          <End Role="SCAGroups1" Type="JeffMartin.ScaData.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAGroups">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="SCAGroups1">
+              <PropertyRef Name="ParentGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAOfficerPosition_SCAGroups">
+          <End Role="SCAGroups" Type="JeffMartin.ScaData.Group" Multiplicity="0..1" />
+          <End Role="SCAOfficerPosition" Type="JeffMartin.ScaData.OfficerPosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAGroups">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="SCAOfficerPosition">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAPeople_SCAGroups">
+          <End Role="SCAGroups" Type="JeffMartin.ScaData.Group" Multiplicity="0..1" />
+          <End Role="SCAPeople" Type="JeffMartin.ScaData.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAGroups">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="SCAPeople">
+              <PropertyRef Name="BranchResidenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAOfficerPosition_SCAOfficerPositionType">
+          <End Role="SCAOfficerPositionType" Type="JeffMartin.ScaData.OfficerPositionType" Multiplicity="0..1" />
+          <End Role="SCAOfficerPosition" Type="JeffMartin.ScaData.OfficerPosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAOfficerPositionType">
+              <PropertyRef Name="OfficerPositionTypeId" />
+            </Principal>
+            <Dependent Role="SCAOfficerPosition">
+              <PropertyRef Name="OfficerPositionTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAPeopleOfficer_SCAOfficerPosition">
+          <End Role="SCAOfficerPosition" Type="JeffMartin.ScaData.OfficerPosition" Multiplicity="1" />
+          <End Role="SCAPeopleOfficer" Type="JeffMartin.ScaData.PersonOfficer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAOfficerPosition">
+              <PropertyRef Name="OfficerPositionId" />
+            </Principal>
+            <Dependent Role="SCAPeopleOfficer">
+              <PropertyRef Name="OfficerPositionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAPeopleAward_SCAPeople">
+          <End Role="SCAPeople" Type="JeffMartin.ScaData.Person" Multiplicity="1" />
+          <End Role="SCAPeopleAward" Type="JeffMartin.ScaData.PersonAward" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAPeople">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="SCAPeopleAward">
+              <PropertyRef Name="PeopleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCAPeopleOfficer_SCAPeople">
+          <End Role="SCAPeople" Type="JeffMartin.ScaData.Person" Multiplicity="1" />
+          <End Role="SCAPeopleOfficer" Type="JeffMartin.ScaData.PersonOfficer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCAPeople">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="SCAPeopleOfficer">
+              <PropertyRef Name="PeopleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="File">
+          <Key>
+            <PropertyRef Name="FileId" />
+          </Key>
+          <Property Type="Int32" Name="FileId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="PortalId" />
+          <Property Type="String" Name="FileName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Extension" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Size" Nullable="false" />
+          <Property Type="Int32" Name="Width" />
+          <Property Type="Int32" Name="Height" />
+          <Property Type="String" Name="ContentType" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Folder" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="FolderID" Nullable="false" />
+          <Property Type="Binary" Name="Content" MaxLength="Max" FixedLength="false" />
+          <Property Type="Int32" Name="CreatedByUserID" />
+          <Property Type="DateTime" Name="CreatedOnDate" />
+          <Property Type="Int32" Name="LastModifiedByUserID" />
+          <Property Type="DateTime" Name="LastModifiedOnDate" />
+          <Property Type="Guid" Name="UniqueId" Nullable="false" />
+          <Property Type="Guid" Name="VersionGuid" Nullable="false" />
+          <Property Type="String" Name="SHA1Hash" MaxLength="40" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FileOfficerPosition">
+          <End Type="JeffMartin.ScaData.File" Role="File" Multiplicity="0..1" />
+          <End Type="JeffMartin.ScaData.OfficerPosition" Role="OfficerPosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="FileId" />
+            </Principal>
+            <Dependent Role="OfficerPosition">
+              <PropertyRef Name="FileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ScaDataStoreContainer" CdmEntityContainer="ScaOpEntities">
+          <EntitySetMapping Name="Aliases"><EntityTypeMapping TypeName="JeffMartin.ScaData.Alias"><MappingFragment StoreEntitySet="SCAAlias">
+            <ScalarProperty Name="AliasId" ColumnName="AliasId" />
+            <ScalarProperty Name="PeopleId" ColumnName="PeopleId" />
+            <ScalarProperty Name="SCAName" ColumnName="SCAName" />
+            <ScalarProperty Name="Registered" ColumnName="Registered" />
+            <ScalarProperty Name="Preferred" ColumnName="Preferred" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="WhoGivesAward"><EntityTypeMapping TypeName="JeffMartin.ScaData.AwardedByWho"><MappingFragment StoreEntitySet="SCAAwardedBy">
+            <ScalarProperty Name="AwardedById" ColumnName="AwardedById" />
+            <ScalarProperty Name="AwardedBy" ColumnName="AwardedBy" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="AwardGroups"><EntityTypeMapping TypeName="JeffMartin.ScaData.AwardGroup"><MappingFragment StoreEntitySet="SCAAwardGroups">
+            <ScalarProperty Name="AwardGroupId" ColumnName="AwardGroupId" />
+            <ScalarProperty Name="AwardGroupName" ColumnName="AwardGroupName" />
+            <ScalarProperty Name="Precedence" ColumnName="Precedence" />
+            <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+            <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Awards"><EntityTypeMapping TypeName="JeffMartin.ScaData.Award"><MappingFragment StoreEntitySet="SCAAwards">
+            <ScalarProperty Name="AwardId" ColumnName="AwardId" />
+            <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Charter" ColumnName="Charter" />
+            <ScalarProperty Name="Precedence" ColumnName="Precedence" />
+            <ScalarProperty Name="BadgeUrl" ColumnName="BadgeUrl" />
+            <ScalarProperty Name="BadgeBlazon" ColumnName="BadgeBlazon" />
+            <ScalarProperty Name="Closed" ColumnName="Closed" />
+            <ScalarProperty Name="AwardedById" ColumnName="AwardedById" />
+            <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+            <ScalarProperty Name="AwardGroupId" ColumnName="AwardGroupId" />
+            <ScalarProperty Name="Honorary" ColumnName="Honorary" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="BranchStatuses"><EntityTypeMapping TypeName="JeffMartin.ScaData.BranchStatus"><MappingFragment StoreEntitySet="SCABranchStatus">
+            <ScalarProperty Name="BranchStatusId" ColumnName="BranchStatusId" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Crowns"><EntityTypeMapping TypeName="JeffMartin.ScaData.Crown"><MappingFragment StoreEntitySet="SCACrowns">
+            <ScalarProperty Name="CrownId" ColumnName="CrownId" />
+            <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+            <ScalarProperty Name="Reign" ColumnName="Reign" />
+            <ScalarProperty Name="SovereignId" ColumnName="SovereignId" />
+            <ScalarProperty Name="ConsortId" ColumnName="ConsortId" />
+            <ScalarProperty Name="Notes" ColumnName="Notes" />
+            <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+            <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+            <ScalarProperty Name="CoronationLocation" ColumnName="CoronationLocation" />
+            <ScalarProperty Name="CrownTournamentDate" ColumnName="CrownTournamentDate" />
+            <ScalarProperty Name="CrownTournamentLocation" ColumnName="CrownTournamentLocation" />
+            <ScalarProperty Name="SteppingDownLocation" ColumnName="SteppingDownLocation" />
+            <ScalarProperty Name="InternalUrl" ColumnName="InternalUrl" />
+            <ScalarProperty Name="Heir" ColumnName="Heir" />
+            <ScalarProperty Name="Picture1Url" ColumnName="Picture1Url" />
+            <ScalarProperty Name="Picture2Url" ColumnName="Picture2Url" />
+            <ScalarProperty Name="Picture1Caption" ColumnName="Picture1Caption" />
+            <ScalarProperty Name="Picture2Caption" ColumnName="Picture2Caption" />
+            <ScalarProperty Name="Picture1Credit" ColumnName="Picture1Credit" />
+            <ScalarProperty Name="Picture2Credit" ColumnName="Picture2Credit" />
+            <ScalarProperty Name="Email" ColumnName="Email" />
+            <ScalarProperty Name="Regent" ColumnName="Regent" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="GroupDesignations"><EntityTypeMapping TypeName="JeffMartin.ScaData.GroupDesignation"><MappingFragment StoreEntitySet="SCAGroupDesignation">
+            <ScalarProperty Name="GroupDesignationId" ColumnName="GroupDesignationId" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="CeremonialHead" ColumnName="CeremonialHead" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Groups"><EntityTypeMapping TypeName="JeffMartin.ScaData.Group"><MappingFragment StoreEntitySet="SCAGroups">
+            <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Code" ColumnName="Code" />
+            <ScalarProperty Name="Location" ColumnName="Location" />
+            <ScalarProperty Name="Precedence" ColumnName="Precedence" />
+            <ScalarProperty Name="FoundingDate" ColumnName="FoundingDate" />
+            <ScalarProperty Name="GroupDesignationId" ColumnName="GroupDesignationId" />
+            <ScalarProperty Name="Hidden" ColumnName="Hidden" />
+            <ScalarProperty Name="ArmsUrl" ColumnName="ArmsUrl" />
+            <ScalarProperty Name="ArmsBlazon" ColumnName="ArmsBlazon" />
+            <ScalarProperty Name="BranchStatusId" ColumnName="BranchStatusId" />
+            <ScalarProperty Name="Notes" ColumnName="Notes" />
+            <ScalarProperty Name="SovereignMaleTitle" ColumnName="SovereignMaleTitle" />
+            <ScalarProperty Name="SovereignFemaleTitle" ColumnName="SovereignFemaleTitle" />
+            <ScalarProperty Name="ConsortMaleTitle" ColumnName="ConsortMaleTitle" />
+            <ScalarProperty Name="ConsortFemaleTitle" ColumnName="ConsortFemaleTitle" />
+            <ScalarProperty Name="ParentGroupId" ColumnName="ParentGroupId" />
+            <ScalarProperty Name="SovereignArmsUrl" ColumnName="SovereignArmsUrl" />
+            <ScalarProperty Name="SovereignBlazon" ColumnName="SovereignBlazon" />
+            <ScalarProperty Name="ConsortArmsUrl" ColumnName="ConsortArmsUrl" />
+            <ScalarProperty Name="WebSiteUrl" ColumnName="WebSiteUrl" />
+            <ScalarProperty Name="InternalUrl" ColumnName="InternalUrl" />
+            <ScalarProperty Name="ConsortBlazon" ColumnName="ConsortBlazon" />
+            <ScalarProperty Name="ReignType" ColumnName="ReignType" />
+            <ScalarProperty Name="RegentMaleTitle" ColumnName="RegentMaleTitle" />
+            <ScalarProperty Name="RegentFemaleTitle" ColumnName="RegentFemaleTitle" />
+            <ScalarProperty Name="RegentType" ColumnName="RegentType" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="OfficerPositions">
+            <EntityTypeMapping TypeName="IsTypeOf(JeffMartin.ScaData.OfficerPosition)">
+              <MappingFragment StoreEntitySet="SCAOfficerPosition">
+                <ScalarProperty Name="FileId" ColumnName="FileId" />
+                <ScalarProperty Name="OfficerPositionId" ColumnName="OfficerPositionId" />
+                <ScalarProperty Name="OfficerPositionTypeId" ColumnName="OfficerPositionTypeId" />
+                <ScalarProperty Name="OfficeEmail" ColumnName="OfficeEmail" />
+                <ScalarProperty Name="ListOrder" ColumnName="ListOrder" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="OfficerPositionTypes"><EntityTypeMapping TypeName="JeffMartin.ScaData.OfficerPositionType"><MappingFragment StoreEntitySet="SCAOfficerPositionType">
+            <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="OfficerPositionTypeId" ColumnName="OfficerPositionTypeId" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+            <ScalarProperty Name="intTypeFlags" ColumnName="TypeFlags" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="People"><EntityTypeMapping TypeName="JeffMartin.ScaData.Person"><MappingFragment StoreEntitySet="SCAPeople">
+            <ScalarProperty Name="PersonId" ColumnName="PeopleId" />
+            <ScalarProperty Name="ScaName" ColumnName="SCAName" />
+            <ScalarProperty Name="MundaneName" ColumnName="MundaneName" />
+            <ScalarProperty Name="Address1" ColumnName="Address1" />
+            <ScalarProperty Name="Address2" ColumnName="Address2" />
+            <ScalarProperty Name="City" ColumnName="City" />
+            <ScalarProperty Name="State" ColumnName="State" />
+            <ScalarProperty Name="Zip" ColumnName="Zip" />
+            <ScalarProperty Name="Phone1" ColumnName="Phone1" />
+            <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+            <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+            <ScalarProperty Name="PhotoURL" ColumnName="PhotoURL" />
+            <ScalarProperty Name="ArmsURL" ColumnName="ArmsURL" />
+            <ScalarProperty Name="ArmsBlazon" ColumnName="ArmsBlazon" />
+            <ScalarProperty Name="ShowPicPermission" ColumnName="ShowPicPermission" />
+            <ScalarProperty Name="ShowEmailPermission" ColumnName="ShowEmailPermission" />
+            <ScalarProperty Name="AdminNotes" ColumnName="AdminNotes" />
+            <ScalarProperty Name="OfficerNotes" ColumnName="OfficerNotes" />
+            <ScalarProperty Name="OPNum" ColumnName="OPNum" />
+            <ScalarProperty Name="Gender" ColumnName="Gender" />
+            <ScalarProperty Name="TitlePrefix" ColumnName="TitlePrefix" />
+            <ScalarProperty Name="HonorsSuffix" ColumnName="HonorsSuffix" />
+            <ScalarProperty Name="Deceased" ColumnName="Deceased" />
+            <ScalarProperty Name="DeceasedWhen" ColumnName="DeceasedWhen" />
+            <ScalarProperty Name="BranchResidenceId" ColumnName="BranchResidenceId" />
+            <ScalarProperty Name="HighestAwardName" ColumnName="HighestAwardName" />
+            <ScalarProperty Name="HighestAwardPrecedence" ColumnName="HighestAwardPrecedence" />
+            <ScalarProperty Name="HighestAwardDate" ColumnName="HighestAwardDate" />
+            <ScalarProperty Name="HighestAwardId" ColumnName="HighestAwardId" />
+            <ScalarProperty Name="CrownId" ColumnName="CrownId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="PersonAwards"><EntityTypeMapping TypeName="JeffMartin.ScaData.PersonAward"><MappingFragment StoreEntitySet="SCAPeopleAward">
+            <ScalarProperty Name="PeopleAwardId" ColumnName="PeopleAwardId" />
+            <ScalarProperty Name="AwardId" ColumnName="AwardId" />
+            <ScalarProperty Name="PeopleId" ColumnName="PeopleId" />
+            <ScalarProperty Name="Date" ColumnName="Date" />
+            <ScalarProperty Name="CrownId" ColumnName="CrownId" />
+            <ScalarProperty Name="Notes" ColumnName="Notes" />
+            <ScalarProperty Name="AliasId" ColumnName="AliasId" />
+            <ScalarProperty Name="Retired" ColumnName="Retired" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="PersonOfficers"><EntityTypeMapping TypeName="JeffMartin.ScaData.PersonOfficer"><MappingFragment StoreEntitySet="SCAPeopleOfficer">
+            <ScalarProperty Name="PeopleOfficerId" ColumnName="PeopleOfficerId" />
+            <ScalarProperty Name="PeopleId" ColumnName="PeopleId" />
+            <ScalarProperty Name="OfficerPositionId" ColumnName="OfficerPositionId" />
+            <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+            <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+            <ScalarProperty Name="CurrentlyHeld" ColumnName="CurrentlyHeld" />
+            <ScalarProperty Name="Acting" ColumnName="Acting" />
+            <ScalarProperty Name="Verified" ColumnName="Verified" />
+            <ScalarProperty Name="PositionSubTitle" ColumnName="PositionSubTitle" />
+            <ScalarProperty Name="PositionNotes" ColumnName="PositionNotes" />
+            <ScalarProperty Name="EmailToUse" ColumnName="EmailToUse" />
+            <ScalarProperty Name="EmailOverride" ColumnName="EmailOverride" />
+            <ScalarProperty Name="VerifiedNotes" ColumnName="VerifiedNotes" />
+            <ScalarProperty Name="LinkedCrownId" ColumnName="LinkedCrownId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Files">
+            <EntityTypeMapping TypeName="IsTypeOf(JeffMartin.ScaData.File)">
+              <MappingFragment StoreEntitySet="Files">
+                <ScalarProperty Name="FileId" ColumnName="FileId" />
+                <ScalarProperty Name="SHA1Hash" ColumnName="SHA1Hash" />
+                <ScalarProperty Name="VersionGuid" ColumnName="VersionGuid" />
+                <ScalarProperty Name="UniqueId" ColumnName="UniqueId" />
+                <ScalarProperty Name="LastModifiedOnDate" ColumnName="LastModifiedOnDate" />
+                <ScalarProperty Name="LastModifiedByUserID" ColumnName="LastModifiedByUserID" />
+                <ScalarProperty Name="CreatedOnDate" ColumnName="CreatedOnDate" />
+                <ScalarProperty Name="CreatedByUserID" ColumnName="CreatedByUserID" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="FolderID" ColumnName="FolderID" />
+                <ScalarProperty Name="Folder" ColumnName="Folder" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="PortalId" ColumnName="PortalId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Default" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="ScaOpData" ZoomLevel="79" DisplayType="true">
+        <EntityTypeShape EntityType="JeffMartin.ScaData.Alias" Width="1.5" PointX="9.75" PointY="22.375" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="JeffMartin.ScaData.AwardedByWho" Width="1.5" PointX="16" PointY="9.75" Height="1.5956835937500031" IsExpanded="true" />
+        <EntityTypeShape EntityType="JeffMartin.ScaData.AwardGroup" Width="1.5" PointX="8.5" PointY="7.125" Height="2.3648893229166656" IsExpanded="true" />
+        <EntityTypeShape EntityType="JeffMartin.ScaData.Award" Width="1.5" PointX="13.875" PointY="7.75" Height="4.0956022135416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="JeffMartin.ScaData.BranchStatus" Width="1.5" PointX="0.75" PointY="9.75" Height="1.595683593749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="JeffMartin.ScaData.Crown" Width="1.5" PointX="10.875" PointY="10.5" Height="5.8263151041666674" IsExpanded="true" />
+        <EntityTypeShape EntityType="JeffMartin.ScaData.GroupDesignation" Width="1.5" PointX="0.75" PointY="12.625" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="JeffMartin.ScaData.Group" Width="1.5" PointX="3" PointY="7.5" Height="7.9416308593750031" IsExpanded="true" />
+        <EntityTypeShape EntityType="JeffMartin.ScaData.OfficerPosition" Width="2.125" PointX="6.75" PointY="12.75" Height="3.3263964843749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="JeffMartin.ScaData.OfficerPositionType" Width="2" PointX="4.625" PointY="17.125" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="JeffMartin.ScaData.Person" Width="1.5" PointX="7.5" PointY="18.875" Height="7.5570279947916674" IsExpanded="true" />
+        <EntityTypeShape EntityType="JeffMartin.ScaData.PersonAward" Width="1.5" PointX="12.5" PointY="19.5" Height="3.3263964843750031" IsExpanded="true" />
+        <EntityTypeShape EntityType="JeffMartin.ScaData.PersonOfficer" Width="1.5" PointX="9.375" PointY="17.375" Height="4.2879036458333388" IsExpanded="true" />
+        <AssociationConnector Association="JeffMartin.ScaData.FK_SCAAlias_SCAPeople" ManuallyRouted="false">
+          <ConnectorPoint PointX="9" PointY="23.557444661458334" />
+          <ConnectorPoint PointX="9.75" PointY="23.557444661458334" />
+        </AssociationConnector>
+        <AssociationConnector Association="JeffMartin.ScaData.FK_SCAPeopleAward_SCAAlias" ManuallyRouted="false">
+          <ConnectorPoint PointX="11.25" PointY="22.6006982421875" />
+          <ConnectorPoint PointX="12.5" PointY="22.6006982421875" />
+        </AssociationConnector>
+        <AssociationConnector Association="JeffMartin.ScaData.FK_SCAAwards_SCAAwardedBy" ManuallyRouted="false">
+          <ConnectorPoint PointX="16" PointY="10.547841796875002" />
+          <ConnectorPoint PointX="15.375" PointY="10.547841796875002" />
+        </AssociationConnector>
+        <AssociationConnector Association="JeffMartin.ScaData.FK_SCAAwardGroups_SCAGroups" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="8.7807421875000031" />
+          <ConnectorPoint PointX="5.875681559244792" PointY="8.7807421875000031" />
+          <ConnectorPoint PointX="6.042348225911458" PointY="8.7807421875000031" />
+          <ConnectorPoint PointX="8.5" PointY="8.7807421875000031" />
+        </AssociationConnector>
+        <AssociationConnector Association="JeffMartin.ScaData.FK_SCAAwards_SCAAwardGroups" ManuallyRouted="false">
+          <ConnectorPoint PointX="10" PointY="8.6199446614583337" />
+          <ConnectorPoint PointX="13.875" PointY="8.6199446614583337" />
+        </AssociationConnector>
+        <AssociationConnector Association="JeffMartin.ScaData.FK_SCAAwards_SCAGroups" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="9.9949446614583337" />
+          <ConnectorPoint PointX="5.875681559244792" PointY="9.9949446614583337" />
+          <ConnectorPoint PointX="6.042348225911458" PointY="9.9949446614583337" />
+          <ConnectorPoint PointX="13.875" PointY="9.9949446614583337" />
+        </AssociationConnector>
+        <AssociationConnector Association="JeffMartin.ScaData.FK_SCAPeopleAward_SCAAwards" ManuallyRouted="false">
+          <ConnectorPoint PointX="14.687500499999999" PointY="11.845602213541667" />
+          <ConnectorPoint PointX="14.687500499999999" PointY="21.1631982421875" />
+          <ConnectorPoint PointX="14" PointY="21.1631982421875" />
+        </AssociationConnector>
+        <AssociationConnector Association="JeffMartin.ScaData.FK_SCAGroups_SCABranchStatusId" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="10.547841796874998" />
+          <ConnectorPoint PointX="3" PointY="10.547841796874998" />
+        </AssociationConnector>
+        <AssociationConnector Association="JeffMartin.ScaData.FK_SCACrowns_SCAGroups" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="11.59375" />
+          <ConnectorPoint PointX="5.875681559244792" PointY="11.59375" />
+          <ConnectorPoint PointX="6.042348225911458" PointY="11.59375" />
+          <ConnectorPoint PointX="10.875" PointY="11.59375" />
+        </AssociationConnector>
+        <AssociationConnector Association="JeffMartin.ScaData.FK_SCAPeopleAward_SCACrowns" ManuallyRouted="false">
+          <ConnectorPoint PointX="12.0312525" PointY="16.326315104166667" />
+          <ConnectorPoint PointX="12.0312525" PointY="20.728223411458341" />
+          <ConnectorPoint PointX="12.5" PointY="20.728223411458341" />
+        </AssociationConnector>
+        <AssociationConnector Association="JeffMartin.ScaData.FK_SCAPeopleOfficer_SCACrowns" ManuallyRouted="false">
+          <ConnectorPoint PointX="11.45312375" PointY="16.326315104166667" />
+          <ConnectorPoint PointX="11.45312375" PointY="19.051611705729172" />
+          <ConnectorPoint PointX="10.875" PointY="19.051611705729172" />
+        </AssociationConnector>
+        <AssociationConnector Association="JeffMartin.ScaData.FK_SCAGroups_SCAGroupDesignation" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="13.518992513020834" />
+          <ConnectorPoint PointX="3" PointY="13.518992513020834" />
+        </AssociationConnector>
+        <AssociationConnector Association="JeffMartin.ScaData.FK_SCAGroups_SCAGroups" ManuallyRouted="false">
+          <ConnectorPoint PointX="3.4176923076923078" PointY="15.441630859375003" />
+          <ConnectorPoint PointX="3.4176923076923078" PointY="15.691630859375003" />
+          <ConnectorPoint PointX="3.75" PointY="15.691630859375003" />
+          <ConnectorPoint PointX="3.75" PointY="15.441630859375003" />
+        </AssociationConnector>
+        <AssociationConnector Association="JeffMartin.ScaData.FK_SCAOfficerPosition_SCAGroups" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="14.55102487099979" />
+          <ConnectorPoint PointX="6.75" PointY="14.55102487099979" />
+        </AssociationConnector>
+        <AssociationConnector Association="JeffMartin.ScaData.FK_SCAPeople_SCAGroups" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.1562525" PointY="15.441630859375003" />
+          <ConnectorPoint PointX="4.1562525" PointY="22.7999072265625" />
+          <ConnectorPoint PointX="7.5" PointY="22.7999072265625" />
+        </AssociationConnector>
+        <AssociationConnector Association="JeffMartin.ScaData.FK_SCAOfficerPosition_SCAOfficerPositionType" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.29302978515625" PointY="17.125" />
+          <ConnectorPoint PointX="5.29302978515625" PointY="15.344963177687395" />
+          <ConnectorPoint PointX="6.75" PointY="15.344963177687395" />
+        </AssociationConnector>
+        <AssociationConnector Association="JeffMartin.ScaData.FK_SCAPeopleOfficer_SCAOfficerPosition" ManuallyRouted="false">
+          <ConnectorPoint PointX="7.09375" PointY="16.076396484375" />
+          <ConnectorPoint PointX="7.09375" PointY="18.09375" />
+          <ConnectorPoint PointX="9.375" PointY="18.09375" />
+        </AssociationConnector>
+        <AssociationConnector Association="JeffMartin.ScaData.FK_SCAPeopleAward_SCAPeople" ManuallyRouted="false">
+          <ConnectorPoint PointX="9" PointY="22.018951822916669" />
+          <ConnectorPoint PointX="12.5" PointY="22.018951822916669" />
+        </AssociationConnector>
+        <AssociationConnector Association="JeffMartin.ScaData.FK_SCAPeopleOfficer_SCAPeople" ManuallyRouted="false">
+          <ConnectorPoint PointX="9" PointY="21.417315662202377" />
+          <ConnectorPoint PointX="9.375" PointY="21.417315662202377" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="JeffMartin.ScaData.File" Width="1.5" PointX="5.125" PointY="2.25" Height="4.4802050781250031" />
+        <AssociationConnector Association="JeffMartin.ScaData.FileOfficerPosition">
+          <ConnectorPoint PointX="5.959014892578125" PointY="6.7302050781250031" />
+          <ConnectorPoint PointX="5.959014892578125" PointY="13.619259935499894" />
+          <ConnectorPoint PointX="6.75" PointY="13.619259935499894" />
+        </AssociationConnector>
+        </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,971 @@
+﻿/************************************************************/
+/*****              SQLDataProvider                     *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}SCAOfficerPositionType]') AND type in (N'U'))
+BEGIN
+CREATE TABLE  {databaseOwner}[{objectQualifier}SCAOfficerPositionType](
+	[OfficerPositionTypeId] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+	[Description] [nvarchar](max) NULL,
+	[TypeFlags] [int] NOT NULL,
+	[SortOrder] [int] NOT NULL
+ CONSTRAINT [PK_SCAOfficerPositionType] PRIMARY KEY CLUSTERED 
+(
+	[OfficerPositionTypeId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+END
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_SCAOfficerPositionType_TypeFlags]') AND type = 'D')
+BEGIN
+ALTER TABLE  {databaseOwner}[{objectQualifier}SCAOfficerPositionType] ADD  CONSTRAINT [DF_SCAOfficerPositionType_TypeFlags]  DEFAULT ((0)) FOR [TypeFlags]
+END
+
+GO
+
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_SCAOfficerPositionType_SortOrder]') AND type = 'D')
+BEGIN
+ALTER TABLE  {databaseOwner}[{objectQualifier}SCAOfficerPositionType] ADD  CONSTRAINT [DF_SCAOfficerPositionType_SortOrder]  DEFAULT ((0)) FOR [SortOrder]
+END
+
+GO
+
+/*Pointer used for text / image updates. This might not be needed, but is declared here just in case*/
+DECLARE @pv binary(16)
+IF NOT EXISTS (SELECT * FROM  {databaseOwner}[{objectQualifier}SCAOfficerPositionType])
+BEGIN
+BEGIN TRANSACTION
+SET IDENTITY_INSERT   {databaseOwner}[{objectQualifier}SCAOfficerPositionType] ON
+INSERT INTO   {databaseOwner}[{objectQualifier}SCAOfficerPositionType] ([OfficerPositionTypeId], [Name], [Description], [TypeFlags], [SortOrder]) VALUES (1, N'Warranted Officer', N'An Kingdom or Branch officer defined in Kingdom Law or Society Policy where the office was warranted.  In the Kingdom of Atenveldt, time in a warranted office is generally required to enter crown tournament.  Check Lex Atenveldtus for more details.', 0, 1)
+INSERT INTO   {databaseOwner}[{objectQualifier}SCAOfficerPositionType] ([OfficerPositionTypeId], [Name], [Description], [TypeFlags], [SortOrder]) VALUES (2, N'Court Position', N'A position on a Royal or Baronial court.  This is generally an honorary position.', 0, 2)
+INSERT INTO   {databaseOwner}[{objectQualifier}SCAOfficerPositionType] ([OfficerPositionTypeId], [Name], [Description], [TypeFlags], [SortOrder]) VALUES (3, N'Event Steward', N'This is a position for the length of planning and executing of an event.  Depending on the event this may be warranted as part of a roster or an individual warrant.', 0, 3)
+SET IDENTITY_INSERT   {databaseOwner}[{objectQualifier}SCAOfficerPositionType] OFF
+COMMIT TRANSACTION
+END
+GO
+
+/*
+Deployment script for Officer Positions
+Adding FileId, Description and OfficerPositionType
+*/
+
+
+SET ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, ARITHABORT, CONCAT_NULL_YIELDS_NULL, QUOTED_IDENTIFIER ON;
+SET NUMERIC_ROUNDABORT OFF;
+GO
+
+
+PRINT N'Dropping DF_SCAOfficerPosition_LinkedToCrown...';
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_SCAOfficerPosition_LinkedToCrown]') AND type = 'D')
+ALTER TABLE   {databaseOwner}[{objectQualifier}SCAOfficerPosition] DROP CONSTRAINT [DF_SCAOfficerPosition_LinkedToCrown];
+GO
+
+PRINT N'Dropping FK_SCAPeopleOfficer_SCAOfficerPosition...';
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[FK_SCAPeopleOfficer_SCAOfficerPosition]') AND type = 'D')
+ALTER TABLE   {databaseOwner}[{objectQualifier}SCAPeopleOfficer] DROP CONSTRAINT [FK_SCAPeopleOfficer_SCAOfficerPosition];
+GO
+
+PRINT N'Dropping FK_SCAOfficerPosition_SCAGroups...';
+GO
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[FK_SCAOfficerPosition_SCAGroups]') AND type = 'D')
+ALTER TABLE   {databaseOwner}[{objectQualifier}SCAOfficerPosition] DROP CONSTRAINT [FK_SCAOfficerPosition_SCAGroups];
+GO
+
+PRINT N'Starting rebuilding table   {databaseOwner}[{objectQualifier}SCAOfficerPosition]...';
+GO
+
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+SET XACT_ABORT ON;
+BEGIN TRANSACTION;
+
+CREATE TABLE   {databaseOwner}[{objectQualifier}tmp_ms_xx_SCAOfficerPosition] (
+	[OfficerPositionId]     INT            IDENTITY (1, 1) NOT NULL,
+	[Title]                 VARCHAR (200)  NOT NULL,
+	[GroupId]               INT            NULL,
+	[ListOrder]             INT            NOT NULL,
+	[Description]           NVARCHAR (MAX) NULL,
+	[BadgeURL]              NVARCHAR (300) NULL,
+	[OfficeEmail]           NVARCHAR (100) NULL,
+	[LinkedToCrown]         BIT            CONSTRAINT [DF_SCAOfficerPosition_LinkedToCrown] DEFAULT ((0)) NOT NULL,
+	[OfficerPositionTypeId] INT            NULL,
+	[FileId]                INT            NULL
+);
+
+ALTER TABLE   {databaseOwner}[{objectQualifier}tmp_ms_xx_SCAOfficerPosition]
+	ADD CONSTRAINT [tmp_ms_xx_clusteredindex_PK_SCAOfficerPosition] PRIMARY KEY CLUSTERED ([OfficerPositionId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF);
+
+IF EXISTS (SELECT TOP 1 1
+		   FROM     {databaseOwner}[{objectQualifier}SCAOfficerPosition])
+	BEGIN
+		SET IDENTITY_INSERT   {databaseOwner}[{objectQualifier}tmp_ms_xx_SCAOfficerPosition] ON;
+		INSERT INTO   {databaseOwner}[{objectQualifier}tmp_ms_xx_SCAOfficerPosition] ([OfficerPositionId], [Title], [GroupId], [ListOrder], [BadgeURL], [OfficeEmail], [LinkedToCrown])
+		SELECT   [OfficerPositionId],
+				 [Title],
+				 [GroupId],
+				 [ListOrder],
+				 [BadgeURL],
+				 [OfficeEmail],
+				 [LinkedToCrown]
+		FROM       {databaseOwner}[{objectQualifier}SCAOfficerPosition]
+		ORDER BY [OfficerPositionId] ASC;
+		SET IDENTITY_INSERT   {databaseOwner}[{objectQualifier}tmp_ms_xx_SCAOfficerPosition] OFF;
+	END
+
+DROP TABLE   {databaseOwner}[{objectQualifier}SCAOfficerPosition];
+EXECUTE sp_rename N'{databaseOwner}[{objectQualifier}tmp_ms_xx_SCAOfficerPosition]', N'SCAOfficerPosition';
+EXECUTE sp_rename N'{databaseOwner}[{objectQualifier}tmp_ms_xx_clusteredindex_PK_SCAOfficerPosition]', N'PK_SCAOfficerPosition', N'OBJECT';
+
+COMMIT TRANSACTION;
+
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+GO
+
+PRINT N'Creating FK_SCAPeopleOfficer_SCAOfficerPosition...';
+GO
+
+ALTER TABLE   {databaseOwner}[{objectQualifier}SCAPeopleOfficer] WITH NOCHECK
+	ADD CONSTRAINT [FK_SCAPeopleOfficer_SCAOfficerPosition] FOREIGN KEY ([OfficerPositionId]) REFERENCES   {databaseOwner}[{objectQualifier}SCAOfficerPosition] ([OfficerPositionId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+PRINT N'Creating FK_SCAOfficerPosition_SCAGroups...';
+GO
+
+ALTER TABLE   {databaseOwner}[{objectQualifier}SCAOfficerPosition] WITH NOCHECK
+	ADD CONSTRAINT [FK_SCAOfficerPosition_SCAGroups] FOREIGN KEY ([GroupId]) REFERENCES   {databaseOwner}[{objectQualifier}SCAGroups] ([GroupId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+PRINT N'Creating FK_SCAOfficerPosition_SCAOfficerPositionType...';
+GO
+
+ALTER TABLE   {databaseOwner}[{objectQualifier}SCAOfficerPosition] WITH NOCHECK
+	ADD CONSTRAINT [FK_SCAOfficerPosition_SCAOfficerPositionType] FOREIGN KEY ([OfficerPositionTypeId]) REFERENCES   {databaseOwner}[{objectQualifier}SCAOfficerPositionType] ([OfficerPositionTypeId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+PRINT N'Checking existing data against newly created constraints';
+GO
+
+ALTER TABLE   {databaseOwner}[{objectQualifier}SCAPeopleOfficer] WITH CHECK CHECK CONSTRAINT [FK_SCAPeopleOfficer_SCAOfficerPosition];
+ALTER TABLE   {databaseOwner}[{objectQualifier}SCAOfficerPosition] WITH CHECK CHECK CONSTRAINT [FK_SCAOfficerPosition_SCAGroups];
+ALTER TABLE   {databaseOwner}[{objectQualifier}SCAOfficerPosition] WITH CHECK CHECK CONSTRAINT [FK_SCAOfficerPosition_SCAOfficerPositionType];
+GO
+
+
+/* translating BadgeUrl to FileId */
+
+UPDATE        {databaseOwner}{objectQualifier}SCAOfficerPosition
+SET                FileId = badgeFiles.FileId
+FROM             {databaseOwner}{objectQualifier}SCAOfficerPosition LEFT OUTER JOIN
+						  {databaseOwner}{objectQualifier}Files AS badgeFiles ON  {databaseOwner}{objectQualifier}SCAOfficerPosition.BadgeURL = 'fileid=' + CONVERT(varchar, badgeFiles.FileId)
+GO
+						 
+/* translating Linked to Crown to Correct Officer Position Type */
+IF EXISTS (SELECT * FROM  {databaseOwner}[{objectQualifier}SCAOfficerPositionType] WHERE OfficerPositionTypeId = 2 and Name = 'Court Position')
+BEGIN
+Update  {databaseOwner}{objectQualifier}SCAOfficerPosition 
+Set OfficerPositionTypeId = 2
+where LinkedToCrown = 1
+END
+GO
+
+
+PRINT N'Dropping DF_SCAOfficerPosition_LinkedToCrown...';
+GO
+ALTER TABLE  {databaseOwner}[{objectQualifier}SCAOfficerPosition] DROP CONSTRAINT [DF_SCAOfficerPosition_LinkedToCrown];
+GO
+PRINT N'Altering  {databaseOwner}[{objectQualifier}SCAOfficerPosition]...';
+GO
+ALTER TABLE  {databaseOwner}[{objectQualifier}SCAOfficerPosition] DROP COLUMN [BadgeURL], COLUMN [LinkedToCrown];
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}SCAPeopleCombinedOfficesGet]    Script Date: 11/10/2010 19:53:34 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}SCAPeopleCombinedOfficesGet]') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}[{objectQualifier}SCAPeopleCombinedOfficesGet]
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}SCAPeopleCombinedOfficesGet]    Script Date: 11/10/2010 19:53:34 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}SCAPeopleCombinedOfficesGet]
+	@PeopleId int
+AS
+
+SELECT
+	PeopleOfficer.PeopleOfficerId as ID,
+	PeopleOfficer.PeopleId,
+	OfficerPosition.Title,
+	OfficerPosition.OfficerPositionId,
+	OfficerPosition.OfficeEmail,
+	PeopleOfficer.EmailToUse,
+	PeopleOfficer.EmailOverride,
+	CASE OfficerPositionType.TypeFlags & 2 WHEN 0 THEN 0 ELSE 1 END  LinkedToCrown,
+	OfficerPositionType.Name as PositionType,
+	IsNull(OfficerPositionType.SortOrder, 999)  as PositionTypeSortOrder,
+	Groups.Name AS GroupName,
+	Groups.GroupId,
+	PeopleOfficer.StartDate,
+	PeopleOfficer.EndDate,
+	PeopleOfficer.CurrentlyHeld,
+	PeopleOfficer.Acting,
+	PeopleOfficer.Verified,
+	PeopleOfficer.PositionSubTitle,
+	PeopleOfficer.PositionNotes,
+	PeopleOfficer.VerifiedNotes,
+	Cast(0 as bit) as RulingOffice,
+	LinkedCrownId,
+			CASE 
+				WHEN LEFT(Sovereign.SCAName, CASE WHEN PATINDEX('% %',Sovereign.SCAName)>0 THEN PATINDEX('% %',Sovereign.SCAName) -1 ELSE 0 END) = '' THEN Sovereign.SCAName 
+				ELSE LEFT(Sovereign.SCAName, CASE WHEN PATINDEX('% %',Sovereign.SCAName)>0 THEN PATINDEX('% %',Sovereign.SCAName) -1 ELSE 0 END) END + 
+			CASE 
+				WHEN Consort.SCAName IS NULL THEN '' 
+				ELSE ' and ' END + 
+			CASE 
+				WHEN Consort.SCAName IS NULL THEN ''  
+				WHEN LEFT(Consort.SCAName,CASE WHEN PATINDEX('% %',Consort.SCAName)>0 THEN PATINDEX('% %',Consort.SCAName) -1 ELSE 0 END) = '' THEN Consort.SCAName 
+				ELSE LEFT(Consort.SCAName,CASE WHEN PATINDEX('% %',Consort.SCAName)>0 THEN PATINDEX('% %',Consort.SCAName) -1 ELSE 0 END) END 
+	AS LinkedCrownDisplay
+FROM {databaseOwner}{objectQualifier}SCAPeopleOfficer  PeopleOfficer 
+JOIN {databaseOwner}{objectQualifier}SCAOfficerPosition OfficerPosition ON PeopleOfficer.OfficerPositionId = OfficerPosition.OfficerPositionId 
+JOIN {databaseOwner}{objectQualifier}SCAGroups Groups ON OfficerPosition.GroupId = Groups.GroupId
+Left join {databaseOwner}{objectQualifier}SCAOfficerPositionType OfficerPositionType on OfficerPosition.OfficerPositionTypeId = OfficerPositionType.OfficerPositionTypeId
+left join {databaseOwner}{objectQualifier}SCACrowns Crowns on PeopleOfficer.LinkedCrownId = Crowns.CrownId
+LEFT JOIN {databaseOwner}{objectQualifier}SCAPeople Consort ON Crowns.ConsortId = Consort.PeopleId
+LEFT JOIN {databaseOwner}{objectQualifier}SCAPeople Sovereign ON Crowns.SovereignId = Sovereign.PeopleId
+WHERE (PeopleOfficer.PeopleId = @PeopleId)
+UNION ALL  /****** Sovereign Offices ******/
+SELECT
+	Crowns.CrownId as ID,
+	Crowns.SovereignId AS PeopleId,
+	CASE WHEN heir =0  THEN '' ELSE 'Heir to the ' END + 
+	CASE WHEN regent = 0 THEN
+	CASE gender WHEN 'M' THEN SovereignMaleTitle WHEN 'F' THEN SovereignFemaleTitle ELSE 'Sovereign' END  
+	ELSE
+	CASE gender WHEN 'M' THEN RegentMaleTitle WHEN 'F' THEN RegentFemaleTitle ELSE 'Regent' END  
+	 END
+	 AS Title ,
+	'-1' as OfficerPositionId,
+	Crowns.Email,
+	'' as EmailToUse,
+	'' as EmailOverride,
+	Cast(0 as bit) as LinkedToCrown,
+	'Reign' as PositionType,
+	'0' as PositionTypeSortOrder,
+	Groups.Name AS GroupName,
+	Groups.GroupId,
+	Crowns.StartDate,
+	Crowns.EndDate,
+			CASE WHEN (Crowns.Reign = (SELECT
+			MAX(Reign)
+			FROM {databaseOwner}{objectQualifier}SCACrowns wC
+			WHERE wC.GroupId = Groups.GroupId  AND wC.Heir=0) OR heir =1)
+			AND Groups.BranchStatusId = 1 AND 
+			(Crowns.EndDate IS NULL OR Crowns.EndDate> GetDate())
+			THEN 1 ELSE 0 END
+	AS CurrentlyHeld,
+	0 as Acting,
+	1 as Verified,
+	'' as PositionSubTitle,
+	'' as PositionNotes,
+	'' as VerifiedNotes,
+	Cast(1 as bit) as RulingOffice,
+	Null as LinkedCrownId, 
+	Null As LinkedCrownDisplay
+FROM {databaseOwner}{objectQualifier}SCACrowns  Crowns
+JOIN {databaseOwner}{objectQualifier}SCAGroups Groups ON Crowns.GroupId = Groups.GroupId 
+JOIN {databaseOwner}{objectQualifier}SCAPeople People ON Crowns.SovereignId = People.PeopleId
+WHERE (Crowns.SovereignId = @PeopleId)
+UNION ALL /****** Consort Offices ******/
+SELECT
+	Crowns.CrownId as ID,
+	Crowns.SovereignId AS PeopleId,
+	CASE WHEN heir =0  THEN '' ELSE 'Heir to the ' END + 
+	CASE WHEN regent = 0 THEN
+	CASE gender WHEN 'M' THEN ConsortMaleTitle WHEN 'F' THEN ConsortFemaleTitle ELSE 'Consort' END
+	ELSE
+	CASE gender WHEN 'M' THEN RegentMaleTitle WHEN 'F' THEN RegentFemaleTitle ELSE 'Regent' END  
+	 END
+	 AS Title ,
+	'-1' as OfficerPositionId,
+	Crowns.Email,
+	'' as EmailToUse,
+	'' as EmailOverride,
+	Cast(0 as bit) as LinkedToCrown,
+	'Reign' as PositionType,
+	'0' as PositionTypeSortOrder,
+	Groups.Name AS GroupName,
+	Groups.GroupId,
+	Crowns.StartDate,
+	Crowns.EndDate,
+			CASE WHEN (Crowns.Reign = (SELECT
+			MAX(Reign)
+			FROM {databaseOwner}{objectQualifier}SCACrowns wC
+			WHERE wC.GroupId = Groups.GroupId  AND wC.Heir=0) OR heir =1)
+			AND Groups.BranchStatusId = 1 AND 
+			(Crowns.EndDate IS NULL OR Crowns.EndDate> GetDate())
+			THEN 1 ELSE 0 END
+	AS CurrentlyHeld,
+	0 as Acting,
+	1 as Verified,
+	'' as PositionSubTitle,
+	'' as PositionNotes,
+	'' as VerifiedNotes,
+	Cast(1 as bit) as RulingOffice,
+	Null as LinkedCrownId, 
+	Null As LinkedCrownDisplay
+FROM {databaseOwner}{objectQualifier}SCACrowns  Crowns
+JOIN {databaseOwner}{objectQualifier}SCAGroups Groups ON Crowns.GroupId = Groups.GroupId 
+JOIN {databaseOwner}{objectQualifier}SCAPeople People ON Crowns.ConsortId = People.PeopleId
+WHERE (Crowns.ConsortId = @PeopleId)
+
+Order By  PositionTypeSortOrder, CurrentlyHeld DESC, StartDate DESC
+
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}SCAPeopleOfficerListByOfficerPositionIDs]    Script Date: 11/13/2010 14:18:05 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}SCAPeopleOfficerListByOfficerPositionIDs]') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}[{objectQualifier}SCAPeopleOfficerListByOfficerPositionIDs]
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}SCAPeopleOfficerListByOfficerPositionIDs]    Script Date: 11/13/2010 14:18:05 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}SCAPeopleOfficerListByOfficerPositionIDs]
+ @OfficerPositionIds varchar(max),
+ @ShowVacant bit,
+ @ShowHistory bit,
+ @UseCrownLink bit,
+ @CrownId int
+AS
+
+WITH NewFiles(FileName, Width, Height, FileId,Folder, FileJoin) AS
+(
+Select FileName, Width, Height, FileId, Folder, 'fileid=' + convert(varchar,FileID)
+FROM {databaseOwner}{objectQualifier}Files
+),
+GroupTree(GroupId, Name, GroupName, Level, Sort)
+AS 
+(
+SELECT
+	Groups.GroupId,
+	Groups.Name,
+	Groups.Name as GroupName,
+	1,
+	CONVERT(varchar(max), CONVERT(char(50), Groups.Name) + '|')
+FROM {databaseOwner}{objectQualifier}SCAGroups Groups
+where ParentGroupId is null
+UNION ALL 
+SELECT 
+Groups.GroupId,
+	Groups.Name,
+	Groups.Name as GroupName,
+	Level + 1,
+CONVERT(varchar(max), Sort + CONVERT(char(50), Groups.Name) + '|')
+FROM {databaseOwner}{objectQualifier}SCAGroups Groups
+JOIN GroupTree  ON Groups.ParentGroupId = GroupTree.GroupId
+)
+
+ 
+SELECT
+	PeopleOfficer.PeopleOfficerId as ID,
+	PeopleOfficer.PeopleId,
+	OfficerPosition.Title,
+	OfficerPosition.OfficerPositionId,
+	ISNULL(BadgeFiles.Folder + BadgeFiles.FileName,'')  BadgeUrl,
+	case when BadgeFiles.Width is null then 0 else BadgeFiles.Width end as BadgeURLWidth,
+	case when BadgeFiles.Height is null then 0 else BadgeFiles.Height end as BadgeURLHeight,
+	ISNULL(People.SCAName, 'VACANT') as SCAName,
+	People.MundaneName,
+	People.Address1,
+	People.Address2,
+	People.City,
+	People.State,
+	People.Zip,
+	People.Phone1,
+	People.Phone2,
+	People.EmailAddress,
+	OfficerPosition.OfficeEmail,
+	PeopleOfficer.EmailToUse,
+	PeopleOfficer.EmailOverride,
+	CASE ISNULL(OfficerPositionType.TypeFlags, 0) & 2 WHEN 0 THEN 0 ELSE 1 END  LinkedToCrown, --TypeFlag2 = Related to Crown see enum in code
+	case when photoFiles.FileName is null then People.PhotoURL else photoFiles.Folder + photoFiles.FileName end as PhotoUrl,
+	case when photoFiles.Width is null then 0 else photoFiles.Width end as PhotoURLWidth,
+	case when photoFiles.Height is null then 0 else photoFiles.Height end as PhotoURLHeight,
+	case when armsFiles.FileName is null then People.ArmsURL else armsFiles.Folder + armsFiles.FileName end as ArmsURL,
+	case when armsFiles.Width is null then 0 else armsFiles.Width end as ArmsURLWidth,
+	case when armsFiles.Height is null then 0 else armsFiles.Height end as ArmsURLHeight,
+	People.OfficerNotes,
+	People.[TitlePrefix],
+	People.[HonorsSuffix],
+	Groups.Name AS GroupName,
+	Groups.GroupId,
+	PeopleOfficer.StartDate,
+	PeopleOfficer.EndDate,
+	PeopleOfficer.CurrentlyHeld,
+	IsNull(PeopleOfficer.Acting, 0) as Acting,
+	PeopleOfficer.Verified,
+	PeopleOfficer.PositionSubTitle,
+	PeopleOfficer.PositionNotes,
+	PeopleOfficer.VerifiedNotes,
+	OfficerPosition.ListOrder,
+	GroupTree.GroupName as HomeBranch,
+	RTRIM(SUBSTRING(GroupTree.sort, 1, 50)) as HomeKingdom,
+	LinkedCrownId,
+			CASE 
+				WHEN LEFT(Sovereign.SCAName, CASE WHEN PATINDEX('% %',Sovereign.SCAName)>0 THEN PATINDEX('% %',Sovereign.SCAName) -1 ELSE 0 END) = '' THEN Sovereign.SCAName 
+				ELSE LEFT(Sovereign.SCAName, CASE WHEN PATINDEX('% %',Sovereign.SCAName)>0 THEN PATINDEX('% %',Sovereign.SCAName) -1 ELSE 0 END) END + 
+			CASE 
+				WHEN Consort.SCAName IS NULL THEN '' 
+				ELSE ' and ' END + 
+			CASE 
+				WHEN Consort.SCAName IS NULL THEN ''  
+				WHEN LEFT(Consort.SCAName,CASE WHEN PATINDEX('% %',Consort.SCAName)>0 THEN PATINDEX('% %',Consort.SCAName) -1 ELSE 0 END) = '' THEN Consort.SCAName 
+				ELSE LEFT(Consort.SCAName,CASE WHEN PATINDEX('% %',Consort.SCAName)>0 THEN PATINDEX('% %',Consort.SCAName) -1 ELSE 0 END) END 
+	AS LinkedCrownDisplay
+FROM {databaseOwner}{objectQualifier}SCAOfficerPosition OfficerPosition
+LEFT JOIN  {databaseOwner}{objectQualifier}SCAPeopleOfficer PeopleOfficer ON PeopleOfficer.OfficerPositionId = OfficerPosition.OfficerPositionId AND
+	(
+		(@UseCrownLink=0 and GETDATE() between PeopleOfficer.StartDate and PeopleOfficer.EndDate) OR -- Current date is between start and end
+		(@UseCrownLink=0 and GETDATE() >= PeopleOfficer.StartDate and PeopleOfficer.EndDate is null) OR -- Current date after start and no end date
+		(@UseCrownLink=0 and @ShowHistory=1) OR -- just show them all
+		(@UseCrownLink=1 and PeopleOfficer.LinkedCrownId= @CrownId)
+	)
+LEFT JOIN {databaseOwner}{objectQualifier}SCAGroups Groups ON OfficerPosition.GroupId = Groups.GroupId
+LEFT JOIN {databaseOwner}{objectQualifier}SCAPeople People on PeopleOfficer.PeopleId = People.PeopleId
+left join NewFiles photoFiles on People.PhotoURL = photoFiles.FileJoin
+left join NewFiles badgeFiles on OfficerPosition.FileId = badgeFiles.FileId
+left join NewFiles armsFiles on People.ArmsURL = armsFiles.FileJoin
+left join {databaseOwner}{objectQualifier}SCACrowns Crowns on PeopleOfficer.LinkedCrownId = Crowns.CrownId
+LEFT JOIN {databaseOwner}{objectQualifier}SCAPeople Consort ON Crowns.ConsortId = Consort.PeopleId
+LEFT JOIN {databaseOwner}{objectQualifier}SCAPeople Sovereign ON Crowns.SovereignId = Sovereign.PeopleId
+LEFT JOIN GroupTree on People.BranchResidenceId = GroupTree.GroupId
+LEFT JOIN {databaseOwner}{objectQualifier}SCAOfficerPositionType OfficerPositionType on OfficerPosition.OfficerPositionTypeId = OfficerPositionType.OfficerPositionTypeId
+JOIN iter_intlist_to_tbl(@OfficerPositionIds) i ON OfficerPosition.OfficerPositionId = i.number
+WHERE @ShowVacant= 1 OR PeopleOfficer.PeopleId is not null
+ORDER BY OfficerPosition.ListOrder,  PeopleOfficer.StartDate
+
+GO
+
+
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}SCAPeopleCombinedOfficesGet]    Script Date: 11/13/2010 14:22:52 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}SCAPeopleCombinedOfficesGet]') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}[SCAPeopleCombinedOfficesGet]
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[SCAPeopleCombinedOfficesGet]    Script Date: 11/13/2010 14:22:52 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}SCAPeopleCombinedOfficesGet]
+	@PeopleId int
+AS
+
+SELECT
+	PeopleOfficer.PeopleOfficerId as ID,
+	PeopleOfficer.PeopleId,
+	OfficerPosition.Title,
+	OfficerPosition.OfficerPositionId,
+	OfficerPosition.OfficeEmail,
+	PeopleOfficer.EmailToUse,
+	PeopleOfficer.EmailOverride,
+	CASE OfficerPositionType.TypeFlags & 2 WHEN 0 THEN 0 ELSE 1 END  LinkedToCrown,
+	OfficerPositionType.Name as PositionType,
+	IsNull(OfficerPositionType.SortOrder, 999)  as PositionTypeSortOrder,
+	Groups.Name AS GroupName,
+	Groups.GroupId,
+	PeopleOfficer.StartDate,
+	PeopleOfficer.EndDate,
+	PeopleOfficer.CurrentlyHeld,
+	PeopleOfficer.Acting,
+	PeopleOfficer.Verified,
+	PeopleOfficer.PositionSubTitle,
+	PeopleOfficer.PositionNotes,
+	PeopleOfficer.VerifiedNotes,
+	Cast(0 as bit) as RulingOffice,
+	LinkedCrownId,
+			CASE 
+				WHEN LEFT(Sovereign.SCAName, CASE WHEN PATINDEX('% %',Sovereign.SCAName)>0 THEN PATINDEX('% %',Sovereign.SCAName) -1 ELSE 0 END) = '' THEN Sovereign.SCAName 
+				ELSE LEFT(Sovereign.SCAName, CASE WHEN PATINDEX('% %',Sovereign.SCAName)>0 THEN PATINDEX('% %',Sovereign.SCAName) -1 ELSE 0 END) END + 
+			CASE 
+				WHEN Consort.SCAName IS NULL THEN '' 
+				ELSE ' and ' END + 
+			CASE 
+				WHEN Consort.SCAName IS NULL THEN ''  
+				WHEN LEFT(Consort.SCAName,CASE WHEN PATINDEX('% %',Consort.SCAName)>0 THEN PATINDEX('% %',Consort.SCAName) -1 ELSE 0 END) = '' THEN Consort.SCAName 
+				ELSE LEFT(Consort.SCAName,CASE WHEN PATINDEX('% %',Consort.SCAName)>0 THEN PATINDEX('% %',Consort.SCAName) -1 ELSE 0 END) END 
+	AS LinkedCrownDisplay
+FROM {databaseOwner}{objectQualifier}SCAPeopleOfficer  PeopleOfficer 
+JOIN {databaseOwner}{objectQualifier}SCAOfficerPosition OfficerPosition ON PeopleOfficer.OfficerPositionId = OfficerPosition.OfficerPositionId 
+JOIN {databaseOwner}{objectQualifier}SCAGroups Groups ON OfficerPosition.GroupId = Groups.GroupId
+Left join {databaseOwner}{objectQualifier}SCAOfficerPositionType OfficerPositionType on OfficerPosition.OfficerPositionTypeId = OfficerPositionType.OfficerPositionTypeId
+left join {databaseOwner}{objectQualifier}SCACrowns Crowns on PeopleOfficer.LinkedCrownId = Crowns.CrownId
+LEFT JOIN {databaseOwner}{objectQualifier}SCAPeople Consort ON Crowns.ConsortId = Consort.PeopleId
+LEFT JOIN {databaseOwner}{objectQualifier}SCAPeople Sovereign ON Crowns.SovereignId = Sovereign.PeopleId
+WHERE (PeopleOfficer.PeopleId = @PeopleId)
+UNION ALL  /****** Sovereign Offices ******/
+SELECT
+	Crowns.CrownId as ID,
+	Crowns.SovereignId AS PeopleId,
+	CASE WHEN heir =0  THEN '' ELSE 'Heir to the ' END + 
+	CASE WHEN regent = 0 THEN
+	CASE gender WHEN 'M' THEN SovereignMaleTitle WHEN 'F' THEN SovereignFemaleTitle ELSE 'Sovereign' END  
+	ELSE
+	CASE gender WHEN 'M' THEN RegentMaleTitle WHEN 'F' THEN RegentFemaleTitle ELSE 'Regent' END  
+	 END
+	 AS Title ,
+	'-1' as OfficerPositionId,
+	Crowns.Email,
+	'' as EmailToUse,
+	'' as EmailOverride,
+	Cast(0 as bit) as LinkedToCrown,
+	'Reign' as PositionType,
+	'0' as PositionTypeSortOrder,
+	Groups.Name AS GroupName,
+	Groups.GroupId,
+	Crowns.StartDate,
+	Crowns.EndDate,
+			CASE WHEN (Crowns.Reign = (SELECT
+			MAX(Reign)
+			FROM {databaseOwner}{objectQualifier}SCACrowns wC
+			WHERE wC.GroupId = Groups.GroupId  AND wC.Heir=0) OR heir =1)
+			AND Groups.BranchStatusId = 1 AND 
+			(Crowns.EndDate IS NULL OR Crowns.EndDate> GetDate())
+			THEN 1 ELSE 0 END
+	AS CurrentlyHeld,
+	0 as Acting,
+	1 as Verified,
+	'' as PositionSubTitle,
+	'' as PositionNotes,
+	'' as VerifiedNotes,
+	Cast(1 as bit) as RulingOffice,
+	Null as LinkedCrownId, 
+	Null As LinkedCrownDisplay
+FROM {databaseOwner}{objectQualifier}SCACrowns  Crowns
+JOIN {databaseOwner}{objectQualifier}SCAGroups Groups ON Crowns.GroupId = Groups.GroupId 
+JOIN {databaseOwner}{objectQualifier}SCAPeople People ON Crowns.SovereignId = People.PeopleId
+WHERE (Crowns.SovereignId = @PeopleId)
+UNION ALL /****** Consort Offices ******/
+SELECT
+	Crowns.CrownId as ID,
+	Crowns.SovereignId AS PeopleId,
+	CASE WHEN heir =0  THEN '' ELSE 'Heir to the ' END + 
+	CASE WHEN regent = 0 THEN
+	CASE gender WHEN 'M' THEN ConsortMaleTitle WHEN 'F' THEN ConsortFemaleTitle ELSE 'Consort' END
+	ELSE
+	CASE gender WHEN 'M' THEN RegentMaleTitle WHEN 'F' THEN RegentFemaleTitle ELSE 'Regent' END  
+	 END
+	 AS Title ,
+	'-1' as OfficerPositionId,
+	Crowns.Email,
+	'' as EmailToUse,
+	'' as EmailOverride,
+	Cast(0 as bit) as LinkedToCrown,
+	'Reign' as PositionType,
+	'0' as PositionTypeSortOrder,
+	Groups.Name AS GroupName,
+	Groups.GroupId,
+	Crowns.StartDate,
+	Crowns.EndDate,
+			CASE WHEN (Crowns.Reign = (SELECT
+			MAX(Reign)
+			FROM {databaseOwner}{objectQualifier}SCACrowns wC
+			WHERE wC.GroupId = Groups.GroupId  AND wC.Heir=0) OR heir =1)
+			AND Groups.BranchStatusId = 1 AND 
+			(Crowns.EndDate IS NULL OR Crowns.EndDate> GetDate())
+			THEN 1 ELSE 0 END
+	AS CurrentlyHeld,
+	0 as Acting,
+	1 as Verified,
+	'' as PositionSubTitle,
+	'' as PositionNotes,
+	'' as VerifiedNotes,
+	Cast(1 as bit) as RulingOffice,
+	Null as LinkedCrownId, 
+	Null As LinkedCrownDisplay
+FROM {databaseOwner}{objectQualifier}SCACrowns  Crowns
+JOIN {databaseOwner}{objectQualifier}SCAGroups Groups ON Crowns.GroupId = Groups.GroupId 
+JOIN {databaseOwner}{objectQualifier}SCAPeople People ON Crowns.ConsortId = People.PeopleId
+WHERE (Crowns.ConsortId = @PeopleId)
+
+Order By  PositionTypeSortOrder, CurrentlyHeld DESC, StartDate DESC
+
+
+GO
+
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}SCAOfficerPositionListByGroup]    Script Date: 11/11/2010 16:51:49 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE {databaseOwner}[{objectQualifier}SCAOfficerPositionListByGroup]
+	@GroupId int
+AS
+
+SELECT
+	OfficerPositionId,
+	Title,
+	OfficerPosition.GroupId,
+	ListOrder,
+	BadgeFiles.Folder + BadgeFiles.FileName as BadgeURL,
+	case when BadgeFiles.Width is null then 0 else BadgeFiles.Width end as BadgeURLWidth,
+	case when BadgeFiles.Height is null then 0 else BadgeFiles.Height end as BadgeURLHeight,
+	Groups.Name as GroupName,
+	Groups.Name + ' ' + Title as GroupOfficerTitle,
+	CASE OfficerPosition.OfficerPositionTypeId WHEN 2 THEN 1 ELSE 0 END   as LinkedToCrown,
+	ISNULL(PositionType.Name + '- ', '') + Title as TypeAndTitle
+FROM {databaseOwner}{objectQualifier}SCAOfficerPosition OfficerPosition
+JOIN {databaseOwner}{objectQualifier}SCAGroups Groups ON OfficerPosition.GroupId = Groups.GroupId
+Left Join {databaseOwner}{objectQualifier}SCAOfficerPositionType PositionType on OfficerPosition.OfficerPositionTypeId = PositionType.OfficerPositionTypeId
+left join {databaseOwner}{objectQualifier}Files badgeFiles on OfficerPosition.FileId= badgeFiles.FileID
+Where OfficerPosition.GroupID= @GroupId
+ORDER BY  ISNULL(PositionType.SortOrder,999),  Title
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}SCAPeopleOfficerListGroupRegnum]    Script Date: 11/13/2010 14:31:36 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE {databaseOwner}[{objectQualifier}SCAPeopleOfficerListGroupRegnum]
+ @GroupId int
+AS
+WITH NewFiles(FileName, Width, Height, FileId,Folder, FileJoin) AS
+(
+Select FileName, Width, Height, FileId, Folder, 'fileid='+ convert(varchar,FileID)
+FROM Files
+)
+
+SELECT
+	PeopleOfficer.PeopleOfficerId as ID,
+	PeopleOfficer.PeopleId,
+	OfficerPosition.Title,
+	OfficerPosition.OfficerPositionId,
+	ISNULL(BadgeFiles.Folder + BadgeFiles.FileName,'')  BadgeUrl,
+	case when BadgeFiles.Width is null then 0 else BadgeFiles.Width end as BadgeURLWidth,
+	case when BadgeFiles.Height is null then 0 else BadgeFiles.Height end as BadgeURLHeight,
+	ISNULL(People.SCAName, 'VACANT') as SCAName,
+	People.MundaneName,
+	People.Address1,
+	People.Address2,
+	People.City,
+	People.State,
+	People.Zip,
+	People.Phone1,
+	People.Phone2,
+	People.EmailAddress,
+	OfficerPosition.OfficeEmail,
+	PeopleOfficer.EmailToUse,
+	PeopleOfficer.EmailOverride,
+	CASE ISNULL(OfficerPositionType.TypeFlags, 0) & 2 WHEN 0 THEN 0 ELSE 1 END  LinkedToCrown, --TypeFlag2 = Related to Crown see enum in code
+	case when photoFiles.FileName is null then People.PhotoURL else photoFiles.Folder + photoFiles.FileName end as PhotoUrl,
+	case when photoFiles.Width is null then 0 else photoFiles.Width end as PhotoURLWidth,
+	case when photoFiles.Height is null then 0 else photoFiles.Height end as PhotoURLHeight,
+	case when armsFiles.FileName is null then People.ArmsURL else armsFiles.Folder + armsFiles.FileName end as ArmsURL,
+	case when armsFiles.Width is null then 0 else armsFiles.Width end as ArmsURLWidth,
+	case when armsFiles.Height is null then 0 else armsFiles.Height end as ArmsURLHeight,
+	People.OfficerNotes,
+	People.[TitlePrefix],
+	People.[HonorsSuffix],
+	Groups.Name AS GroupName,
+	Groups.GroupId,
+	PeopleOfficer.StartDate,
+	PeopleOfficer.EndDate,
+	PeopleOfficer.CurrentlyHeld,
+	IsNull(PeopleOfficer.Acting, 0) as Acting,
+	PeopleOfficer.Verified,
+	PeopleOfficer.PositionSubTitle,
+	PeopleOfficer.PositionNotes,
+	PeopleOfficer.VerifiedNotes,
+	OfficerPosition.ListOrder,
+	LinkedCrownId,
+			CASE 
+				WHEN LEFT(Sovereign.SCAName, CASE WHEN PATINDEX('% %',Sovereign.SCAName)>0 THEN PATINDEX('% %',Sovereign.SCAName) -1 ELSE 0 END) = '' THEN Sovereign.SCAName 
+				ELSE LEFT(Sovereign.SCAName, CASE WHEN PATINDEX('% %',Sovereign.SCAName)>0 THEN PATINDEX('% %',Sovereign.SCAName) -1 ELSE 0 END) END + 
+			CASE 
+				WHEN Consort.SCAName IS NULL THEN '' 
+				ELSE ' and ' END + 
+			CASE 
+				WHEN Consort.SCAName IS NULL THEN ''  
+				WHEN LEFT(Consort.SCAName,CASE WHEN PATINDEX('% %',Consort.SCAName)>0 THEN PATINDEX('% %',Consort.SCAName) -1 ELSE 0 END) = '' THEN Consort.SCAName 
+				ELSE LEFT(Consort.SCAName,CASE WHEN PATINDEX('% %',Consort.SCAName)>0 THEN PATINDEX('% %',Consort.SCAName) -1 ELSE 0 END) END 
+	AS LinkedCrownDisplay
+FROM {databaseOwner}{objectQualifier}SCAOfficerPosition OfficerPosition
+LEFT JOIN  SCAPeopleOfficer PeopleOfficer ON PeopleOfficer.OfficerPositionId = OfficerPosition.OfficerPositionId AND
+	(
+		(GETDATE() between PeopleOfficer.StartDate and PeopleOfficer.EndDate) OR -- Current date is between start and end
+		(GETDATE() > PeopleOfficer.StartDate and PeopleOfficer.EndDate is null)  -- Current date after start and currentlyheld is marked.
+	)
+LEFT JOIN {databaseOwner}{objectQualifier}SCAGroups Groups ON OfficerPosition.GroupId = Groups.GroupId
+LEFT JOIN {databaseOwner}{objectQualifier}SCAPeople People on PeopleOfficer.PeopleId = People.PeopleId
+left join NewFiles photoFiles on People.PhotoURL = photoFiles.FileJoin
+left join NewFiles badgeFiles on OfficerPosition.FileId = badgeFiles.FileId
+left join NewFiles armsFiles on People.ArmsURL = armsFiles.FileJoin
+left join {databaseOwner}{objectQualifier}SCACrowns Crowns on PeopleOfficer.LinkedCrownId = Crowns.CrownId
+LEFT JOIN {databaseOwner}{objectQualifier}SCAPeople Consort ON Crowns.ConsortId = Consort.PeopleId
+LEFT JOIN {databaseOwner}{objectQualifier}SCAPeople Sovereign ON Crowns.SovereignId = Sovereign.PeopleId
+LEFT JOIN {databaseOwner}{objectQualifier}SCAOfficerPositionType OfficerPositionType on OfficerPosition.OfficerPositionTypeId = OfficerPositionType.OfficerPositionTypeId
+WHERE (OfficerPosition.GroupId = @GroupId)
+UNION ALL -- Soveriern of Group
+SELECT
+	{databaseOwner}{objectQualifier}SCACrowns.CrownId as ID,
+	{databaseOwner}{objectQualifier}SCACrowns.SovereignId AS PeopleId,
+	CASE WHEN heir =0  THEN '' ELSE 'Heir to the ' END + 
+	CASE gender WHEN 'M' THEN SovereignMaleTitle WHEN 'F' THEN SovereignFemaleTitle ELSE 'Sovereign' END  
+	 AS Title,
+	'-1' as OfficerPositionId,
+	null as BadgeUrl, --case when SovereignArmsFiles.FileName is null then SCAGroups.SovereignArmsUrl else SovereignArmsFiles.Folder + SovereignArmsFiles.FileName end as BadgeUrl,
+	case when SovereignArmsFiles.Width is null then 0 else SovereignArmsFiles.Width end as BadgeWidth,
+	case when SovereignArmsFiles.Height is null then 0 else SovereignArmsFiles.Height end as BadgeHeight,
+	{databaseOwner}{objectQualifier}SCAPeople.SCAName,
+	MundaneName,
+	Address1,
+	Address2,
+	City,
+	State,
+	Zip,
+	Phone1,
+	Phone2,
+	EmailAddress,
+	SCACrowns.Email,
+	'' as EmailToUse,
+	'' as EmailOverride,
+	Cast(0 as bit) as LinkedToCrown,
+	case when photoFiles.FileName is null then {databaseOwner}{objectQualifier}SCAPeople.PhotoURL else photoFiles.Folder + photoFiles.FileName end as PhotoUrl,
+	case when photoFiles.Width is null then 0 else photoFiles.Width end as PhotoURLWidth,
+	case when photoFiles.Height is null then 0 else photoFiles.Height end as PhotoURLHeight,
+	case when armsFiles.FileName is null then {databaseOwner}{objectQualifier}SCAPeople.ArmsURL else armsFiles.Folder + armsFiles.FileName end as ArmsURL,
+	case when armsFiles.Width is null then 0 else armsFiles.Width end as ArmsURLWidth,
+	case when armsFiles.Height is null then 0 else armsFiles.Height end as ArmsURLHeight,
+	OfficerNotes,
+	[TitlePrefix],
+	[HonorsSuffix],
+	{databaseOwner}{objectQualifier}SCAGroups.Name AS GroupName,
+	{databaseOwner}{objectQualifier}SCAGroups.GroupId,
+	{databaseOwner}{objectQualifier}SCACrowns.StartDate,
+	{databaseOwner}{objectQualifier}SCACrowns.EndDate,
+	CASE WHEN (GETDATE() BETWEEN {databaseOwner}{objectQualifier}SCACrowns.StartDate AND {databaseOwner}{objectQualifier}SCACrowns.EndDate) OR ({databaseOwner}{objectQualifier}SCACrowns.EndDate is null) THEN 1 ELSE 0 END AS CurrentlyHeld,
+	0 as Acting,
+	1 as Verified,
+	'' as PositionSubTitle,
+	'' as PositionNotes,
+	'' as VerifiedNotes,
+	-1004 as ListOrder,
+	Null as LinkedCrownId, 
+	Null As LinkedCrownDisplay
+FROM {databaseOwner}{objectQualifier}SCACrowns 
+JOIN {databaseOwner}{objectQualifier}SCAGroups ON {databaseOwner}{objectQualifier}SCACrowns.GroupId = SCAGroups.GroupId 
+JOIN {databaseOwner}{objectQualifier}SCAPeople ON {databaseOwner}{objectQualifier}SCACrowns.SovereignId = SCAPeople.PeopleId
+left join NewFiles photoFiles on {databaseOwner}{objectQualifier}SCAPeople.PhotoURL =photoFiles.FileJoin
+left join NewFiles SovereignArmsFiles on {databaseOwner}{objectQualifier}SCAGroups.SovereignArmsUrl = SovereignArmsFiles.FileJoin
+left join NewFiles armsFiles on {databaseOwner}{objectQualifier}SCAPeople.ArmsURL = armsFiles.FileJoin
+WHERE (SCACrowns.GroupId = @GroupId) and SCACrowns.Reign = (SELECT
+	MAX(Reign) 
+FROM SCACrowns wC
+WHERE wC.GroupId = {databaseOwner}{objectQualifier}SCAGroups.GroupId and Heir=0) and Heir=0 AND ((GETDATE() BETWEEN {databaseOwner}{objectQualifier}SCACrowns.StartDate AND {databaseOwner}{objectQualifier}SCACrowns.EndDate) OR ({databaseOwner}{objectQualifier}SCACrowns.EndDate is null))
+
+UNION ALL --Consort Sovereign of Group
+
+SELECT
+	{databaseOwner}{objectQualifier}SCACrowns.CrownId as ID,
+	{databaseOwner}{objectQualifier}SCACrowns.ConsortId AS PeopleId,
+	CASE WHEN heir =0  THEN '' ELSE 'Heir to the ' END + 
+	CASE gender WHEN 'M' THEN ConsortMaleTitle WHEN 'F' THEN ConsortFemaleTitle ELSE 'Consort' END
+	 AS Title,
+	'-1' as OfficerPositionId,
+	null as BadgeUrl, --case when ConsortArmsFiles.FileName is null then SCAGroups.ConsortArmsUrl else ConsortArmsFiles.Folder + ConsortArmsFiles.FileName end as BadgeUrl,
+	case when ConsortArmsFiles.Width is null then 0 else ConsortArmsFiles.Width end as BadgeWidth,
+	case when ConsortArmsFiles.Height is null then 0 else ConsortArmsFiles.Height end as BadgeHeight,
+	{databaseOwner}{objectQualifier}SCAPeople.SCAName,
+	MundaneName,
+	Address1,
+	Address2,
+	City,
+	State,
+	Zip,
+	Phone1,
+	Phone2,
+	EmailAddress,
+	SCACrowns.Email,
+	'' as EmailToUse,
+	'' as EmailOverride,
+	Cast(0 as bit) as LinkedToCrown,
+	case when photoFiles.FileName is null then {databaseOwner}{objectQualifier}SCAPeople.PhotoURL else photoFiles.Folder + photoFiles.FileName end as PhotoUrl,
+	case when photoFiles.Width is null then 0 else photoFiles.Width end as PhotoURLWidth,
+	case when photoFiles.Height is null then 0 else photoFiles.Height end as PhotoURLHeight,
+	case when armsFiles.FileName is null then {databaseOwner}{objectQualifier}SCAPeople.ArmsURL else armsFiles.Folder + armsFiles.FileName end as ArmsURL,
+	case when armsFiles.Width is null then 0 else armsFiles.Width end as ArmsURLWidth,
+	case when armsFiles.Height is null then 0 else armsFiles.Height end as ArmsURLHeight,
+	OfficerNotes,
+	[TitlePrefix],
+	[HonorsSuffix],
+	{databaseOwner}{objectQualifier}SCAGroups.Name AS GroupName,
+	{databaseOwner}{objectQualifier}SCAGroups.GroupId,
+	{databaseOwner}{objectQualifier}SCACrowns.StartDate,
+	{databaseOwner}{objectQualifier}SCACrowns.EndDate,
+	CASE WHEN (GETDATE() BETWEEN {databaseOwner}{objectQualifier}SCACrowns.StartDate AND {databaseOwner}{objectQualifier}SCACrowns.EndDate) OR ({databaseOwner}{objectQualifier}SCACrowns.EndDate is null) THEN 1 ELSE 0 END AS CurrentlyHeld,
+	0 as Acting,
+	1 as Verified,
+	'' as PositionSubTitle,
+	'' as PositionNotes,
+	'' as VerifiedNotes,
+	-1003 as ListOrder,
+	Null as LinkedCrownId, 
+	Null As LinkedCrownDisplay
+FROM {databaseOwner}{objectQualifier}SCACrowns 
+JOIN {databaseOwner}{objectQualifier}SCAGroups ON {databaseOwner}{objectQualifier}SCACrowns.GroupId = {databaseOwner}{objectQualifier}SCAGroups.GroupId 
+JOIN {databaseOwner}{objectQualifier}SCAPeople ON {databaseOwner}{objectQualifier}SCACrowns.Consortid = {databaseOwner}{objectQualifier}SCAPeople.PeopleId
+left join NewFiles photoFiles on {databaseOwner}{objectQualifier}SCAPeople.PhotoURL =photoFiles.FileJoin
+left join NewFiles ConsortArmsFiles on {databaseOwner}{objectQualifier}SCAGroups.ConsortArmsUrl = ConsortArmsFiles.FileJoin
+left join NewFiles armsFiles on {databaseOwner}{objectQualifier}SCAPeople.ArmsURL = armsFiles.FileJoin
+WHERE ({databaseOwner}{objectQualifier}SCACrowns.GroupId = @GroupId) and {databaseOwner}{objectQualifier}SCACrowns.Reign = (SELECT
+	MAX(Reign)
+FROM {databaseOwner}{objectQualifier}SCACrowns wC
+WHERE wC.GroupId = SCAGroups.GroupId and Heir=0) and Heir=0 AND ((GETDATE() BETWEEN {databaseOwner}{objectQualifier}SCACrowns.StartDate AND {databaseOwner}{objectQualifier}SCACrowns.EndDate) OR ({databaseOwner}{objectQualifier}SCACrowns.EndDate is null))
+
+UNION ALL  -- Heir to Soveren
+
+SELECT
+	{databaseOwner}{objectQualifier}SCACrowns.CrownId as ID,
+	{databaseOwner}{objectQualifier}SCACrowns.SovereignId AS PeopleId,
+	CASE WHEN heir =0  THEN '' ELSE 'Heir to the ' END + 
+	CASE gender WHEN 'M' THEN SovereignMaleTitle WHEN 'F' THEN SovereignFemaleTitle ELSE 'Sovereign' END  
+	 AS Title,
+	'-1' as OfficerPositionId,
+	null as BadgeUrl, --case when SovereignArmsFiles.FileName is null then SCAGroups.SovereignArmsUrl else SovereignArmsFiles.Folder + SovereignArmsFiles.FileName end as BadgeUrl,
+	case when SovereignArmsFiles.Width is null then 0 else SovereignArmsFiles.Width end as BadgeWidth,
+	case when SovereignArmsFiles.Height is null then 0 else SovereignArmsFiles.Height end as BadgeHeight,
+	{databaseOwner}{objectQualifier}SCAPeople.SCAName,
+	MundaneName,
+	Address1,
+	Address2,
+	City,
+	State,
+	Zip,
+	Phone1,
+	Phone2,
+	EmailAddress,
+	{databaseOwner}{objectQualifier}SCACrowns.Email,
+	'' as EmailToUse,
+	'' as EmailOverride,
+	Cast(0 as bit) as LinkedToCrown,
+	case when photoFiles.FileName is null then {databaseOwner}{objectQualifier}SCAPeople.PhotoURL else photoFiles.Folder + photoFiles.FileName end as PhotoUrl,
+	case when photoFiles.Width is null then 0 else photoFiles.Width end as PhotoURLWidth,
+	case when photoFiles.Height is null then 0 else photoFiles.Height end as PhotoURLHeight,
+	case when armsFiles.FileName is null then {databaseOwner}{objectQualifier}SCAPeople.ArmsURL else armsFiles.Folder + armsFiles.FileName end as ArmsURL,
+	case when armsFiles.Width is null then 0 else armsFiles.Width end as ArmsURLWidth,
+	case when armsFiles.Height is null then 0 else armsFiles.Height end as ArmsURLHeight,
+	OfficerNotes,
+	[TitlePrefix],
+	[HonorsSuffix],
+	{databaseOwner}{objectQualifier}SCAGroups.Name AS GroupName,
+	{databaseOwner}{objectQualifier}SCAGroups.GroupId,
+	{databaseOwner}{objectQualifier}SCACrowns.StartDate,
+	{databaseOwner}{objectQualifier}SCACrowns.EndDate,
+	CASE WHEN (GETDATE() BETWEEN {databaseOwner}{objectQualifier}SCACrowns.StartDate AND {databaseOwner}{objectQualifier}SCACrowns.EndDate) OR ({databaseOwner}{objectQualifier}SCACrowns.EndDate is null) THEN 1 ELSE 0 END AS CurrentlyHeld,
+	0 as Acting,
+	1 as Verified,
+	'' as PositionSubTitle,
+	'' as PositionNotes,
+	'' as VerifiedNotes,
+	-1002 as ListOrder,
+	Null as LinkedCrownId, 
+	Null As LinkedCrownDisplay
+FROM {databaseOwner}{objectQualifier}SCACrowns 
+JOIN {databaseOwner}{objectQualifier}SCAGroups ON SCACrowns.GroupId = {databaseOwner}{objectQualifier}SCAGroups.GroupId 
+JOIN {databaseOwner}{objectQualifier}SCAPeople ON SCACrowns.SovereignId = {databaseOwner}{objectQualifier}SCAPeople.PeopleId
+left join NewFiles photoFiles on {databaseOwner}{objectQualifier}SCAPeople.PhotoURL =photoFiles.FileJoin
+left join NewFiles SovereignArmsFiles on {databaseOwner}{objectQualifier}SCAGroups.SovereignArmsUrl = SovereignArmsFiles.FileJoin
+left join NewFiles armsFiles on {databaseOwner}{objectQualifier}SCAPeople.ArmsURL = armsFiles.FileJoin
+WHERE ({databaseOwner}{objectQualifier}SCACrowns.GroupId = @GroupId) and {databaseOwner}{objectQualifier}SCACrowns.Reign = (SELECT
+	MAX(Reign) 
+FROM {databaseOwner}{objectQualifier}SCACrowns wC
+WHERE wC.GroupId = SCAGroups.GroupId and Heir=1) and Heir=1 AND ((GETDATE() BETWEEN {databaseOwner}{objectQualifier}SCACrowns.StartDate AND {databaseOwner}{objectQualifier}SCACrowns.EndDate) OR ({databaseOwner}{objectQualifier}SCACrowns.EndDate is null))
+
+UNION ALL -- heir to consort
+
+SELECT
+	{databaseOwner}{objectQualifier}SCACrowns.CrownId as ID,
+	{databaseOwner}{objectQualifier}SCACrowns.ConsortId AS PeopleId,
+	CASE WHEN heir =0  THEN '' ELSE 'Heir to the ' END + 
+	CASE gender WHEN 'M' THEN ConsortMaleTitle WHEN 'F' THEN ConsortFemaleTitle ELSE 'Consort' END
+	 AS Title,
+	'-1' as OfficerPositionId,
+	null as BadgeUrl, --case when ConsortArmsFiles.FileName is null then SCAGroups.ConsortArmsUrl else ConsortArmsFiles.Folder + ConsortArmsFiles.FileName end as BadgeUrl,
+	case when ConsortArmsFiles.Width is null then 0 else ConsortArmsFiles.Width end as BadgeWidth,
+	case when ConsortArmsFiles.Height is null then 0 else ConsortArmsFiles.Height end as BadgeHeight,
+	{databaseOwner}{objectQualifier}SCAPeople.SCAName,
+	MundaneName,
+	Address1,
+	Address2,
+	City,
+	State,
+	Zip,
+	Phone1,
+	Phone2,
+	EmailAddress,
+	{databaseOwner}{objectQualifier}SCACrowns.Email,
+	'' as EmailToUse,
+	'' as EmailOverride,
+	Cast(0 as bit) as LinkedToCrown,
+	case when photoFiles.FileName is null then SCAPeople.PhotoURL else photoFiles.Folder + photoFiles.FileName end as PhotoUrl,
+	case when photoFiles.Width is null then 0 else photoFiles.Width end as PhotoURLWidth,
+	case when photoFiles.Height is null then 0 else photoFiles.Height end as PhotoURLHeight,
+	case when armsFiles.FileName is null then SCAPeople.ArmsURL else armsFiles.Folder + armsFiles.FileName end as ArmsURL,
+	case when armsFiles.Width is null then 0 else armsFiles.Width end as ArmsURLWidth,
+	case when armsFiles.Height is null then 0 else armsFiles.Height end as ArmsURLHeight,
+	OfficerNotes,
+	[TitlePrefix],
+	[HonorsSuffix],
+	{databaseOwner}{objectQualifier}SCAGroups.Name AS GroupName,
+	{databaseOwner}{objectQualifier}SCAGroups.GroupId,
+	{databaseOwner}{objectQualifier}SCACrowns.StartDate,
+	{databaseOwner}{objectQualifier}SCACrowns.EndDate,
+	CASE WHEN (GETDATE() BETWEEN {databaseOwner}{objectQualifier}SCACrowns.StartDate AND {databaseOwner}{objectQualifier}SCACrowns.EndDate) OR ({databaseOwner}{objectQualifier}SCACrowns.EndDate is null) THEN 1 ELSE 0 END AS CurrentlyHeld,
+	0 as Acting,
+	1 as Verified,
+	'' as PositionSubTitle,
+	'' as PositionNotes,
+	'' as VerifiedNotes,
+	-1001 as ListOrder,
+	Null as LinkedCrownId, 
+	Null As LinkedCrownDisplay
+FROM {databaseOwner}{objectQualifier}SCACrowns 
+JOIN {databaseOwner}{objectQualifier}SCAGroups ON {databaseOwner}{objectQualifier}SCACrowns.GroupId = {databaseOwner}{objectQualifier}SCAGroups.GroupId 
+JOIN {databaseOwner}{objectQualifier}SCAPeople ON {databaseOwner}{objectQualifier}SCACrowns.Consortid = {databaseOwner}{objectQualifier}SCAPeople.PeopleId
+left join NewFiles photoFiles on {databaseOwner}{objectQualifier}SCAPeople.PhotoURL =photoFiles.FileJoin
+left join NewFiles ConsortArmsFiles on {databaseOwner}{objectQualifier}SCAGroups.ConsortArmsUrl = ConsortArmsFiles.FileJoin
+left join NewFiles armsFiles on {databaseOwner}{objectQualifier}SCAPeople.ArmsURL = armsFiles.FileJoin
+WHERE ({databaseOwner}{objectQualifier}SCACrowns.GroupId = @GroupId) and {databaseOwner}{objectQualifier}SCACrowns.Reign = (SELECT
+	MAX(Reign)
+FROM {databaseOwner}{objectQualifier}SCACrowns wC
+WHERE wC.GroupId = {databaseOwner}{objectQualifier}SCAGroups.GroupId and Heir=1) and Heir=1 AND ((GETDATE() BETWEEN {databaseOwner}{objectQualifier}SCACrowns.StartDate AND {databaseOwner}{objectQualifier}SCACrowns.EndDate) OR ({databaseOwner}{objectQualifier}SCACrowns.EndDate is null))
+Order By ListOrder ASC, SCAName ASC

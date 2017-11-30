@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="JeffMartin.ScaData.ScaOpEntities" Collapsed="true">
+    <Position X="7" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgCAgPAACIEQABFEAsEAIFIGAgCQgICEAiAKBAECAAg=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffMartin.ScaData.Alias" Collapsed="true">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAYAAEAEAAACAAAEABDIABAQACIBICAAAAAACIAEII=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffMartin.ScaData.Award" Collapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAiCBDAUCALxCCQAQKFjISUJIIAAQgJVUAAQCCCyAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffMartin.ScaData.AwardedByWho" Collapsed="true">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAIAAAAAAAQAAABEAAEIhAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffMartin.ScaData.AwardGroup" Collapsed="true">
+    <Position X="8.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABCAEAABQIKAAAIECASAApgAAAABdUAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffMartin.ScaData.BranchStatus" Collapsed="true">
+    <Position X="3.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAQAAAAAAkAIAQAgAAQQAAAAAgAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffMartin.ScaData.Crown" Collapsed="true">
+    <Position X="5.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>xoQhABAGhKZzSAwQZB0SCiIgoEMCvawQIuAgDkRiBSI=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffMartin.ScaData.Group" Collapsed="true">
+    <Position X="7" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QgI7I3AngRg/2ipwB5M5srUmvBAX1AhzQIg0gAA2EC0=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffMartin.ScaData.GroupDesignation" Collapsed="true">
+    <Position X="8.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EABCAAAAAAAAAAIAAAEAIAQAAAAAQAAgAAAAAAABUCA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffMartin.ScaData.OfficerPosition">
+    <Position X="1.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAaAEwA9gAVAAQAlBAChAIKACgEAUIISABBEhAAA=</HashCode>
+      <FileName>OfficerPosition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffMartin.ScaData.OfficerPositionType" Collapsed="true">
+    <Position X="7" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAQAEAAMgAAAARAAQIAQAAABAQAAEAAQAACgAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffMartin.ScaData.Person" Collapsed="true">
+    <Position X="8.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>MSBSODjSxADRagKsiIOnaMG2Kz9CBIEEhc8IJieRRGI=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffMartin.ScaData.PersonAward" Collapsed="true">
+    <Position X="3.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAQFRABSBABAAAZKIQABAEAJIIBBAAQCCIBlqI=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffMartin.ScaData.PersonOfficer" Collapsed="true">
+    <Position X="5.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>aKBAEgAAURgACQCUIhhAAKwjIJAQJHEQZIAQIFACEcI=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffMartin.ScaData.OfficerPositionFull" Collapsed="true">
+    <Position X="5.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAoEExAwIAFAAAhhBADhAIKgAgEYSoICABFAhAAE=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
